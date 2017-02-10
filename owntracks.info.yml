@@ -1,0 +1,10 @@
+name: OwnTracks
+description: Collects and presents location data sent by OwnTracks Android and iOS apps.
+package: OwnTracks
+
+type: module
+core: 8.x
+
+dependencies:
+  - drupal:views
+  - drupal:basic_auth
