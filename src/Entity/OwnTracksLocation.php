@@ -138,19 +138,21 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
     }
 
     foreach ($owntracks_location->payloadProperties as $field_name => $property_name) {
-      if (isset($payload->{$property_name})) {
-        if (is_array($property_name)) {
-          $value = [];
+      if (is_array($property_name)) {
+        $value = [];
 
-          foreach ($property_name as $property_key => $field_key) {
+        foreach ($property_name as $property_key => $field_key) {
+          if (isset($payload->{$property_key})) {
             $value[$field_key] = $payload->{$property_key};
           }
         }
-        else {
-          $value = $payload->{$property_name};
-        }
 
         $owntracks_location->set($field_name, $value);
+      }
+      else {
+        if (isset($payload->{$property_name})) {
+          $owntracks_location->set($field_name, $payload->{$property_name});
+        }
       }
     }
 
