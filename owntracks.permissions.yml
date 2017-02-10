@@ -1,0 +1,12 @@
+owntracks post location:
+  title: 'Post location'
+  description: 'Post OwnTracks location data.'
+  restrict access: false
+owntracks view own location:
+  title: 'View own location'
+  description: 'View own OwnTracks location data.'
+  restrict access: false
+owntracks view any location:
+  title: 'View any location'
+  description: 'View any OwnTracks location data'
+  restrict access: false
