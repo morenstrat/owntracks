@@ -10,6 +10,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\owntracks\Entity\OwnTracksLocation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class OwntracksLocationController extends ControllerBase {
 
@@ -54,29 +55,36 @@ class OwntracksLocationController extends ControllerBase {
    *   A post request object with content type application/json.
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
-   *   A JSON response object with status code indicating operation result.
+   *   An empty JSON response.
+   *
+   * @throws \Symfony\Component\HttpKernel\Exception\HttpException
    */
   public function post(Request $request) {
     $content = $request->getContent();
     $payload = json_decode($content);
 
-    if (is_object($payload) && isset($payload->_type) && $payload->_type === 'location') {
-      $this->prepareEntityValues($payload);
+    if (!is_object($payload)) {
+      throw new HttpException(400, 'Invalid request body');
+    }
 
+    if (!isset($payload->_type)) {
+      throw new HttpException(400, 'Payload type not set');
+    }
+
+    if ($payload->_type === 'location') {
       try {
+        $this->prepareEntityValues($payload);
         $owntracks_location = OwnTracksLocation::create($this->entityValues);
         $owntracks_location->save();
-        $status = 200;
       }
       catch (\Exception $e) {
-        $status = 500;
+        throw new HttpException(500, $e->getMessage());
       }
-    }
-    else {
-      $status = 400;
+    } else {
+      throw new HttpException(400, 'Invalid payload type');
     }
 
-    return new JsonResponse(NULL, $status);
+    return new JsonResponse();
   }
 
   /**
