@@ -20,6 +20,9 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  *     plural = "@count owntracks locations"
  *   ),
  *   base_table = "owntracks_location",
+ *   handlers = {
+ *     "views_data" = "Drupal\views\EntityViewsData",
+ *   },
  *   entity_keys = {
  *     "id" = "id",
  *     "uuid" = "uuid",
