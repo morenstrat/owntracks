@@ -25,22 +25,22 @@ class OwntracksLocationController extends ControllerBase {
    *   corresponding owntracks_location entity field names.
    */
   protected $payloadProperties = [
-    'acc'   => 'acc',
-    'alt'   => 'alt',
-    'batt'  => 'batt',
-    'cog'   => 'cog',
+    'acc'   => 'accuracy',
+    'alt'   => 'altitude',
+    'batt'  => 'battery_level',
+    'cog'   => 'heading',
     'desc'  => 'description',
     'event' => 'event',
-    'lat'   => 'lat',
-    'lon'   => 'lon',
-    'rad'   => 'rad',
-    't'     => 't',
-    'tid'   => 'tid',
-    'tst'   => 'tst',
-    'vac'   => 'vac',
-    'vel'   => 'vel',
-    'p'     => 'p',
-    'conn'  => 'conn',
+    'lat'   => 'geolocation_lat',
+    'lon'   => 'geolocation_lng',
+    'rad'   => 'radius',
+    't'     => 'trigger',
+    'tid'   => 'tracker_id',
+    'tst'   => 'timestamp',
+    'vac'   => 'vertical_accuracy',
+    'vel'   => 'velocity',
+    'p'     => 'pressure',
+    'conn'  => 'connection',
   ];
 
   /**

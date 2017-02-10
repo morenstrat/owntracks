@@ -32,17 +32,17 @@ class OwnTracksLocation extends ContentEntityBase {
       ->setLabel(t('User'))
       ->setSetting('target_type', 'user');
 
-    $fields['acc'] = BaseFieldDefinition::create('integer')
+    $fields['accuracy'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Accuracy'));
 
-    $fields['alt'] = BaseFieldDefinition::create('integer')
+    $fields['altitude'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Altitude'));
 
-    $fields['batt'] = BaseFieldDefinition::create('integer')
+    $fields['battery_level'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Battery level'));
 
-    $fields['cog'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Course over ground'));
+    $fields['heading'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Heading'));
 
     $fields['description'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Description'));
@@ -53,28 +53,28 @@ class OwnTracksLocation extends ContentEntityBase {
     $fields['geolocation'] = BaseFieldDefinition::create('geolocation')
       ->setLabel(t('Geolocation'));
 
-    $fields['rad'] = BaseFieldDefinition::create('integer')
+    $fields['radius'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Radius'));
 
-    $fields['t'] = BaseFieldDefinition::create('list_string')
+    $fields['trigger'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Trigger'));
 
-    $fields['tid'] = BaseFieldDefinition::create('string')
+    $fields['tracker_id'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Tracker-ID'));
 
-    $fields['tst'] = BaseFieldDefinition::create('timestamp')
+    $fields['timestamp'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(t('Timestamp'));
 
-    $fields['vac'] = BaseFieldDefinition::create('integer')
+    $fields['vertical_accuracy'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Vertical accuracy'));
 
-    $fields['vel'] = BaseFieldDefinition::create('integer')
+    $fields['velocity'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Velocity'));
 
-    $fields['p'] = BaseFieldDefinition::create('integer')
+    $fields['pressure'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Pressure'));
 
-    $fields['conn'] = BaseFieldDefinition::create('list_string')
+    $fields['connection'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Connection'));
 
     return $fields;
