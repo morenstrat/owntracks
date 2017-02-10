@@ -50,15 +50,8 @@ class OwnTracksLocation extends ContentEntityBase {
     $fields['event'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Event'));
 
-    $fields['lat'] = BaseFieldDefinition::create('decimal')
-      ->setSetting('precision', 10)
-      ->setSetting('scale', 8)
-      ->setLabel(t('Latitude'));
-
-    $fields['lon'] = BaseFieldDefinition::create('decimal')
-      ->setSetting('precision', 11)
-      ->setSetting('scale', 8)
-      ->setLabel(t('Longitude'));
+    $fields['geolocation'] = BaseFieldDefinition::create('geolocation')
+      ->setLabel(t('Geolocation'));
 
     $fields['rad'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Radius'));
