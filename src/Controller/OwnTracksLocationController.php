@@ -31,8 +31,12 @@ class OwntracksLocationController extends ControllerBase {
     'cog'   => 'heading',
     'desc'  => 'description',
     'event' => 'event',
-    'lat'   => 'geolocation_lat',
-    'lon'   => 'geolocation_lng',
+    'lat'   => [
+      'geolocation' => 'lat',
+     ],
+    'lon'   => [
+      'geolocation' => 'lng',
+     ],
     'rad'   => 'radius',
     't'     => 'trigger',
     'tid'   => 'tracker_id',
@@ -86,7 +90,12 @@ class OwntracksLocationController extends ControllerBase {
 
     foreach ($this->payloadProperties as $property => $field) {
       if (isset($payload->{$property})) {
-        $this->entityValues[$field] = $payload->{$property};
+        if (is_array($field)) {
+          $this->entityValues[key($field)][current($field)] = $payload->{$property};
+        }
+        else {
+          $this->entityValues[$field] = $payload->{$property};
+        }
       }
     }
   }
