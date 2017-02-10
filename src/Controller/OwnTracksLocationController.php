@@ -38,7 +38,7 @@ class OwntracksLocationController extends ControllerBase {
       'geolocation' => 'lng',
      ],
     'rad'   => 'radius',
-    't'     => 'trigger',
+    't'     => 'trigger_id',
     'tid'   => 'tracker_id',
     'tst'   => 'timestamp',
     'vac'   => 'vertical_accuracy',

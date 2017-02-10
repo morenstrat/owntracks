@@ -56,7 +56,7 @@ class OwnTracksLocation extends ContentEntityBase {
     $fields['radius'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Radius'));
 
-    $fields['trigger'] = BaseFieldDefinition::create('list_string')
+    $fields['trigger_id'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Trigger'));
 
     $fields['tracker_id'] = BaseFieldDefinition::create('string')
