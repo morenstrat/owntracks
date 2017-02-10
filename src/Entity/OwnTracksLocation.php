@@ -5,6 +5,9 @@ namespace Drupal\owntracks\Entity;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Session\AccountInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * @ContentEntityType(
@@ -23,8 +26,37 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   },
  * )
  */
-class OwnTracksLocation extends ContentEntityBase {
+class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationInterface {
 
+  /**
+   * @var array $payloadProperties
+   *   Associative array of allowed payload property names mapped to their
+   *   corresponding  field names.
+   */
+  protected $payloadProperties = [
+    'accuracy'          => 'acc',
+    'altitude'          => 'alt',
+    'battery_level'     => 'batt',
+    'heading'           => 'cog',
+    'description'       => 'desc',
+    'event'             => 'event',
+    'geolocation'       => [
+      'lat' => 'lat',
+      'lon' => 'lng',
+    ],
+    'radius'            => 'rad',
+    'trigger_id'        => 't',
+    'tracker_id'        => 'tid',
+    'timestamp'         => 'tst',
+    'vertical_accuracy' => 'vac',
+    'velocity'          => 'vel',
+    'pressure'          => 'p',
+    'connection'        => 'conn',
+  ];
+
+  /**
+   * @inheritdoc
+   */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
 
@@ -80,6 +112,46 @@ class OwnTracksLocation extends ContentEntityBase {
     return $fields;
   }
 
+  /**
+   * @param Request $request
+   * @param AccountInterface $account
+   * @return OwnTracksLocationInterface
+   */
+  public static function createFromRequest(Request $request, AccountInterface $account) {
+    $owntracks_location = OwnTracksLocation::create(['uid' => $account->id()]);
+    $content = $request->getContent();
+    $payload = json_decode($content);
 
+    if (!is_object($payload)) {
+      throw new HttpException(400, 'Invalid request content');
+    }
+
+    if (!isset($payload->_type)) {
+      throw new HttpException(400, 'Payload type not set');
+    }
+
+    if ($payload->_type !== 'location') {
+      throw new HttpException(400, 'Invalid payload type');
+    }
+
+    foreach ($owntracks_location->payloadProperties as $field_name => $property_name) {
+      if (isset($payload->{$property_name})) {
+        if (is_array($property_name)) {
+          $value = [];
+
+          foreach ($property_name as $property_key => $field_key) {
+            $value[$field_key] = $payload->{$property_key};
+          }
+        }
+        else {
+          $value = $payload->{$property_name};
+        }
+
+        $owntracks_location->set($field_name, $value);
+      }
+    }
+
+    return $owntracks_location;
+  }
 
 }
