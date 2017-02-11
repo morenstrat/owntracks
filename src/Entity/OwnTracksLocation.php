@@ -43,10 +43,8 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
     'heading'           => 'cog',
     'description'       => 'desc',
     'event'             => 'event',
-    'geolocation'       => [
-      'lat' => 'lat',
-      'lon' => 'lng',
-    ],
+    'latitude'          => 'lat',
+    'longitude'         => 'lon',
     'radius'            => 'rad',
     'trigger_id'        => 't',
     'tracker_id'        => 'tid',
@@ -85,8 +83,15 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
     $fields['event'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Event'));
 
-    $fields['geolocation'] = BaseFieldDefinition::create('geolocation')
-      ->setLabel(t('Geolocation'));
+    $fields['latitude'] = BaseFieldDefinition::create('decimal')
+      ->setLabel(t('Latitude'))
+      ->setSetting('precision', 10)
+      ->setSetting('scale', 8);
+
+    $fields['longitude'] = BaseFieldDefinition::create('decimal')
+      ->setLabel(t('Longitude'))
+      ->setSetting('precision', 11)
+      ->setSetting('scale', 8);
 
     $fields['radius'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Radius'));
@@ -138,23 +143,14 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
     }
 
     foreach ($owntracks_location->payloadProperties as $field_name => $property_name) {
-      if (is_array($property_name)) {
-        $value = [];
-
-        foreach ($property_name as $property_key => $field_key) {
-          if (isset($payload->{$property_key})) {
-            $value[$field_key] = $payload->{$property_key};
-          }
-        }
-
-        $owntracks_location->set($field_name, $value);
-      }
-      else {
-        if (isset($payload->{$property_name})) {
-          $owntracks_location->set($field_name, $payload->{$property_name});
-        }
+      if (isset($payload->{$property_name})) {
+        $owntracks_location->set($field_name, $payload->{$property_name});
       }
     }
+
+    // @todo geofield/geolocation integration
+    // geofield: $owntracks_location->set($field_name, 'POINT ('. $payload->lon .' '. $payload->lat .')');
+    // geolocation: $owntracks_location->set($field_name, ['lat' => $payload->lat, 'lng' => $payload->lon]);
 
     return $owntracks_location;
   }
