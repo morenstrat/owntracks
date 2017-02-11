@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\owntracks\Controller\OwntracksLocationController.
+ * Contains \Drupal\owntracks\Controller\OwnTracksLocationController.
  */
 namespace Drupal\owntracks\Controller;
 
@@ -13,8 +13,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class OwntracksLocationController extends ControllerBase {
+
   /**
-   * Receive and store an OwnTracks location.
+   * Receive and store OwnTracks locations.
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   A post request object with content type application/json.
@@ -36,4 +37,5 @@ class OwntracksLocationController extends ControllerBase {
 
     return new JsonResponse();
   }
+
 }
