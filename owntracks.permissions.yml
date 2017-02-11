@@ -1,12 +1,11 @@
+administer owntracks locations:
+  title: 'Administer OwnTracks locations'
 owntracks post location:
   title: 'Post location'
-  description: 'Post OwnTracks location data.'
-  restrict access: false
+  description: 'Post OwnTracks locations.'
 owntracks view own location:
   title: 'View own location'
-  description: 'View own OwnTracks location data.'
-  restrict access: false
+  description: 'View own OwnTracks locations.'
 owntracks view any location:
   title: 'View any location'
-  description: 'View any OwnTracks location data'
-  restrict access: false
+  description: 'View any OwnTracks locations'
