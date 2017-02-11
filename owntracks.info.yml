@@ -6,5 +6,4 @@ type: module
 core: 8.x
 
 dependencies:
-  - drupal:views
   - drupal:basic_auth
