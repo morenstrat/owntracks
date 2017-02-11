@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function owntracks_theme($existing, $type, $theme, $path) {
+  return [
+    'owntracks_location' => [
+      'render element' => 'content',
+    ],
+  ];
+}
