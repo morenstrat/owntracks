@@ -21,8 +21,15 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  *   ),
  *   base_table = "owntracks_location",
  *   handlers = {
+ *     "route_provider" = {
+ *       "html" = "Drupal\Core\Entity\Routing\DefaultHtmlRouteProvider",
+ *     },
  *     "views_data" = "Drupal\views\EntityViewsData",
  *   },
+ *   links = {
+ *     "canonical" = "/owntracks_location/{owntracks_location}"
+ *   },
+ *   admin_permission = "administer owntracks locations",
  *   entity_keys = {
  *     "id" = "id",
  *     "uuid" = "uuid",
@@ -63,59 +70,127 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['uid'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('User'))
-      ->setSetting('target_type', 'user');
+      ->setSetting('target_type', 'user')
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['accuracy'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Accuracy'));
+      ->setLabel(t('Accuracy'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['altitude'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Altitude'));
+      ->setLabel(t('Altitude'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['battery_level'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Battery level'));
+      ->setLabel(t('Battery level'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['heading'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Heading'));
+      ->setLabel(t('Heading'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['description'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Description'));
+      ->setLabel(t('Description'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['event'] = BaseFieldDefinition::create('list_string')
-      ->setLabel(t('Event'));
+      ->setLabel(t('Event'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['latitude'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Latitude'))
       ->setSetting('precision', 10)
-      ->setSetting('scale', 8);
+      ->setSetting('scale', 8)
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['longitude'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Longitude'))
       ->setSetting('precision', 11)
-      ->setSetting('scale', 8);
+      ->setSetting('scale', 8)
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['radius'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Radius'));
+      ->setLabel(t('Radius'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['trigger_id'] = BaseFieldDefinition::create('list_string')
-      ->setLabel(t('Trigger'));
+      ->setLabel(t('Trigger'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['tracker_id'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Tracker-ID'));
+      ->setLabel(t('Tracker-ID'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['timestamp'] = BaseFieldDefinition::create('timestamp')
-      ->setLabel(t('Timestamp'));
+      ->setLabel(t('Timestamp'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['vertical_accuracy'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Vertical accuracy'));
+      ->setLabel(t('Vertical accuracy'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['velocity'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Velocity'));
+      ->setLabel(t('Velocity'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['pressure'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Pressure'));
+      ->setLabel(t('Pressure'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     $fields['connection'] = BaseFieldDefinition::create('list_string')
-      ->setLabel(t('Connection'));
+      ->setLabel(t('Connection'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'weight' => 0,
+      ]);
 
     return $fields;
   }
