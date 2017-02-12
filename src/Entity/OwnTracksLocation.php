@@ -37,7 +37,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  *     "edit-form" = "/owntracks_location/{owntracks_location}/edit",
  *     "delete-form" = "/owntracks_location/{owntracks_location}/delete",
  *   },
- *   admin_permission = "administer owntracks locations",
+ *   admin_permission = "administer owntracks",
  *   entity_keys = {
  *     "id" = "id",
  *     "uuid" = "uuid",

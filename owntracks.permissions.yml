@@ -1,5 +1,5 @@
-administer owntracks locations:
-  title: 'Administer OwnTracks locations'
+administer owntracks:
+  title: 'Administer OwnTracks'
 owntracks post location:
   title: 'Post location'
   description: 'Post OwnTracks locations.'
