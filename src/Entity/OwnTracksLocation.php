@@ -81,142 +81,130 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setLabel(t('User'))
       ->setSetting('target_type', 'user')
       ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0]);
 
     $fields['accuracy'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Accuracy'))
       ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setSetting('suffix', 'm');
 
     $fields['altitude'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Altitude'))
       ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setSetting('suffix', 'm');
 
     $fields['battery_level'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Battery level'))
       ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setSetting('suffix', '%');
 
     $fields['heading'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Heading'))
       ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE);
 
     $fields['description'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Description'))
       ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE);
 
     $fields['event'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Event'))
       ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE);
 
     $fields['latitude'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Latitude'))
       ->setDisplayOptions('form', ['weight' => 0])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'settings' => ['scale' => 8], 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE)
       ->setSetting('precision', 10)
-      ->setSetting('scale', 8)
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setSetting('scale', 8);
 
     $fields['longitude'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Longitude'))
       ->setDisplayOptions('form', ['weight' => 0])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'settings' => ['scale' => 8], 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE)
       ->setSetting('precision', 11)
-      ->setSetting('scale', 8)
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setSetting('scale', 8);
 
     $fields['radius'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Radius'))
       ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setSetting('suffix', 'm');
 
     $fields['trigger_id'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Trigger'))
       ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE);
 
     $fields['tracker_id'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Tracker-ID'))
       ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE);
 
     $fields['timestamp'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(t('Timestamp'))
       ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE);
 
     $fields['vertical_accuracy'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Vertical accuracy'))
       ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setSetting('suffix', 'm');
 
     $fields['velocity'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Velocity'))
       ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setSetting('suffix', 'km/h');
 
     $fields['pressure'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Pressure'))
       ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setSetting('suffix', 'kPa');
 
     $fields['connection'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Connection'))
       ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'weight' => 0,
-      ]);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('view', TRUE);
 
     return $fields;
   }
