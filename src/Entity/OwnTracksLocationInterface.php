@@ -10,4 +10,6 @@ interface OwnTracksLocationInterface extends ContentEntityInterface {
 
   public static function createFromRequest(Request $request, AccountInterface $account);
 
+  public function getLocation();
+
 }
