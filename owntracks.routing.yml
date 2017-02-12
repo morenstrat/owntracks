@@ -1,3 +1,19 @@
+owntracks.admin_index:
+  path: '/admin/config/owntracks'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'OwnTracks settings'
+  requirements:
+    _permission: 'access administration pages'
+
+entity.owntracks_location.admin_form:
+  path: '/admin/config/owntracks/location'
+  defaults:
+    _form: '\Drupal\owntracks\OwnTracksLocationSettingsForm'
+    _title: 'OwnTracks Location settings'
+  requirements:
+    _permission: 'administer owntracks'
+
 owntracks.location.post:
   path: '/owntracks/location/post'
   defaults:

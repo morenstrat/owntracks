@@ -1,0 +1,4 @@
+owntracks.owntracks_location_settings_tab:
+  title: 'Settings'
+  route_name: entity.owntracks_location.admin_form
+  base_route: entity.owntracks_location.admin_form

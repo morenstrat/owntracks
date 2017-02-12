@@ -1,0 +1,13 @@
+owntracks.admin_index:
+  title: 'OwnTracks'
+  route_name: owntracks.admin_index
+  parent: system.admin_config
+  description: 'Configure OwnTracks settings.'
+  weight: 0
+
+entity.owntracks_location.admin_form:
+  title: 'OwnTracks Location settings'
+  route_name: entity.owntracks_location.admin_form
+  parent: owntracks.admin_index
+  description: 'Configure OwnTracks Location settings.'
+  weight: 0

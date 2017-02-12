@@ -38,6 +38,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  *     "delete-form" = "/owntracks_location/{owntracks_location}/delete",
  *   },
  *   admin_permission = "administer owntracks",
+ *   field_ui_base_route = "entity.owntracks_location.admin_form",
  *   entity_keys = {
  *     "id" = "id",
  *     "uuid" = "uuid",
