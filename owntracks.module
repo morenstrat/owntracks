@@ -1,5 +1,34 @@
 <?php
 
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Template\Attribute;
+use Drupal\owntracks\Entity\OwnTracksLocationInterface;
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function owntracks_entity_extra_field_info() {
+  $fields['owntracks_location']['owntracks_location']['display']['map'] = [
+    'label' => t('Map'),
+    'description' => t('Display a map with a location marker.'),
+    'weight' => -10,
+  ];
+
+  return $fields;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view() for owntrack_location entities.
+ */
+function owntracks_owntracks_location_view(array &$build, OwnTracksLocationInterface $owntracks_location, EntityViewDisplayInterface $display) {
+  if ($display->getComponent('map')) {
+    $build['map'] = [
+      '#theme' => 'owntracks_map',
+      '#locations' => [$owntracks_location->getLocation()],
+    ];
+  }
+}
+
 /**
  * Implements hook_theme().
  */
@@ -7,6 +36,13 @@ function owntracks_theme($existing, $type, $theme, $path) {
   return [
     'owntracks_location' => [
       'render element' => 'content',
+    ],
+    'owntracks_map' => [
+      'file' => 'owntracks.theme.inc',
+      'variables' => [
+        'attributes' => [],
+        'locations' => [],
+      ],
     ],
   ];
 }
