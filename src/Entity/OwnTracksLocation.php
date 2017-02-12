@@ -24,10 +24,18 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  *     "route_provider" = {
  *       "html" = "Drupal\Core\Entity\Routing\DefaultHtmlRouteProvider",
  *     },
+ *     "form" = {
+ *       "add" = "Drupal\Core\Entity\ContentEntityForm",
+ *       "edit" = "Drupal\Core\Entity\ContentEntityForm",
+ *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
+ *     },
  *     "views_data" = "Drupal\views\EntityViewsData",
  *   },
  *   links = {
- *     "canonical" = "/owntracks_location/{owntracks_location}"
+ *     "canonical" = "/owntracks_location/{owntracks_location}",
+ *     "add-form" = "/owntracks_location/add",
+ *     "edit-form" = "/owntracks_location/{owntracks_location}/edit",
+ *     "delete-form" = "/owntracks_location/{owntracks_location}/delete",
  *   },
  *   admin_permission = "administer owntracks locations",
  *   entity_keys = {
@@ -71,6 +79,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
     $fields['uid'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('User'))
       ->setSetting('target_type', 'user')
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'weight' => 0,
@@ -78,6 +87,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['accuracy'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Accuracy'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'weight' => 0,
@@ -85,6 +95,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['altitude'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Altitude'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'weight' => 0,
@@ -92,6 +103,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['battery_level'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Battery level'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'weight' => 0,
@@ -99,6 +111,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['heading'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Heading'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'weight' => 0,
@@ -106,6 +119,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['description'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Description'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'weight' => 0,
@@ -113,6 +127,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['event'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Event'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'weight' => 0,
@@ -120,6 +135,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['latitude'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Latitude'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setSetting('precision', 10)
       ->setSetting('scale', 8)
       ->setDisplayOptions('view', [
@@ -129,6 +145,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['longitude'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Longitude'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setSetting('precision', 11)
       ->setSetting('scale', 8)
       ->setDisplayOptions('view', [
@@ -138,6 +155,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['radius'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Radius'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'weight' => 0,
@@ -145,6 +163,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['trigger_id'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Trigger'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'weight' => 0,
@@ -152,6 +171,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['tracker_id'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Tracker-ID'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'weight' => 0,
@@ -159,6 +179,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['timestamp'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(t('Timestamp'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'weight' => 0,
@@ -166,6 +187,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['vertical_accuracy'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Vertical accuracy'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'weight' => 0,
@@ -173,6 +195,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['velocity'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Velocity'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'weight' => 0,
@@ -180,6 +203,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['pressure'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Pressure'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'weight' => 0,
@@ -187,6 +211,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
 
     $fields['connection'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Connection'))
+      ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'weight' => 0,
