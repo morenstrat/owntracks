@@ -26,15 +26,7 @@ class OwntracksLocationController extends ControllerBase {
    * @throws \Symfony\Component\HttpKernel\Exception\HttpException
    */
   public function post(Request $request) {
-    $owntracks_location = OwnTracksLocation::createFromRequest($request, $this->currentUser());
-
-    try {
-      $owntracks_location->save();
-    }
-    catch (\Exception $e) {
-      throw new HttpException(500, $e->getMessage());
-    }
-
+    OwnTracksLocation::createFromRequest($request);
     return new JsonResponse();
   }
 
