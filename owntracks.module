@@ -41,7 +41,8 @@ function owntracks_theme($existing, $type, $theme, $path) {
       'file' => 'owntracks.theme.inc',
       'variables' => [
         'attributes' => [],
-        'locations' => [],
+        'markers' => [],
+        'track' => [],
       ],
     ],
   ];
