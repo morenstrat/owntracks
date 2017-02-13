@@ -1,7 +1,10 @@
 (function ($, Drupal, drupalSettings) {
+
+  'use strict';
+
   var maps = drupalSettings.owntracks.maps;
 
-  $.each(maps, function(d, data) {
+  $.each(maps, function (d, data) {
     if (!data.processed) {
       var map = L.map(data.id);
 
@@ -9,7 +12,7 @@
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);
 
-      if (data.track.length == 1) {
+      if (data.track.length === 1) {
         map.setView(data.track[0], 13);
         L.marker(data.track[0]).addTo(map);
       }
