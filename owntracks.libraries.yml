@@ -7,7 +7,6 @@ map:
     js/map.js: {}
   dependencies:
     - core/jquery
-    - core/jquery.once
     - core/drupalSettings
     - owntracks/leaflet
 leaflet:
