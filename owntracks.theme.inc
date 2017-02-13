@@ -8,6 +8,15 @@
 use Drupal\Core\Template\Attribute;
 use Drupal\Component\Utility\Html;
 
+/**
+ * Prepares variables for owntracks_map templates.
+ *
+ * Default template: owntracks-map.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - track: An array of Lat/Lang cooridnates.
+ */
 function template_preprocess_owntracks_map(&$variables) {
   $class = 'owntracks-map';
   $id = Html::getUniqueId($class);
