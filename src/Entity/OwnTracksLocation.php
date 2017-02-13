@@ -262,8 +262,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
   }
 
   /**
-   * @param Request $request
-   * @return OwnTracksLocationInterface
+   * @inheritdoc
    */
   public static function createFromRequest(Request $request) {
     $owntracks_location = OwnTracksLocation::create();
@@ -300,10 +299,11 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
     catch (\Exception $e) {
       throw new HttpException(500, 'Internal server error');
     }
-
-    return $owntracks_location;
   }
 
+  /**
+   * @inheritdoc
+   */
   public function getLocation() {
     return [
       $this->get('latitude')->value,
