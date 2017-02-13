@@ -24,7 +24,7 @@ function owntracks_owntracks_location_view(array &$build, OwnTracksLocationInter
   if ($display->getComponent('map')) {
     $build['map'] = [
       '#theme' => 'owntracks_map',
-      '#locations' => [$owntracks_location->getLocation()],
+      '#track' => [$owntracks_location->getLocation()],
     ];
   }
 }
@@ -41,7 +41,6 @@ function owntracks_theme($existing, $type, $theme, $path) {
       'file' => 'owntracks.theme.inc',
       'variables' => [
         'attributes' => [],
-        'markers' => [],
         'track' => [],
       ],
     ],
