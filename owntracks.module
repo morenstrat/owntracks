@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Main functions of the module.
+ */
+
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\owntracks\Entity\OwnTracksLocationInterface;
 
