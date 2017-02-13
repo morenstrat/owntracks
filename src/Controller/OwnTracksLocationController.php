@@ -7,6 +7,9 @@ use Drupal\owntracks\Entity\OwnTracksLocation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+/**
+ * Class OwntracksLocationController
+ */
 class OwntracksLocationController extends ControllerBase {
 
   /**
