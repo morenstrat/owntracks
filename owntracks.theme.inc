@@ -20,7 +20,6 @@ function template_preprocess_owntracks_map(&$variables) {
   $variables['#attached']['drupalSettings']['owntracks']['maps'][] = [
     'id' => $id,
     'track' => $variables['track'],
-    'markers' => $variables['markers'],
     'processed' => FALSE,
   ];
 }
