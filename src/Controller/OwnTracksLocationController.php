@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * Class OwntracksLocationController
+ * Provides a controller for creating owntrack_location entities.
  */
 class OwntracksLocationController extends ControllerBase {
 
