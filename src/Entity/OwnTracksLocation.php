@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
+ * Defines the owntracks_location entity.
+ *
  * @ContentEntityType(
  *   id = "owntracks_location",
  *   label = @Translation("OwnTracks Location"),
@@ -47,6 +49,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationInterface {
 
   /**
+   * Definition of the allowed payload properties.
+   *
    * @var array
    *   Associative array of allowed payload property names mapped to their
    *   corresponding  field names.
@@ -71,7 +75,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
   ];
 
   /**
-   * @inheritdoc
+   * {@inheritdoc}
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
@@ -262,7 +266,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
   }
 
   /**
-   * @inheritdoc
+   * {@inheritdoc}
    */
   public static function createFromRequest(Request $request) {
     $owntracks_location = OwnTracksLocation::create();
@@ -302,7 +306,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
   }
 
   /**
-   * @inheritdoc
+   * {@inheritdoc}
    */
   public function getLocation() {
     return [
