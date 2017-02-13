@@ -5,7 +5,6 @@ namespace Drupal\owntracks\Entity;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -48,7 +47,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationInterface {
 
   /**
-   * @var array $payloadProperties
+   * @var array
    *   Associative array of allowed payload property names mapped to their
    *   corresponding  field names.
    */
@@ -158,7 +157,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'settings' => ['scale' => 8],
-        'weight' => 0
+        'weight' => 0,
       ])
       ->setDisplayConfigurable('view', TRUE)
       ->setSetting('suffix', '°')
@@ -173,7 +172,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'settings' => ['scale' => 8],
-        'weight' => 0
+        'weight' => 0,
       ])
       ->setDisplayConfigurable('view', TRUE)
       ->setSetting('suffix', '°')
@@ -256,7 +255,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setSetting('allowed_values', [
         'w' => 'WiFi',
         'o' => 'Offline',
-        'm' => 'Mobile'
+        'm' => 'Mobile',
       ]);
 
     return $fields;
@@ -288,10 +287,6 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
         $owntracks_location->set($field_name, $payload->{$property_name});
       }
     }
-
-    // @todo geofield/geolocation integration
-    // geofield: $owntracks_location->set($field_name, 'POINT ('. $payload->lon .' '. $payload->lat .')');
-    // geolocation: $owntracks_location->set($field_name, ['lat' => $payload->lat, 'lng' => $payload->lon]);
 
     $violations = $owntracks_location->validate();
 

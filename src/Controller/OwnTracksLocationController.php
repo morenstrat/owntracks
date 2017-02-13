@@ -1,16 +1,11 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\owntracks\Controller\OwnTracksLocationController.
- */
 namespace Drupal\owntracks\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\owntracks\Entity\OwnTracksLocation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class OwntracksLocationController extends ControllerBase {
 

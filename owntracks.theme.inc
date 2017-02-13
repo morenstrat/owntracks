@@ -4,6 +4,7 @@
  * @file
  * Preprocessors and theme functions of OwnTracks module.
  */
+
 use Drupal\Core\Template\Attribute;
 use Drupal\Component\Utility\Html;
 
