@@ -7,7 +7,6 @@ use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\owntracks\Entity\OwnTracksLocationInterface;
 use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -26,14 +25,14 @@ class UserTracksBlock extends BlockBase implements ContainerFactoryPluginInterfa
    *
    * @var \Drupal\Core\Routing\CurrentRouteMatch
    */
-  protected $current_route_match;
+  protected $currentRouteMatch;
 
   /**
    * Drupal\Core\Entity\Query\QueryFactory definition.
    *
    * @var \Drupal\Core\Entity\Query\QueryFactory
    */
-  protected $entity_query;
+  protected $entityQuery;
 
 
   /**
@@ -41,7 +40,7 @@ class UserTracksBlock extends BlockBase implements ContainerFactoryPluginInterfa
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $entity_type_manager;
+  protected $entityTypeManager;
 
   /**
    * Construct.
@@ -56,7 +55,7 @@ class UserTracksBlock extends BlockBase implements ContainerFactoryPluginInterfa
    *   The current route match service.
    * @param QueryFactory $entity_query
    *   The entity query service.
-   * @param EntityTypeManagerInterface $entity_type_manager.
+   * @param EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
    */
   public function __construct(
@@ -69,9 +68,9 @@ class UserTracksBlock extends BlockBase implements ContainerFactoryPluginInterfa
 
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->current_route_match = $current_route_match;
-    $this->entity_query = $entity_query;
-    $this->entity_type_manager = $entity_type_manager;
+    $this->currentRouteMatch = $current_route_match;
+    $this->entityQuery = $entity_query;
+    $this->entityTypeManager = $entity_type_manager;
   }
 
   /**
@@ -92,22 +91,21 @@ class UserTracksBlock extends BlockBase implements ContainerFactoryPluginInterfa
    * {@inheritdoc}
    */
   public function build() {
-    $user = $this->current_route_match->getParameter('user');
+    $user = $this->currentRouteMatch->getParameter('user');
     $track = [];
 
     if ($user instanceof UserInterface) {
-      $query = $this->entity_query
+      $query = $this->entityQuery
         ->get('owntracks_location')
         ->condition('uid', $user->id());
 
       $result = $query->execute();
 
       if (!empty($result)) {
-        $entities = $this->entity_type_manager
+        $entities = $this->entityTypeManager
           ->getStorage('owntracks_location')
           ->loadMultiple($result);
 
-        /** @var OwnTracksLocationInterface $owntracks_location */
         foreach ($entities as $owntracks_location) {
           $track[] = $owntracks_location->getLocation();
         }
