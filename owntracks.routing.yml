@@ -25,11 +25,3 @@ owntracks.location.post:
     _method: 'POST'
     _content_type_format: 'json'
     _permission: 'owntracks post location'
-owntracks.anonymous.location.post:
-  path: '/owntracks/anonymous/location/post'
-  defaults:
-    _controller: '\Drupal\owntracks\Controller\OwnTracksLocationController::post'
-  requirements:
-    _method: 'POST'
-    _content_type_format: 'json'
-    _permission: 'owntracks post location'
