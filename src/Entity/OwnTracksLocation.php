@@ -26,8 +26,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  *       "html" = "Drupal\Core\Entity\Routing\DefaultHtmlRouteProvider",
  *     },
  *     "form" = {
- *       "add" = "Drupal\Core\Entity\ContentEntityForm",
- *       "edit" = "Drupal\Core\Entity\ContentEntityForm",
+ *       "add" = "Drupal\owntracks\Form\OwnTracksLocationForm",
+ *       "edit" = "Drupal\owntracks\Form\OwnTracksLocationForm",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *     },
  *     "views_data" = "Drupal\views\EntityViewsData",
