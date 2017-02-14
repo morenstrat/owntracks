@@ -167,6 +167,12 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setSetting('suffix', '°')
       ->setSetting('precision', 10)
       ->setSetting('scale', 8)
+      ->addPropertyConstraints('value', [
+        'Range' => [
+          'min' => -90,
+          'max' => 90,
+        ],
+      ])
       ->setRequired(TRUE);
 
     $fields['longitude'] = BaseFieldDefinition::create('decimal')
@@ -182,6 +188,12 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setSetting('suffix', '°')
       ->setSetting('precision', 11)
       ->setSetting('scale', 8)
+      ->addPropertyConstraints('value', [
+        'Range' => [
+          'min' => -180,
+          'max' => 180,
+        ],
+      ])
       ->setRequired(TRUE);
 
     $fields['radius'] = BaseFieldDefinition::create('integer')
