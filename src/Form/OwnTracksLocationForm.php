@@ -20,4 +20,3 @@ class OwnTracksLocationForm extends ContentEntityForm {
   }
 
 }
-
