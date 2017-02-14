@@ -24,4 +24,4 @@ owntracks.location.post:
     _user_is_logged_in: 'TRUE'
     _method: 'POST'
     _content_type_format: 'json'
-    _permission: 'owntracks post location'
+    _permission: 'post owntracks location'

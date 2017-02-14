@@ -1,11 +1,11 @@
 administer owntracks:
   title: 'Administer OwnTracks'
-owntracks post location:
+post owntracks location:
   title: 'Post location'
   description: 'Post OwnTracks locations.'
-owntracks view own location:
+view own owntracks location:
   title: 'View own location'
   description: 'View own OwnTracks locations.'
-owntracks view any location:
+view any owntracks location:
   title: 'View any location'
   description: 'View any OwnTracks locations'
