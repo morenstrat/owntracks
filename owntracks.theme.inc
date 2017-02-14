@@ -15,7 +15,7 @@ use Drupal\Component\Utility\Html;
  *
  * @param array $variables
  *   An associative array containing:
- *   - track: An array of Lat/Lang cooridnates.
+ *   - track: An array of Lat/Lang coordinates.
  */
 function template_preprocess_owntracks_map(array &$variables) {
   $class = 'owntracks-map';
