@@ -3,12 +3,13 @@
 namespace Drupal\owntracks\Entity;
 
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\user\EntityOwnerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Defines the owntracks_location entity interface.
  */
-interface OwnTracksLocationInterface extends ContentEntityInterface {
+interface OwnTracksLocationInterface extends ContentEntityInterface, EntityOwnerInterface {
 
   /**
    * Creates an owntracks_location entity from a request.

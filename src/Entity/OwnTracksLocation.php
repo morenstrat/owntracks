@@ -5,6 +5,7 @@ namespace Drupal\owntracks\Entity;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\user\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -30,6 +31,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  *       "edit" = "Drupal\owntracks\Form\OwnTracksLocationForm",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *     },
+ *     "access" = "Drupal\owntracks\Access\OwnTracksLocationAccessControlHandler"
  *     "views_data" = "Drupal\views\EntityViewsData",
  *   },
  *   links = {
@@ -325,6 +327,36 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       $this->get('latitude')->value,
       $this->get('longitude')->value,
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOwner() {
+    return $this->get('uid')->entity;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOwnerId() {
+    return $this->getEntityKey('uid');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setOwnerId($uid) {
+    $this->set('uid', $uid);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setOwner(UserInterface $account) {
+    $this->set('uid', $account->id());
+    return $this;
   }
 
   /**
