@@ -31,7 +31,6 @@ class OwnTracksLocationService {
    *
    * @param QueryFactory $entity_query
    *   The entity query service.
-   *
    * @param EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
    */
@@ -44,6 +43,7 @@ class OwnTracksLocationService {
    * Get a user's location records.
    *
    * @param UserInterface $user
+   *   The user to get the track for.
    *
    * @return array
    *   The user's track.
