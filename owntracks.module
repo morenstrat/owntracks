@@ -7,6 +7,7 @@
 
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\owntracks\Entity\OwnTracksLocationInterface;
+use Drupal\user\UserInterface;
 
 /**
  * Implements hook_entity_extra_field_info().
@@ -16,6 +17,14 @@ function owntracks_entity_extra_field_info() {
     'label' => t('Map'),
     'description' => t('Display a map with a location marker.'),
     'weight' => -10,
+    'visible' => TRUE,
+  ];
+
+  $fields['user']['user']['display']['owntracks_map'] = [
+    'label' => t('OwnTracks map'),
+    'description' => t('Display OwnTracks map of user.'),
+    'weight' => -10,
+    'visible' => TRUE,
   ];
 
   return $fields;
@@ -29,6 +38,20 @@ function owntracks_owntracks_location_view(array &$build, OwnTracksLocationInter
     $build['map'] = [
       '#theme' => 'owntracks_map',
       '#track' => [$owntracks_location->getLocation()],
+    ];
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function owntracks_user_view(array &$build, UserInterface $user, EntityViewDisplayInterface $display) {
+  if ($display->getComponent('owntracks_map')) {
+    $owntracks_location_service = \Drupal::service('owntracks.location_service');
+
+    $build['owntracks_map'] = [
+      '#theme' => 'owntracks_map',
+      '#track' => $owntracks_location_service->getUserTrack($user),
     ];
   }
 }

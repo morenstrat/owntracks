@@ -1,0 +1,4 @@
+services:
+  owntracks.location_service:
+    class: Drupal\owntracks\OwnTracksLocationService
+    arguments: ['@entity.query', '@entity_type.manager']
