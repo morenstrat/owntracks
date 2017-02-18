@@ -25,3 +25,11 @@ owntracks.location.post:
     _user_is_logged_in: 'TRUE'
     _content_type_format: 'json'
     _permission: 'post owntracks locations'
+
+owntracks.user:
+  path: '/user/{user}/owntracks'
+  defaults:
+    _form: '\Drupal\owntracks\Form\OwnTracksUserForm'
+    _title: 'OwnTracks'
+  requirements:
+    _access: 'TRUE'
