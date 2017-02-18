@@ -31,7 +31,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  *       "edit" = "Drupal\owntracks\Form\OwnTracksLocationForm",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *     },
- *     "access" = "Drupal\owntracks\Access\OwnTracksLocationAccessControlHandler"
+ *     "access" = "Drupal\owntracks\Access\OwnTracksLocationAccessControlHandler",
  *     "views_data" = "Drupal\views\EntityViewsData",
  *   },
  *   links = {
