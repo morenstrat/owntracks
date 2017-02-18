@@ -4,7 +4,7 @@ namespace Drupal\owntracks;
 
 use Drupal\Core\Config\Entity\Query\QueryFactory;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\user\UserInterface;
+use Drupal\Core\Session\AccountInterface;
 
 /**
  * Provides the owntracks location service.
@@ -42,14 +42,31 @@ class OwnTracksLocationService {
   /**
    * Get a user's location records.
    *
-   * @param UserInterface $user
+   * @param AccountInterface $account
    *   The user to get the track for.
    *
    * @return array
    *   The user's track.
    */
-  public function getUserTrack(UserInterface $user) {
+  public function getUserTrack(AccountInterface $account) {
     $track = [];
+
+    $query = $this->entityQuery
+      ->get('owntracks_location')
+      ->condition('uid', $account->id());
+
+    $result = $query->execute();
+
+    if (!empty($result)) {
+      $entities = $this->entityTypeManager
+        ->getStorage('owntracks_location')
+        ->loadMultiple($result);
+
+      foreach ($entities as $owntracks_location) {
+        $track[] = $owntracks_location->getLocation();
+      }
+    }
+
     return $track;
   }
 
