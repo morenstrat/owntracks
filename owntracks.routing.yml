@@ -20,8 +20,8 @@ owntracks.location.post:
     _controller: '\Drupal\owntracks\Controller\OwnTracksLocationController::post'
   options:
     _auth: [ 'basic_auth' ]
+  methods: [POST]
   requirements:
     _user_is_logged_in: 'TRUE'
-    _method: 'POST'
     _content_type_format: 'json'
     _permission: 'post owntracks locations'
