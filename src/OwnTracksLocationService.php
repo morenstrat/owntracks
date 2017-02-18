@@ -2,7 +2,7 @@
 
 namespace Drupal\owntracks;
 
-use Drupal\Core\Config\Entity\Query\QueryFactory;
+use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 
