@@ -77,7 +77,7 @@ class OwnTracksMapForm extends FormBase {
       '#options' => $options,
       '#default_value' => date('j', REQUEST_TIME),
       '#required' => TRUE,
-      '#weight' => -10
+      '#weight' => -10,
     ];
 
     $options = [];
