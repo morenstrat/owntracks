@@ -10,9 +10,9 @@ use Drupal\owntracks\OwnTracksLocationService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * OwnTracks date select form.
+ * OwnTracks user form.
  */
-class OwnTracksMapForm extends FormBase {
+class OwnTracksUserForm extends FormBase {
 
   /**
    * CurrentRouteMatch definition.
