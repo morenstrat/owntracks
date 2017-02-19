@@ -16,7 +16,6 @@ class OwnTracksUserAccess implements AccessInterface {
    *
    * @param AccountInterface $account
    *   The currently logged in user.
-   *
    * @param UserInterface $user
    *   The owner of the owntracks location map.
    *
