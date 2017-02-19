@@ -32,4 +32,4 @@ owntracks.user:
     _form: '\Drupal\owntracks\Form\OwnTracksUserForm'
     _title: 'OwnTracks'
   requirements:
-    _access: 'TRUE'
+    _owntracks_user_access: 'TRUE'
