@@ -5,8 +5,8 @@ namespace Drupal\owntracks\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\owntracks\OwnTracksLocationService;
+use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -56,13 +56,9 @@ class OwnTracksUserForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, AccountInterface $account = NULL) {
-    if ($account === NULL) {
-      $account = $this->currentRouteMatch->getParameter('user');
-
-      if (!$account instanceof AccountInterface) {
-        $account = $this->currentUser();
-      }
+  public function buildForm(array $form, FormStateInterface $form_state, UserInterface $user = NULL) {
+    if ($user === NULL) {
+      $user = $this->currentUser();
     }
 
     $options = [];
@@ -118,7 +114,7 @@ class OwnTracksUserForm extends FormBase {
 
     $form['map'] = [
       '#theme' => 'owntracks_map',
-      '#track' => $this->ownTracksLocationService->getUserTrack($account),
+      '#track' => $this->ownTracksLocationService->getUserTrack($user),
       '#weight' => 30,
     ];
 
