@@ -6,6 +6,7 @@ use Drupal\Core\Routing\Access\AccessInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\user\UserInterface;
+use Drupal\Core\Access\AccessResult;
 
 /**
  * OwnTracksUserAccess definition.
@@ -20,23 +21,23 @@ class OwnTracksUserAccess implements AccessInterface {
    * @param RouteMatchInterface $route_match
    *   The route match service.
    *
-   * @return bool
+   * @return AccessResult
    *   TRUE if access should be granted, FALSE otherwise.
    */
   public function access(AccountInterface $account, RouteMatchInterface $route_match) {
     if ($account->hasPermission('view any owntracks location')) {
-      return TRUE;
+      return AccessResult::allowed();
     }
 
     if ($account->hasPermission('view own owntracks locations')) {
       $user = $route_match->getParameter('user');
 
       if ($user instanceof UserInterface && $user->id() === $account->id()) {
-        return TRUE;
+        return AccessResult::allowed();
       }
     }
 
-    return FALSE;
+    return AccessResult::forbidden();
   }
 
 }
