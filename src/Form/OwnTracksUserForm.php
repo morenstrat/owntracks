@@ -134,6 +134,7 @@ class OwnTracksUserForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $form_state->setRebuild();
   }
 
 }
