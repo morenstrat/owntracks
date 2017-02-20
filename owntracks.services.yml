@@ -4,6 +4,5 @@ services:
     arguments: ['@entity.query', '@entity_type.manager']
   owntracks.user_access:
     class: Drupal\owntracks\Access\OwnTracksUserAccess
-    arguments: ['@current_user', '@current_route_match']
     tags:
       - { name: access_check, applies_to: _owntracks_user_access }
