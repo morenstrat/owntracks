@@ -22,18 +22,18 @@ class OwnTracksUserAccess implements AccessInterface {
    *   The route match service.
    *
    * @return AccessResult
-   *   TRUE if access should be granted, FALSE otherwise.
+   *   Allowed or Forbidden.
    */
   public function access(AccountInterface $account, RouteMatchInterface $route_match) {
     if ($account->hasPermission('view any owntracks location')) {
-      return AccessResult::allowed();
+      return AccessResult::allowedIfHasPermission($account, 'access user profile');
     }
 
     if ($account->hasPermission('view own owntracks locations')) {
       $user = $route_match->getParameter('user');
 
       if ($user instanceof UserInterface && $user->id() === $account->id()) {
-        return AccessResult::allowed();
+        return AccessResult::allowedIfHasPermission($account, 'access user profile');
       }
     }
 
