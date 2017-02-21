@@ -89,7 +89,7 @@ class OwnTracksLocationService {
       }
     }
 
-    return $track;
+    return empty($track) ? NULL : $track;
   }
 
 }

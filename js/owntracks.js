@@ -12,7 +12,7 @@
           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        if (track.length) {
+        if (track !== null) {
           var polyline = L.polyline(track, {color: 'blue'}).addTo(map);
           map.fitBounds(polyline.getBounds());
 
