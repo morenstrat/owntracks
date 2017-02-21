@@ -2,6 +2,7 @@
 
 namespace Drupal\owntracks\Form;
 
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
@@ -61,6 +62,12 @@ class OwnTracksUserForm extends FormBase {
       $user = $this->currentUser();
     }
 
+    $date = DrupalDateTime::createFromArray([
+      'day'   => $form_state->getValue('day', date('j', REQUEST_TIME)),
+      'month' => $form_state->getValue('month', date('n', REQUEST_TIME)),
+      'year'  => $form_state->getValue('year', date('Y', REQUEST_TIME)),
+    ]);
+
     $options = [];
 
     for ($i = 1; $i <= 31; $i++) {
@@ -71,7 +78,7 @@ class OwnTracksUserForm extends FormBase {
       '#type' => 'select',
       '#title' => $this->t('Day'),
       '#options' => $options,
-      '#default_value' => date('j', REQUEST_TIME),
+      '#default_value' => $date->format('j'),
       '#required' => TRUE,
       '#weight' => -10,
     ];
@@ -86,14 +93,14 @@ class OwnTracksUserForm extends FormBase {
       '#type' => 'select',
       '#title' => $this->t('Month'),
       '#options' => $options,
-      '#default_value' => date('n', REQUEST_TIME),
+      '#default_value' => $date->format('n'),
       '#required' => TRUE,
       '#weight' => 0,
     ];
 
     $options = [];
 
-    for ($i = 1978; $i <= date('Y', REQUEST_TIME); $i++) {
+    for ($i = 1978; $i <= $date->format('Y'); $i++) {
       $options[$i] = $i;
     }
 
@@ -101,7 +108,7 @@ class OwnTracksUserForm extends FormBase {
       '#type' => 'select',
       '#title' => $this->t('Year'),
       '#options' => $options,
-      '#default_value' => date('Y', REQUEST_TIME),
+      '#default_value' => $date->format('Y'),
       '#required' => TRUE,
       '#weight' => 10,
     ];
@@ -114,7 +121,7 @@ class OwnTracksUserForm extends FormBase {
 
     $form['map'] = [
       '#theme' => 'owntracks_map',
-      '#track' => $this->ownTracksLocationService->getUserTrack($user),
+      '#track' => $this->ownTracksLocationService->getUserTrack($user, $date),
       '#weight' => 30,
     ];
 

@@ -2,6 +2,7 @@
 
 namespace Drupal\owntracks;
 
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
@@ -48,12 +49,31 @@ class OwnTracksLocationService {
    * @return array
    *   The user's track.
    */
-  public function getUserTrack(AccountInterface $account) {
+  public function getUserTrack(AccountInterface $account, DrupalDateTime $date) {
     $track = [];
+
+    $from = DrupalDateTime::createFromArray([
+      'day'    => $date->format('j'),
+      'month'  => $date->format('n'),
+      'year'   => $date->format('Y'),
+      'hour'   => 0,
+      'minute' => 0,
+      'second' => 0,
+    ])->format('U');
+
+    $till = DrupalDateTime::createFromArray([
+      'day'    => $date->format('j'),
+      'month'  => $date->format('n'),
+      'year'   => $date->format('Y'),
+      'hour'   => 23,
+      'minute' => 59,
+      'second' => 59,
+    ])->format('U');
 
     $query = $this->entityQuery
       ->get('owntracks_location')
-      ->condition('uid', $account->id());
+      ->condition('uid', $account->id())
+      ->condition('timestamp', [$from, $till], 'BETWEEN');
 
     $result = $query->execute();
 
