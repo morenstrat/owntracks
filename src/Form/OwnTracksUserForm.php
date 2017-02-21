@@ -68,13 +68,20 @@ class OwnTracksUserForm extends FormBase {
       'year'  => $form_state->getValue('year', date('Y', REQUEST_TIME)),
     ]);
 
+    $form['container'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['container-inline'],
+      ],
+    ];
+
     $options = [];
 
     for ($i = 1; $i <= 31; $i++) {
       $options[$i] = $i;
     }
 
-    $form['day'] = [
+    $form['container']['day'] = [
       '#type' => 'select',
       '#title' => $this->t('Day'),
       '#options' => $options,
@@ -89,7 +96,7 @@ class OwnTracksUserForm extends FormBase {
       $options[$i] = $i;
     }
 
-    $form['month'] = [
+    $form['container']['month'] = [
       '#type' => 'select',
       '#title' => $this->t('Month'),
       '#options' => $options,
@@ -104,7 +111,7 @@ class OwnTracksUserForm extends FormBase {
       $options[$i] = $i;
     }
 
-    $form['year'] = [
+    $form['container']['year'] = [
       '#type' => 'select',
       '#title' => $this->t('Year'),
       '#options' => $options,
@@ -113,7 +120,7 @@ class OwnTracksUserForm extends FormBase {
       '#weight' => 10,
     ];
 
-    $form['submit'] = [
+    $form['container']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
       '#weight' => 20,
