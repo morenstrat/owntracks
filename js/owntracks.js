@@ -4,7 +4,7 @@
 
   Drupal.behaviors.owntracks = {
     attach: function (context) {
-      $('#owntracks-map').once().each(function() {
+      $('#owntracks-map').once().each(function () {
         var track = drupalSettings.owntracks.track;
         var map = L.map('owntracks-map');
 

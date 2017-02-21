@@ -6,7 +6,6 @@
  */
 
 use Drupal\Core\Template\Attribute;
-use Drupal\Component\Utility\Html;
 
 /**
  * Prepares variables for owntracks_map templates.

@@ -15,12 +15,12 @@ class OwnTracksUserAccess implements AccessInterface {
   /**
    * Check access to user owntracks locations map.
    *
-   * @param AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface $account
    *   The currently logged in user.
-   * @param UserInterface $user
+   * @param \Drupal\user\UserInterface $user
    *   The currently visited user.
    *
-   * @return AccessResult
+   * @return \Drupal\Core\Access\AccessResult
    *   Allowed or Forbidden.
    */
   public function access(AccountInterface $account, UserInterface $user) {

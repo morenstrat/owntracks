@@ -17,7 +17,7 @@ class OwnTracksUserForm extends FormBase {
   /**
    * OwntracksLocationService definition.
    *
-   * @var OwnTracksLocationService
+   * @var \Drupal\owntracks\OwnTracksLocationService
    */
   protected $ownTracksLocationService;
 

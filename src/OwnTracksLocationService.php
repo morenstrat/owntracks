@@ -30,9 +30,9 @@ class OwnTracksLocationService {
   /**
    * OwnTracksLocationService constructor.
    *
-   * @param QueryFactory $entity_query
+   * @param \Drupal\Core\Entity\Query\QueryFactory $entity_query
    *   The entity query service.
-   * @param EntityTypeManagerInterface $entity_type_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
    */
   public function __construct(QueryFactory $entity_query, EntityTypeManagerInterface $entity_type_manager) {
@@ -43,8 +43,10 @@ class OwnTracksLocationService {
   /**
    * Get a user's location records.
    *
-   * @param AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface $account
    *   The user to get the track for.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date
+   *   The date of the track.
    *
    * @return array
    *   The user's track.

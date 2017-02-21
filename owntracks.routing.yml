@@ -4,7 +4,7 @@ owntracks.admin_index:
     _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
     _title: 'OwnTracks settings'
   requirements:
-    _permission: 'access administration pages'
+    _permission: 'administer owntracks'
 
 entity.owntracks_location.admin_form:
   path: '/admin/config/owntracks/location'
