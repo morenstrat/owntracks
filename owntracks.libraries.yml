@@ -1,12 +1,13 @@
-map:
+owntracks:
   version: 1.0.0
   css:
     theme:
-      css/map.css: {}
+      css/owntracks.css: {}
   js:
-    js/map.js: {}
+    js/owntracks.js: {}
   dependencies:
     - core/jquery
+    - core/jquery.once
     - core/drupalSettings
     - owntracks/leaflet
 leaflet:

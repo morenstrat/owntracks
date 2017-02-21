@@ -18,18 +18,11 @@ use Drupal\Component\Utility\Html;
  *   - track: An array of Lat/Lang coordinates.
  */
 function template_preprocess_owntracks_map(array &$variables) {
-  $class = 'owntracks-map';
-  $id = Html::getUniqueId($class);
-
   $variables['attributes'] = new Attribute([
-    'id' => $id,
-    'class' => [$class],
+    'id' => 'owntracks-map',
+    'class' => ['owntracks-map'],
   ]);
 
-  $variables['#attached']['library'][] = 'owntracks/map';
-  $variables['#attached']['drupalSettings']['owntracks']['maps'][] = [
-    'id' => $id,
-    'track' => $variables['track'],
-    'processed' => FALSE,
-  ];
+  $variables['#attached']['library'][] = 'owntracks/owntracks';
+  $variables['#attached']['drupalSettings']['owntracks']['track'] = $variables['track'];
 }

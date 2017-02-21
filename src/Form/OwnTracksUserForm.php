@@ -5,7 +5,6 @@ namespace Drupal\owntracks\Form;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\owntracks\OwnTracksLocationService;
 use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -14,13 +13,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * OwnTracks user form.
  */
 class OwnTracksUserForm extends FormBase {
-
-  /**
-   * CurrentRouteMatch definition.
-   *
-   * @var CurrentRouteMatch
-   */
-  protected $currentRouteMatch;
 
   /**
    * OwntracksLocationService definition.
@@ -32,8 +24,7 @@ class OwnTracksUserForm extends FormBase {
   /**
    * OwnTracksDateSelectForm constructor.
    */
-  public function __construct(CurrentRouteMatch $current_route_match, OwnTracksLocationService $owntracks_location_service) {
-    $this->currentRouteMatch = $current_route_match;
+  public function __construct(OwnTracksLocationService $owntracks_location_service) {
     $this->ownTracksLocationService = $owntracks_location_service;
   }
 
@@ -42,7 +33,6 @@ class OwnTracksUserForm extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('current_route_match'),
       $container->get('owntracks.location_service')
     );
   }
@@ -51,22 +41,23 @@ class OwnTracksUserForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'owntracks_date_select_form';
+    return 'owntracks_map_form';
   }
 
   /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, UserInterface $user = NULL) {
-    if ($user === NULL) {
-      $user = $this->currentUser();
-    }
-
+    $now = new DrupalDateTime();
+    $user = $user === NULL ? $this->currentUser() : $user;
     $date = DrupalDateTime::createFromArray([
-      'day'   => $form_state->getValue('day', date('j', REQUEST_TIME)),
-      'month' => $form_state->getValue('month', date('n', REQUEST_TIME)),
-      'year'  => $form_state->getValue('year', date('Y', REQUEST_TIME)),
+      'day'   => $form_state->getValue('day', $now->format('j')),
+      'month' => $form_state->getValue('month', $now->format('n')),
+      'year'  => $form_state->getValue('year', $now->format('Y')),
     ]);
+
+    $form['#prefix'] = '<div id="owntracks-map-form-wrapper">';
+    $form['#suffix'] = '</div>';
 
     $form['container'] = [
       '#type' => 'container',
@@ -77,7 +68,7 @@ class OwnTracksUserForm extends FormBase {
 
     $options = [];
 
-    for ($i = 1; $i <= 31; $i++) {
+    for ($i = 1; $i <= $date->format('t'); $i++) {
       $options[$i] = $i;
     }
 
@@ -88,6 +79,15 @@ class OwnTracksUserForm extends FormBase {
       '#default_value' => $date->format('j'),
       '#required' => TRUE,
       '#weight' => -10,
+      '#ajax' => [
+        'callback' => [$this, 'reloadForm'],
+        'event' => 'change',
+        'wrapper' => 'owntracks-map-form-wrapper',
+        'progress' => [
+          'type' => 'throbber',
+          'message' => '',
+        ],
+      ],
     ];
 
     $options = [];
@@ -103,11 +103,20 @@ class OwnTracksUserForm extends FormBase {
       '#default_value' => $date->format('n'),
       '#required' => TRUE,
       '#weight' => 0,
+      '#ajax' => [
+        'callback' => [$this, 'reloadForm'],
+        'event' => 'change',
+        'wrapper' => 'owntracks-map-form-wrapper',
+        'progress' => [
+          'type' => 'throbber',
+          'message' => '',
+        ],
+      ],
     ];
 
     $options = [];
 
-    for ($i = 1978; $i <= $date->format('Y'); $i++) {
+    for ($i = 1978; $i <= $now->format('Y'); $i++) {
       $options[$i] = $i;
     }
 
@@ -118,12 +127,33 @@ class OwnTracksUserForm extends FormBase {
       '#default_value' => $date->format('Y'),
       '#required' => TRUE,
       '#weight' => 10,
+      '#ajax' => [
+        'callback' => [$this, 'reloadForm'],
+        'event' => 'change',
+        'wrapper' => 'owntracks-map-form-wrapper',
+        'progress' => [
+          'type' => 'throbber',
+          'message' => '',
+        ],
+      ],
     ];
 
     $form['container']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
       '#weight' => 20,
+      '#attributes' => [
+        'class' => ['visually-hidden'],
+      ],
+      '#ajax' => [
+        'callback' => [$this, 'reloadForm'],
+        'event' => 'click',
+        'wrapper' => 'owntracks-map-form-wrapper',
+        'progress' => [
+          'type' => 'throbber',
+          'message' => '',
+        ],
+      ],
     ];
 
     $form['map'] = [
@@ -138,17 +168,18 @@ class OwnTracksUserForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    if (!checkdate($form_state->getValue('month'), $form_state->getValue('day'), $form_state->getValue('year'))) {
-      $form_state->setErrorByName('day', $this->t('Please select a valid date.'));
-    }
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $form_state->setRebuild();
   }
 
   /**
-   * {@inheritdoc}
+   * Reload the form.
+   *
+   * @return array
+   *   The form render array
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    $form_state->setRebuild();
+  public function reloadForm(array &$form) {
+    return $form;
   }
 
 }
