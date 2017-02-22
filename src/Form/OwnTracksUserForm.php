@@ -55,6 +55,15 @@ class OwnTracksUserForm extends FormBase {
       'month' => $form_state->getValue('month', $now->format('n')),
       'year'  => $form_state->getValue('year', $now->format('Y')),
     ]);
+    $ajax = [
+      'callback' => [$this, 'reloadForm'],
+      'event' => 'change',
+      'wrapper' => 'owntracks-map-form-wrapper',
+      'progress' => [
+        'type' => 'throbber',
+        'message' => '',
+      ],
+    ];
 
     $form['#prefix'] = '<div id="owntracks-map-form-wrapper">';
     $form['#suffix'] = '</div>';
@@ -79,15 +88,7 @@ class OwnTracksUserForm extends FormBase {
       '#default_value' => $date->format('j'),
       '#required' => TRUE,
       '#weight' => -10,
-      '#ajax' => [
-        'callback' => [$this, 'reloadForm'],
-        'event' => 'change',
-        'wrapper' => 'owntracks-map-form-wrapper',
-        'progress' => [
-          'type' => 'throbber',
-          'message' => '',
-        ],
-      ],
+      '#ajax' => $ajax,
     ];
 
     $options = [];
@@ -103,15 +104,7 @@ class OwnTracksUserForm extends FormBase {
       '#default_value' => $date->format('n'),
       '#required' => TRUE,
       '#weight' => 0,
-      '#ajax' => [
-        'callback' => [$this, 'reloadForm'],
-        'event' => 'change',
-        'wrapper' => 'owntracks-map-form-wrapper',
-        'progress' => [
-          'type' => 'throbber',
-          'message' => '',
-        ],
-      ],
+      '#ajax' => $ajax,
     ];
 
     $options = [];
@@ -127,32 +120,15 @@ class OwnTracksUserForm extends FormBase {
       '#default_value' => $date->format('Y'),
       '#required' => TRUE,
       '#weight' => 10,
-      '#ajax' => [
-        'callback' => [$this, 'reloadForm'],
-        'event' => 'change',
-        'wrapper' => 'owntracks-map-form-wrapper',
-        'progress' => [
-          'type' => 'throbber',
-          'message' => '',
-        ],
-      ],
+      '#ajax' => $ajax,
     ];
 
-    $form['container']['submit'] = [
+    $form['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
       '#weight' => 20,
       '#attributes' => [
         'class' => ['visually-hidden'],
-      ],
-      '#ajax' => [
-        'callback' => [$this, 'reloadForm'],
-        'event' => 'click',
-        'wrapper' => 'owntracks-map-form-wrapper',
-        'progress' => [
-          'type' => 'throbber',
-          'message' => '',
-        ],
       ],
     ];
 
