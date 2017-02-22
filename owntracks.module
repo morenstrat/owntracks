@@ -35,22 +35,6 @@ function owntracks_owntracks_location_view(array &$build, OwnTracksLocationInter
 }
 
 /**
- * Implements hook_requirements().
- */
-function owntracks_requirements($phase) {
-  $owntracks_map_configured = FALSE;
-
-  return [
-    'owntracks' => [
-      'title' => 'OwnTracks Map Configuration',
-      'value' => $owntracks_map_configured ? t('Configured') : t('Not configured'),
-      'severity' => $owntracks_map_configured ? REQUIREMENT_OK : REQUIREMENT_ERROR,
-      'description' => t('OwnTracks Map is not configured. <a href=":url">Add configuration</a>', [':url' => \Drupal::url('owntracks.map_settings')]),
-    ],
-  ];
-}
-
-/**
  * Implements hook_theme().
  */
 function owntracks_theme($existing, $type, $theme, $path) {
