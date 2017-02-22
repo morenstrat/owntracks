@@ -6,6 +6,14 @@ owntracks.admin_index:
   requirements:
     _permission: 'administer owntracks'
 
+owntracks.map_settings:
+  path: '/admin/config/owntracks/map'
+  defaults:
+    _form: '\Drupal\owntracks\OwnTracksMapSettingsForm'
+    _title: 'OwnTracks Map settings'
+  requirements:
+    _permission: 'administer owntracks'
+
 entity.owntracks_location.admin_form:
   path: '/admin/config/owntracks/location'
   defaults:

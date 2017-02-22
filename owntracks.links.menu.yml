@@ -5,6 +5,13 @@ owntracks.admin_index:
   description: 'Configure OwnTracks settings.'
   weight: 0
 
+owntracks.map_settings:
+  title: 'OwnTracks Map settings'
+  route_name: owntracks.map_settings
+  parent: owntracks.admin_index
+  description: 'Configure OwnTracks Map settings.'
+  weight: 0
+
 entity.owntracks_location.admin_form:
   title: 'OwnTracks Location settings'
   route_name: entity.owntracks_location.admin_form
