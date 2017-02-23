@@ -6,6 +6,8 @@
  */
 
 use Drupal\Core\Template\Attribute;
+use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\Xss;
 
 /**
  * Prepares variables for owntracks_map templates.
@@ -24,4 +26,11 @@ function template_preprocess_owntracks_map(array &$variables) {
 
   $variables['#attached']['library'][] = 'owntracks/owntracks';
   $variables['#attached']['drupalSettings']['owntracks']['track'] = $variables['track'];
+
+  $config = \Drupal::config('owntracks.map.settings');
+  $variables['#attached']['drupalSettings']['owntracks']['map'] = [
+    'tileLayerUrl' => Html::escape($config->get('tileLayerUrl')),
+    'tileLayerAttribution' => Xss::filterAdmin($config->get('tileLayerAttribution')),
+    'polylineColor' => Html::escape($config->get('polylineColor')),
+  ];
 }

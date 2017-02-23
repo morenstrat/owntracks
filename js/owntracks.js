@@ -8,12 +8,12 @@
         var track = drupalSettings.owntracks.track;
         var map = L.map('owntracks-map');
 
-        L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        L.tileLayer(drupalSettings.owntracks.map.tileLayerUrl, {
+          attribution: drupalSettings.owntracks.map.tileLayerAttribution
         }).addTo(map);
 
         if (track !== null) {
-          var polyline = L.polyline(track, {color: 'blue'}).addTo(map);
+          var polyline = L.polyline(track, {color: drupalSettings.owntracks.map.polylineColor}).addTo(map);
           map.fitBounds(polyline.getBounds());
 
           $.each(track, function (i, e) {
