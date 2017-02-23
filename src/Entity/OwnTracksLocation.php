@@ -3,6 +3,7 @@
 namespace Drupal\owntracks\Entity;
 
 use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\user\UserInterface;
@@ -283,40 +284,50 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
    * {@inheritdoc}
    */
   public static function createFromRequest(Request $request) {
+    if ($request->getContentType() !== 'application/json') {
+      throw new HttpException(400, 'Invalid content type');
+    }
+
+    $content = json_decode($request->getContent());
+
+    try {
+      self::createFromObject($content);
+    }
+    catch (EntityStorageException $e) {
+      throw new HttpException(500, 'Internal server error');
+    }
+    catch (\Exception $e) {
+      throw new HttpException(400, $e->getMessage());
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function createFromObject(\stdClass $content) {
+    if (!isset($content->_type)) {
+      throw new \Exception('Payload type not set');
+    }
+
+    if ($content->_type !== 'location') {
+      throw new \Exception('Invalid payload type');
+    }
+
     $owntracks_location = OwnTracksLocation::create();
-    $content = $request->getContent();
-    $payload = json_decode($content);
-
-    if (!is_object($payload)) {
-      throw new HttpException(400, 'Invalid request content');
-    }
-
-    if (!isset($payload->_type)) {
-      throw new HttpException(400, 'Payload type not set');
-    }
-
-    if ($payload->_type !== 'location') {
-      throw new HttpException(400, 'Invalid payload type');
-    }
 
     foreach ($owntracks_location->payloadProperties as $field_name => $property_name) {
-      if (isset($payload->{$property_name}) && !empty($payload->{$property_name})) {
-        $owntracks_location->set($field_name, $payload->{$property_name});
+      if (isset($content->{$property_name}) && !empty($content->{$property_name})) {
+        $owntracks_location->set($field_name, $content->{$property_name});
       }
     }
 
     $violations = $owntracks_location->validate();
 
     if ($violations->count() !== 0) {
-      throw new HttpException(400, 'Invalid location payload');
+      throw new \Exception('Invalid location payload');
     }
 
-    try {
-      $owntracks_location->save();
-    }
-    catch (\Exception $e) {
-      throw new HttpException(500, 'Internal server error');
-    }
+    $owntracks_location->save();
   }
 
   /**
