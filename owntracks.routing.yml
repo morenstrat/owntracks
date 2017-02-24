@@ -37,7 +37,7 @@ owntracks.location.post:
 owntracks.user:
   path: '/user/{user}/owntracks'
   defaults:
-    _form: '\Drupal\owntracks\Form\OwnTracksUserForm'
+    _form: '\Drupal\owntracks\Form\OwnTracksMapForm'
     _title: 'OwnTracks'
   requirements:
     _owntracks_user_access: 'TRUE'
