@@ -9,14 +9,16 @@
  * Implements hook_requirements().
  */
 function owntracks_requirements($phase) {
-  $owntracks_map_configured = FALSE;
+  if ($phase === 'runtime') {
+    $settings = \Drupal::config('owntracks.map.settings')->get();
 
-  return [
-    'owntracks' => [
-      'title' => 'OwnTracks Map Configuration',
-      'value' => $owntracks_map_configured ? t('Configured') : t('Not configured'),
-      'severity' => $owntracks_map_configured ? REQUIREMENT_OK : REQUIREMENT_ERROR,
-      'description' => t('OwnTracks Map is not configured. <a href=":url">Add configuration</a>', [':url' => \Drupal::url('owntracks.map_settings')]),
-    ],
-  ];
+    return [
+      'owntracks' => [
+        'title' => 'OwnTracks Map Configuration',
+        'value' => empty($settings) ? t('Not configured') : t('Configured'),
+        'severity' => empty($settings) ? REQUIREMENT_ERROR : REQUIREMENT_OK,
+        'description' => empty($settings) ? t('OwnTracks Map is not configured. <a href=":url">Add configuration</a>', [':url' => \Drupal::url('owntracks.map_settings')]) : t('OwnTracks Map is configured.'),
+      ],
+    ];
+  }
 }
