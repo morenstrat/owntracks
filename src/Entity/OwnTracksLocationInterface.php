@@ -20,6 +20,14 @@ interface OwnTracksLocationInterface extends ContentEntityInterface, EntityOwner
   public static function createFromRequest(Request $request);
 
   /**
+   * Creates an owntracks_location entity from an object.
+   *
+   * @param \stdClass $content
+   *   An object containing the required location properties.
+   */
+  public static function createFromObject(\stdClass $content);
+
+  /**
    * Gets a location array.
    *
    * @return array
