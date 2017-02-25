@@ -56,27 +56,27 @@ class OwnTracksLocationTest extends EntityKernelTestBase {
    */
   public function testValidation() {
     $content = [
-      'accuracy'          => -1,
-      'altitude'          => -1,
-      'battery_level'     => -1,
-      'heading'           => 361,
-      'description'       => 'Description',
-      'event'             => 'invalid',
-      'latitude'          => -90.1,
-      'longitude'         => 180.1,
-      'radius'            => -1,
-      'trigger_id'        => 'invalid',
-      'tracker_id'        => 'id',
-      'timestamp'         => 'invalid',
-      'vertical_accuracy' => -1,
-      'velocity'          => -1,
-      'pressure'          => -1,
-      'connection'        => 'invalid',
+      'accuracy'          => -1,        // invalid
+      'altitude'          => 'invalid', // invalid
+      'battery_level'     => 101,       // invalid
+      'heading'           => 361,       // invalid
+      'description'       => 'valid',   // valid
+      'event'             => 'invalid', // invalid
+      'latitude'          => -90.1,     // invalid
+      'longitude'         => 180.1,     // invalid
+      'radius'            => -1,        // invalid
+      'trigger_id'        => 'invalid', // invalid
+      'tracker_id'        => 'valid',   // valid
+      'timestamp'         => 0,         // valid
+      'vertical_accuracy' => -1,        // invalid
+      'velocity'          => -1,        // invalid
+      'pressure'          => -1,        // invalid
+      'connection'        => 'invalid', // invalid
     ];
 
     $owntracks_location = OwnTracksLocation::create($content);
     $violations = $owntracks_location->validate();
-    $this->assertEquals(15, $violations->count());
+    $this->assertEquals(13, $violations->count());
   }
 
   /**
