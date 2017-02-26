@@ -4,7 +4,6 @@ namespace Drupal\owntracks\Entity;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\user\EntityOwnerInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Defines the owntracks_location entity interface.

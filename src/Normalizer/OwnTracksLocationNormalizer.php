@@ -7,6 +7,9 @@ use Drupal\serialization\Normalizer\ComplexDataNormalizer;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
+/**
+ * Normalizes/denormalizes OwnTracks Location entity objects into an array structure.
+ */
 class OwnTracksLocationNormalizer extends ComplexDataNormalizer implements DenormalizerInterface {
 
   /**
@@ -38,7 +41,7 @@ class OwnTracksLocationNormalizer extends ComplexDataNormalizer implements Denor
    */
   public function denormalize($data, $class, $format = NULL, array $context = array()) {
     // Validate the _type property.
-    if (!isset($data['_type']) || $data['_type'] =! 'location') {
+    if (!isset($data['_type']) || $data['_type'] != 'location') {
       throw new UnexpectedValueException('Invalid or missing payload type');
     }
 
