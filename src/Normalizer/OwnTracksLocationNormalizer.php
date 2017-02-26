@@ -8,8 +8,7 @@ use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
- * Normalizes/denormalizes OwnTracks Location entity objects into an array
- * structure.
+ * Denormalizes OwnTracks Location data into an entity object.
  */
 class OwnTracksLocationNormalizer extends ComplexDataNormalizer implements DenormalizerInterface {
 
