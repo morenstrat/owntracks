@@ -1,7 +1,5 @@
 administer owntracks:
   title: 'Administer OwnTracks'
-post owntracks locations:
-  title: 'Post OwnTracks locations'
 create owntracks locations:
   title: 'Create OwnTracks locations'
 view own owntracks locations:
