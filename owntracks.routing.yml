@@ -22,18 +22,6 @@ entity.owntracks_location.admin_form:
   requirements:
     _permission: 'administer owntracks'
 
-owntracks.location.post:
-  path: '/owntracks/location/post'
-  defaults:
-    _controller: '\Drupal\owntracks\Controller\OwnTracksLocationController::post'
-  options:
-    _auth: [ 'basic_auth' ]
-  methods: [POST]
-  requirements:
-    _user_is_logged_in: 'TRUE'
-    _content_type_format: 'json'
-    _permission: 'post owntracks locations'
-
 owntracks.user:
   path: '/user/{user}/owntracks'
   defaults:

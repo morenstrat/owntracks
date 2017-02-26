@@ -3,12 +3,9 @@
 namespace Drupal\owntracks\Entity;
 
 use Drupal\Core\Entity\ContentEntityBase;
-use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\user\UserInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Defines the owntracks_location entity.
@@ -52,32 +49,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationInterface {
 
   /**
-   * Definition of the allowed payload properties.
-   *
-   * @var array
-   *   Associative array of allowed payload property names mapped to their
-   *   corresponding  field names.
-   */
-  protected $payloadProperties = [
-    'accuracy'          => 'acc',
-    'altitude'          => 'alt',
-    'battery_level'     => 'batt',
-    'heading'           => 'cog',
-    'description'       => 'desc',
-    'event'             => 'event',
-    'latitude'          => 'lat',
-    'longitude'         => 'lon',
-    'radius'            => 'rad',
-    'trigger_id'        => 't',
-    'tracker_id'        => 'tid',
-    'timestamp'         => 'tst',
-    'vertical_accuracy' => 'vac',
-    'velocity'          => 'vel',
-    'pressure'          => 'p',
-    'connection'        => 'conn',
-  ];
-
-  /**
    * {@inheritdoc}
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
@@ -93,7 +64,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setRequired(TRUE)
       ->setDefaultValueCallback('Drupal\owntracks\Entity\OwnTracksLocation::getCurrentUserId');
 
-    $fields['accuracy'] = BaseFieldDefinition::create('integer')
+    $fields['acc'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Accuracy'))
       ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
@@ -102,7 +73,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setSetting('suffix', 'm')
       ->setSetting('unsigned', TRUE);
 
-    $fields['altitude'] = BaseFieldDefinition::create('integer')
+    $fields['alt'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Altitude'))
       ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
@@ -110,7 +81,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setDisplayConfigurable('view', TRUE)
       ->setSetting('suffix', 'm');
 
-    $fields['battery_level'] = BaseFieldDefinition::create('integer')
+    $fields['batt'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Battery level'))
       ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
@@ -126,7 +97,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
         ],
       ]);
 
-    $fields['heading'] = BaseFieldDefinition::create('integer')
+    $fields['cog'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Heading'))
       ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
@@ -157,7 +128,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setDisplayConfigurable('view', TRUE)
       ->setSetting('allowed_values', ['enter' => 'Enter', 'leave' => 'Leave']);
 
-    $fields['latitude'] = BaseFieldDefinition::create('decimal')
+    $fields['lat'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Latitude'))
       ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
@@ -178,7 +149,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
         ],
       ]);
 
-    $fields['longitude'] = BaseFieldDefinition::create('decimal')
+    $fields['lon'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Longitude'))
       ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', [
@@ -199,7 +170,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
         ],
       ]);
 
-    $fields['radius'] = BaseFieldDefinition::create('integer')
+    $fields['rad'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Radius'))
       ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
@@ -208,7 +179,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setSetting('suffix', 'm')
       ->setSetting('unsigned', TRUE);
 
-    $fields['trigger_id'] = BaseFieldDefinition::create('list_string')
+    $fields['t'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Trigger'))
       ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
@@ -223,14 +194,14 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
         'a' => 'Automatic',
       ]);
 
-    $fields['tracker_id'] = BaseFieldDefinition::create('string')
+    $fields['tid'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Tracker-ID'))
       ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['timestamp'] = BaseFieldDefinition::create('timestamp')
+    $fields['tst'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(t('Timestamp'))
       ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
@@ -238,7 +209,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setDisplayConfigurable('view', TRUE)
       ->setRequired(TRUE);
 
-    $fields['vertical_accuracy'] = BaseFieldDefinition::create('integer')
+    $fields['vac'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Vertical accuracy'))
       ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
@@ -247,7 +218,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setSetting('suffix', 'm')
       ->setSetting('unsigned', TRUE);
 
-    $fields['velocity'] = BaseFieldDefinition::create('integer')
+    $fields['vel'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Velocity'))
       ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
@@ -256,7 +227,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setSetting('suffix', 'km/h')
       ->setSetting('unsigned', TRUE);
 
-    $fields['pressure'] = BaseFieldDefinition::create('integer')
+    $fields['p'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Pressure'))
       ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
@@ -265,7 +236,7 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setSetting('suffix', 'kPa')
       ->setSetting('unsigned', TRUE);
 
-    $fields['connection'] = BaseFieldDefinition::create('list_string')
+    $fields['con'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Connection'))
       ->setDisplayOptions('form', ['weight' => 0])
       ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
@@ -278,56 +249,6 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ]);
 
     return $fields;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function createFromRequest(Request $request) {
-    if ($request->getContentType() !== 'application/json') {
-      throw new HttpException(400, 'Invalid content type');
-    }
-
-    $content = json_decode($request->getContent());
-
-    try {
-      self::createFromObject($content);
-    }
-    catch (EntityStorageException $e) {
-      throw new HttpException(500, 'Internal server error');
-    }
-    catch (\Exception $e) {
-      throw new HttpException(400, $e->getMessage());
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function createFromObject(\stdClass $content) {
-    if (!isset($content->_type)) {
-      throw new \Exception('Payload type not set');
-    }
-
-    if ($content->_type !== 'location') {
-      throw new \Exception('Invalid payload type');
-    }
-
-    $owntracks_location = OwnTracksLocation::create();
-
-    foreach ($owntracks_location->payloadProperties as $field_name => $property_name) {
-      if (isset($content->{$property_name}) && !empty($content->{$property_name})) {
-        $owntracks_location->set($field_name, $content->{$property_name});
-      }
-    }
-
-    $violations = $owntracks_location->validate();
-
-    if ($violations->count() !== 0) {
-      throw new \Exception('Invalid location payload');
-    }
-
-    $owntracks_location->save();
   }
 
   /**
