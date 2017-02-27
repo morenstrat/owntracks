@@ -19,66 +19,51 @@ class OwnTracksLocationTest extends EntityKernelTestBase {
   public static $modules = ['owntracks', 'options'];
 
   /**
-   * Sample owntracks location data.
+   * Sample invalid data.
    *
    * @var array
    */
-  public static $sampleJsonData = [
-    '_type' => 'location',
-    'acc'   => 75,
-    'alt'   => 13,
-    'batt'  => 100,
-    'cog'   => 270,
-    'desc'  => 'Office',
-    'event' => 'enter',
-    'lat'   => 89.472499,
-    'lon'   => -179.4164046,
-    'rad'   => 270,
-    't'     => 'a',
-    'tid'   => '5X',
-    'tst'   => 1376715317,
-    'vac'   => 10,
-    'vel'   => 54,
-    'p'     => 50,
-    'conn'  => 'w',
+  public static $sampleInvalidData = [
+    'acc'         => -1,
+    'alt'         => 'invalid',
+    'batt'        => 101,
+    'cog'         => 361,
+    'description' => 'valid',
+    'event'       => 'invalid',
+    'lat'         => -90.1,
+    'lon'         => 180.1,
+    'rad'         => -1,
+    't'           => 'invalid',
+    'tid'         => 'valid',
+    'tst'         => 0,
+    'vac'         => -1,
+    'vel'         => -1,
+    'p'           => -1,
+    'con'         => 'invalid',
   ];
 
-  public static $sampleValidEntityData = [
-    'accuracy'          => 0,
-    'altitude'          => 0,
-    'battery_level'     => 100,
-    'heading'           => 270,
-    'description'       => 'valid',
-    'event'             => 'enter',
-    'latitude'          => -90,
-    'longitude'         => 180,
-    'radius'            => 100,
-    'trigger_id'        => 'a',
-    'tracker_id'        => 'fc',
-    'timestamp'         => 10101603,
-    'vertical_accuracy' => 0,
-    'velocity'          => 0,
-    'pressure'          => 0,
-    'connection'        => 'w',
-  ];
-
-  public static $sampleInvalidEntityData = [
-    'accuracy'          => -1,        // invalid 1
-    'altitude'          => 'invalid', // invalid 2
-    'battery_level'     => 101,       // invalid 3
-    'heading'           => 361,       // invalid 4
-    'description'       => 'valid',   // valid
-    'event'             => 'invalid', // invalid 5
-    'latitude'          => -90.1,     // invalid 6
-    'longitude'         => 180.1,     // invalid 7
-    'radius'            => -1,        // invalid 8
-    'trigger_id'        => 'invalid', // invalid 9
-    'tracker_id'        => 'valid',   // valid
-    'timestamp'         => 0,         // valid
-    'vertical_accuracy' => -1,        // invalid 10
-    'velocity'          => -1,        // invalid 11
-    'pressure'          => -1,        // invalid 12
-    'connection'        => 'invalid', // invalid 13
+  /**
+   * Sample valid data.
+   *
+   * @var array
+   */
+  public static $sampleValidData = [
+    'acc'         => 0,
+    'alt'         => 0,
+    'batt'        => 100,
+    'cog'         => 360,
+    'description' => 'valid',
+    'event'       => 'enter',
+    'lat'         => -90,
+    'lon'         => 180,
+    'rad'         => 0,
+    't'           => 'u',
+    'tid'         => 'bo',
+    'tst'         => 123456,
+    'vac'         => 0,
+    'vel'         => 0,
+    'p'           => 0,
+    'con'         => 'm',
   ];
 
   /**
@@ -93,8 +78,8 @@ class OwnTracksLocationTest extends EntityKernelTestBase {
    * Tests the owntracks location validation.
    */
   public function testValidation() {
-    $owntracks_location = OwnTracksLocation::create(self::$sampleInvalidEntityData);
-    $violations = $owntracks_location->validate();
+    $entity = OwnTracksLocation::create(static::$sampleInvalidData);
+    $violations = $entity->validate();
     $this->assertEquals(13, $violations->count());
   }
 
@@ -102,51 +87,18 @@ class OwnTracksLocationTest extends EntityKernelTestBase {
    * Tests the owntracks location storage.
    */
   public function testStorage() {
-    $owntracks_location = OwnTracksLocation::create(self::$sampleValidEntityData);
-    $violations = $owntracks_location->validate();
+    $entity = OwnTracksLocation::create(static::$sampleValidData);
+    $violations = $entity->validate();
     $this->assertEquals(0, $violations->count());
-    $owntracks_location->save();
-    $this->assertEquals([-90, 180], $owntracks_location->getLocation());
+    $entity->save();
+    $this->assertEquals([-90, 180], $entity->getLocation());
   }
 
   /**
    * @expectedException \Drupal\Core\Entity\EntityStorageException
    */
   public function testEntityStorageException() {
-    OwnTracksLocation::create(self::$sampleInvalidEntityData)->save();
-  }
-
-  /**
-   * @covers ::createFromObject
-   * @expectedException \Exception
-   * @expectedExceptionMessage Payload type not set
-   */
-  public function testPayloadTypeNotSetException() {
-    $content = (object) self::$sampleJsonData;
-    unset($content->_type);
-    OwnTracksLocation::createFromObject($content);
-  }
-
-  /**
-   * @covers ::createFromObject
-   * @expectedException \Exception
-   * @expectedExceptionMessage Invalid payload type
-   */
-  public function testInvalidPayloadTypeException() {
-    $content = (object) self::$sampleJsonData;
-    $content->_type = 'invalid';
-    OwnTracksLocation::createFromObject($content);
-  }
-
-  /**
-   * @covers ::createFromObject
-   * @expectedException \Exception
-   * @expectedExceptionMessage Invalid location payload
-   */
-  public function testInvalidLocationPayloadException() {
-    $content = (object) self::$sampleJsonData;
-    $content->batt = 101;
-    OwnTracksLocation::createFromObject($content);
+    OwnTracksLocation::create(static::$sampleInvalidData)->save();
   }
 
 }
