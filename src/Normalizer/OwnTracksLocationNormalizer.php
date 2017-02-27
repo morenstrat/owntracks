@@ -4,7 +4,6 @@ namespace Drupal\owntracks\Normalizer;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\serialization\Normalizer\ComplexDataNormalizer;
-use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
@@ -40,17 +39,23 @@ class OwnTracksLocationNormalizer extends ComplexDataNormalizer implements Denor
    * {@inheritdoc}
    */
   public function denormalize($data, $class, $format = NULL, array $context = array()) {
-    // Validate the _type property.
-    if (!isset($data['_type']) || $data['_type'] != 'location') {
-      throw new UnexpectedValueException('Invalid or missing payload type');
+    // Validate the payload _type property.
+    if (!isset($data['_type'])) {
+      throw new \Exception('Missing payload type');
+    }
+
+    if ($data['_type'] != 'location') {
+      throw new \Exception('Invalid payload type');
     }
 
     // Remove the _type property.
     unset($data['_type']);
 
     // Rename desc property because desc is a reserved sql keyword.
-    $data['description'] = $data['desc'];
-    unset($data['desc']);
+    if (isset($data['desc'])) {
+      $data['description'] = $data['desc'];
+      unset($data['desc']);
+    }
 
     // Create the entity from data.
     $entity = $this->entityTypeManager->getStorage('owntracks_location')->create($data);
