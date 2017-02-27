@@ -256,8 +256,8 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
    */
   public function getLocation() {
     return [
-      $this->get('latitude')->value,
-      $this->get('longitude')->value,
+      $this->get('lat')->value,
+      $this->get('lon')->value,
     ];
   }
 
