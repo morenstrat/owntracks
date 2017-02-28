@@ -43,6 +43,7 @@ use Drupal\user\UserInterface;
  *   entity_keys = {
  *     "id" = "id",
  *     "uuid" = "uuid",
+ *     "uid" = "uid",
  *   },
  * )
  */
