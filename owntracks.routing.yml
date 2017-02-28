@@ -1,3 +1,35 @@
+owntracks.owntracks_location.add:
+  path: '/owntracks_location/add'
+  defaults:
+    _entity_form: 'owntracks_location.add'
+    _title: 'Add OwnTracks Location'
+  requirements:
+    _entity_create_access: 'owntracks_location'
+
+entity.owntracks_location.canonical:
+  path: '/owntracks_location/{owntracks_location}'
+  defaults:
+    _entity_view: 'owntracks_location'
+    _title: 'OwnTracks Location'
+  requirements:
+    _entity_access: 'owntracks_location.view'
+
+entity.owntracks_location.edit_form:
+  path: '/owntracks_location/{owntracks_location}/edit'
+  defaults:
+    _entity_form: 'owntracks_location.edit'
+    _title: 'Edit OwnTracks Location'
+  requirements:
+    _entity_access: 'owntracks_location.edit'
+
+entity.owntracks_location.delete_form:
+  path: '/owntracks_location/{owntracks_location}/delete'
+  defaults:
+    _entity_form: 'owntracks_location.delete'
+    _title: 'Delete OwnTracks Location'
+  requirements:
+    _entity_access: 'owntracks_location.delete'
+
 owntracks.admin_index:
   path: '/admin/config/owntracks'
   defaults:

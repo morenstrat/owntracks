@@ -21,9 +21,7 @@ use Drupal\user\UserInterface;
  *   ),
  *   base_table = "owntracks_location",
  *   handlers = {
- *     "route_provider" = {
- *       "html" = "Drupal\Core\Entity\Routing\DefaultHtmlRouteProvider",
- *     },
+ *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "form" = {
  *       "add" = "Drupal\owntracks\Form\OwnTracksLocationForm",
  *       "edit" = "Drupal\owntracks\Form\OwnTracksLocationForm",
