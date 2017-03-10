@@ -5,6 +5,8 @@ namespace Drupal\owntracks\Access;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Session\AccountInterface;
 
 /**
@@ -55,6 +57,18 @@ class OwnTracksLocationAccessControlHandler extends EntityAccessControlHandler {
     }
 
     return $access->orIf(AccessResult::allowedIfHasPermissions($account, $permissions, 'OR'))->addCacheableDependency($entity);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function checkFieldAccess($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, FieldItemListInterface $items = NULL) {
+    $administrative_fields = ['uid'];
+    if ($operation == 'edit' && in_array($field_definition->getName(), $administrative_fields, TRUE)) {
+      return AccessResult::allowedIfHasPermission($account, 'administer owntracks');
+    }
+
+    return parent::checkFieldAccess($operation, $field_definition, $account, $items);
   }
 
 }
