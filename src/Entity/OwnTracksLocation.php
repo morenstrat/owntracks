@@ -42,6 +42,7 @@ use Drupal\user\UserInterface;
  *     "id" = "id",
  *     "uuid" = "uuid",
  *     "uid" = "uid",
+ *     "label" = "description",
  *   },
  * )
  */
