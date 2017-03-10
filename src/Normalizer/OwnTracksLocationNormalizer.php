@@ -39,17 +39,10 @@ class OwnTracksLocationNormalizer extends ContentEntityNormalizer implements Den
    * {@inheritdoc}
    */
   public function denormalize($data, $class, $format = NULL, array $context = array()) {
-    // Validate the payload _type property.
-    if (!isset($data['_type'])) {
-      throw new \Exception('Missing payload type');
+    // Remove the payload _type property.
+    if (isset($data['_type'])) {
+      unset($data['_type']);
     }
-
-    if ($data['_type'] != 'location') {
-      throw new \Exception('Invalid payload type');
-    }
-
-    // Remove the _type property.
-    unset($data['_type']);
 
     // Rename desc property because desc is a reserved sql keyword.
     if (isset($data['desc'])) {
