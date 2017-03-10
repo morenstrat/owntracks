@@ -6,6 +6,8 @@ use Drupal\Tests\rest\Functional\BasicAuthResourceTestTrait;
 use Drupal\Tests\rest\Functional\JsonBasicAuthWorkaroundFor2805281Trait;
 
 /**
+ * Class OwnTracksLocationJsonBasicAuthTest.
+ *
  * @group rest
  */
 class OwnTracksLocationJsonBasicAuthTest extends OwnTracksLocationResourceTestBase {

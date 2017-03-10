@@ -6,6 +6,9 @@ use Drupal\owntracks\Entity\OwnTracksLocation;
 use Drupal\Tests\rest\Functional\EntityResource\EntityResourceTestBase;
 use Drupal\user\Entity\User;
 
+/**
+ * Class OwnTracksLocationResourceTestBase.
+ */
 abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase {
 
   /**
@@ -26,6 +29,8 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
   ];
 
   /**
+   * Drupal\owntracks\Entity\OwnTracksLocationInterface definition.
+   *
    * @var \Drupal\owntracks\Entity\OwnTracksLocationInterface
    */
   protected $entity;
@@ -38,12 +43,15 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
       case 'GET':
         $this->grantPermissionsToTestedRole(['view any owntracks location']);
         break;
+
       case 'POST':
         $this->grantPermissionsToTestedRole(['create owntracks locations']);
         break;
+
       case 'PATCH':
         $this->grantPermissionsToTestedRole(['edit any owntracks location']);
         break;
+
       case 'DELETE':
         $this->grantPermissionsToTestedRole(['delete any owntracks location']);
         break;

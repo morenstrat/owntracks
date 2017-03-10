@@ -5,8 +5,9 @@
   Drupal.behaviors.owntracks = {
     attach: function (context) {
       $('#owntracks-map').once().each(function () {
-        var track = drupalSettings.owntracks.track;
+        /* global L */
         var map = L.map('owntracks-map');
+        var track = drupalSettings.owntracks.track;
 
         L.tileLayer(drupalSettings.owntracks.map.tileLayerUrl, {
           attribution: drupalSettings.owntracks.map.tileLayerAttribution

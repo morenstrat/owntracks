@@ -26,18 +26,4 @@ class OwnTracksLocationSettingsForm extends ConfigFormBase {
     return 'owntracks_location_settings';
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function buildForm(array $form, FormStateInterface $form_state) {
-    return parent::buildForm($form, $form_state);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    parent::submitForm($form, $form_state);
-  }
-
 }

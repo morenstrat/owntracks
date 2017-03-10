@@ -5,6 +5,8 @@ namespace Drupal\Tests\owntracks\Functional\EntityResource\OwnTracksLocation;
 use Drupal\Tests\rest\Functional\CookieResourceTestTrait;
 
 /**
+ * Class OwnTracksLocationJsonCookieTest.
+ *
  * @group rest
  */
 class OwnTracksLocationJsonCookieTest extends OwnTracksLocationResourceTestBase {
