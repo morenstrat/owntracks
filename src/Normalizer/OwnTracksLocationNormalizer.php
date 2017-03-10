@@ -2,7 +2,6 @@
 
 namespace Drupal\owntracks\Normalizer;
 
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\serialization\Normalizer\ContentEntityNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
