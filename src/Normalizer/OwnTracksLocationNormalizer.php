@@ -3,13 +3,13 @@
 namespace Drupal\owntracks\Normalizer;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\serialization\Normalizer\ComplexDataNormalizer;
+use Drupal\serialization\Normalizer\ContentEntityNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
  * Denormalizes OwnTracks Location data into an entity object.
  */
-class OwnTracksLocationNormalizer extends ComplexDataNormalizer implements DenormalizerInterface {
+class OwnTracksLocationNormalizer extends ContentEntityNormalizer implements DenormalizerInterface {
 
   /**
    * The interface or class that this Normalizer supports.
