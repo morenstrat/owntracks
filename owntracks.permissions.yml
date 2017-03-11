@@ -1,16 +1,16 @@
 administer owntracks:
   title: 'Administer OwnTracks'
-create owntracks locations:
-  title: 'Create OwnTracks locations'
-view own owntracks locations:
-  title: 'View own OwnTracks locations'
-view any owntracks location:
-  title: 'View any OwnTracks location'
-edit own owntracks locations:
-  title: 'Edit own OwnTracks locations'
-edit any owntracks location:
-  title: 'Edit any OwnTracks location'
-delete own owntracks locations:
-  title: 'Delete own OwnTracks locations'
-delete any owntracks location:
-  title: 'Delete any OwnTracks location'
+create owntracks entities:
+  title: 'Create OwnTracks entities'
+view own owntracks entities:
+  title: 'View own OwnTracks entities'
+view any owntracks entity:
+  title: 'View any OwnTracks entity'
+edit own owntracks entities:
+  title: 'Edit own OwnTracks entities'
+edit any owntracks entity:
+  title: 'Edit any OwnTracks entity'
+delete own owntracks entities:
+  title: 'Delete own OwnTracks entities'
+delete any owntracks entity:
+  title: 'Delete any OwnTracks entity'

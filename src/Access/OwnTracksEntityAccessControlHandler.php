@@ -10,15 +10,15 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Session\AccountInterface;
 
 /**
- * Defines the access control handler for the owntracks location entity type.
+ * Defines the access control handler for owntracks entities.
  */
-class OwnTracksLocationAccessControlHandler extends EntityAccessControlHandler {
+class OwnTracksEntityAccessControlHandler extends EntityAccessControlHandler {
 
   /**
    * {@inheritdoc}
    */
   protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL) {
-    $access = AccessResult::allowedIfHasPermission($account, 'create owntracks locations');
+    $access = AccessResult::allowedIfHasPermission($account, 'create owntracks entities');
     return $access->orIf(parent::checkCreateAccess($account, $context, $entity_bundle));
   }
 
@@ -32,26 +32,26 @@ class OwnTracksLocationAccessControlHandler extends EntityAccessControlHandler {
 
     switch ($operation) {
       case "view":
-        $permissions[] = 'view any owntracks location';
+        $permissions[] = 'view any owntracks entity';
 
         if ($owner) {
-          $permissions[] = 'view own owntracks locations';
+          $permissions[] = 'view own owntracks entities';
         }
         break;
 
       case "update":
-        $permissions[] = 'edit any owntracks location';
+        $permissions[] = 'edit any owntracks entity';
 
         if ($owner) {
-          $permissions[] = 'edit own owntracks locations';
+          $permissions[] = 'edit own owntracks entities';
         }
         break;
 
       case "delete":
-        $permissions[] = 'delete any owntracks location';
+        $permissions[] = 'delete any owntracks entity';
 
         if ($owner) {
-          $permissions[] = 'delete own owntracks locations';
+          $permissions[] = 'delete own owntracks entities';
         }
         break;
     }

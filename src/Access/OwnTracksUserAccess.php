@@ -24,7 +24,7 @@ class OwnTracksUserAccess implements AccessInterface {
    *   Allowed or Forbidden.
    */
   public function access(AccountInterface $account, UserInterface $user) {
-    if ($account->hasPermission('view any owntracks location') || ($account->hasPermission('view own owntracks locations') && $user->id() === $account->id())) {
+    if ($account->hasPermission('view any owntracks entity') || ($account->hasPermission('view own owntracks entities') && $user->id() === $account->id())) {
       return AccessResult::allowedIfHasPermission($account, 'access user profiles');
     }
     else {

@@ -41,19 +41,19 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
   protected function setUpAuthorization($method) {
     switch ($method) {
       case 'GET':
-        $this->grantPermissionsToTestedRole(['view any owntracks location']);
+        $this->grantPermissionsToTestedRole(['view any owntracks entity']);
         break;
 
       case 'POST':
-        $this->grantPermissionsToTestedRole(['create owntracks locations']);
+        $this->grantPermissionsToTestedRole(['create owntracks entities']);
         break;
 
       case 'PATCH':
-        $this->grantPermissionsToTestedRole(['edit any owntracks location']);
+        $this->grantPermissionsToTestedRole(['edit any owntracks entity']);
         break;
 
       case 'DELETE':
-        $this->grantPermissionsToTestedRole(['delete any owntracks location']);
+        $this->grantPermissionsToTestedRole(['delete any owntracks entity']);
         break;
     }
   }

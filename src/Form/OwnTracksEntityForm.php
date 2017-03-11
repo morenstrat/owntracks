@@ -6,9 +6,9 @@ use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * OwnTracksLocation entity form.
+ * OwnTracks entity form.
  */
-class OwnTracksLocationForm extends ContentEntityForm {
+class OwnTracksEntityForm extends ContentEntityForm {
 
   /**
    * {@inheritdoc}

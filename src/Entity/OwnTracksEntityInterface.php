@@ -6,9 +6,9 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\user\EntityOwnerInterface;
 
 /**
- * Defines the owntracks_location entity interface.
+ * Defines the owntracks entity interface.
  */
-interface OwnTracksLocationInterface extends ContentEntityInterface, EntityOwnerInterface {
+interface OwnTracksEntityInterface extends ContentEntityInterface, EntityOwnerInterface {
 
   /**
    * Gets a location array.

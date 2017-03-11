@@ -2,10 +2,8 @@
 
 namespace Drupal\owntracks\Entity;
 
-use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\user\UserInterface;
 
 /**
  * Defines the owntracks_location entity.
@@ -23,11 +21,11 @@ use Drupal\user\UserInterface;
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "form" = {
- *       "add" = "Drupal\owntracks\Form\OwnTracksLocationForm",
- *       "edit" = "Drupal\owntracks\Form\OwnTracksLocationForm",
+ *       "add" = "Drupal\owntracks\Form\OwnTracksEntityForm",
+ *       "edit" = "Drupal\owntracks\Form\OwnTracksEntityForm",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *     },
- *     "access" = "Drupal\owntracks\Access\OwnTracksLocationAccessControlHandler",
+ *     "access" = "Drupal\owntracks\Access\OwnTracksEntityAccessControlHandler",
  *     "views_data" = "Drupal\views\EntityViewsData",
  *   },
  *   links = {
@@ -46,32 +44,13 @@ use Drupal\user\UserInterface;
  *   },
  * )
  */
-class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationInterface {
+class OwnTracksLocation extends OwnTracksEntityBase implements OwnTracksEntityInterface {
 
   /**
    * {@inheritdoc}
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
-
-    $fields['uid'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('User'))
-      ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE)
-      ->setSetting('target_type', 'user')
-      ->setRequired(TRUE)
-      ->setDefaultValueCallback('Drupal\owntracks\Entity\OwnTracksLocation::getCurrentUserId');
-
-    $fields['acc'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Accuracy'))
-      ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE)
-      ->setSetting('suffix', 'm')
-      ->setSetting('unsigned', TRUE);
 
     $fields['alt'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Altitude'))
@@ -113,63 +92,6 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
         ],
       ]);
 
-    $fields['description'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Description'))
-      ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE);
-
-    $fields['event'] = BaseFieldDefinition::create('list_string')
-      ->setLabel(t('Event'))
-      ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE)
-      ->setSetting('allowed_values', ['enter' => 'Enter', 'leave' => 'Leave']);
-
-    $fields['lat'] = BaseFieldDefinition::create('decimal')
-      ->setLabel(t('Latitude'))
-      ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'settings' => ['scale' => 8],
-        'weight' => 0,
-      ])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE)
-      ->setSetting('suffix', '°')
-      ->setSetting('precision', 10)
-      ->setSetting('scale', 8)
-      ->setRequired(TRUE)
-      ->addPropertyConstraints('value', [
-        'Range' => [
-          'min' => -90,
-          'max' => 90,
-        ],
-      ]);
-
-    $fields['lon'] = BaseFieldDefinition::create('decimal')
-      ->setLabel(t('Longitude'))
-      ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'settings' => ['scale' => 8],
-        'weight' => 0,
-      ])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE)
-      ->setSetting('suffix', '°')
-      ->setSetting('precision', 11)
-      ->setSetting('scale', 8)
-      ->setRequired(TRUE)
-      ->addPropertyConstraints('value', [
-        'Range' => [
-          'min' => -180,
-          'max' => 180,
-        ],
-      ]);
-
     $fields['rad'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Radius'))
       ->setDisplayOptions('form', ['weight' => 0])
@@ -179,35 +101,15 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ->setSetting('suffix', 'm')
       ->setSetting('unsigned', TRUE);
 
-    $fields['t'] = BaseFieldDefinition::create('list_string')
-      ->setLabel(t('Trigger'))
-      ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE)
-      ->setSetting('allowed_values', [
-        'c' => 'Circular',
-        'b' => 'Beacon',
-        'r' => 'Response',
-        'u' => 'User',
-        't' => 'Timer',
-        'a' => 'Automatic',
-      ]);
-
-    $fields['tid'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Tracker-ID'))
-      ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE);
-
-    $fields['tst'] = BaseFieldDefinition::create('timestamp')
-      ->setLabel(t('Timestamp'))
-      ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE)
-      ->setRequired(TRUE);
+    /** @var \Drupal\Core\Field\BaseFieldDefinition $fields['t'] */
+    $fields['t']->setSetting('allowed_values', [
+      'c' => 'Circular',
+      'b' => 'Beacon',
+      'r' => 'Response',
+      'u' => 'User',
+      't' => 'Timer',
+      'a' => 'Automatic',
+    ]);
 
     $fields['vac'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Vertical accuracy'))
@@ -249,58 +151,6 @@ class OwnTracksLocation extends ContentEntityBase implements OwnTracksLocationIn
       ]);
 
     return $fields;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getLocation() {
-    return [
-      $this->get('lat')->value,
-      $this->get('lon')->value,
-    ];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwner() {
-    return $this->get('uid')->entity;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwnerId() {
-    return $this->getEntityKey('uid');
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwnerId($uid) {
-    $this->set('uid', $uid);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwner(UserInterface $account) {
-    $this->set('uid', $account->id());
-    return $this;
-  }
-
-  /**
-   * Default value callback for 'uid' base field definition.
-   *
-   * @see ::baseFieldDefinitions()
-   *
-   * @return array
-   *   An array of default values.
-   */
-  public static function getCurrentUserId() {
-    return [\Drupal::currentUser()->id()];
   }
 
 }

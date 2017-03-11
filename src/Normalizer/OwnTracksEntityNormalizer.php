@@ -6,16 +6,16 @@ use Drupal\serialization\Normalizer\ContentEntityNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
- * Denormalizes OwnTracks Location data into an entity object.
+ * Denormalizes OwnTracks data into an entity object.
  */
-class OwnTracksLocationNormalizer extends ContentEntityNormalizer implements DenormalizerInterface {
+class OwnTracksEntityNormalizer extends ContentEntityNormalizer implements DenormalizerInterface {
 
   /**
    * The interface or class that this Normalizer supports.
    *
    * @var array
    */
-  protected $supportedInterfaceOrClass = ['Drupal\owntracks\Entity\OwnTracksLocationInterface'];
+  protected $supportedInterfaceOrClass = ['Drupal\owntracks\Entity\OwnTracksEntityInterface'];
 
   /**
    * {@inheritdoc}
@@ -32,8 +32,11 @@ class OwnTracksLocationNormalizer extends ContentEntityNormalizer implements Den
       unset($data['desc']);
     }
 
+    // Get the entity type ID.
+    $entity_type_id = $this->entityManager->getEntityTypeFromClass($class);
+
     // Create the entity from data.
-    $entity = $this->entityManager->getStorage('owntracks_location')->create($data);
+    $entity = $this->entityManager->getStorage($entity_type_id)->create($data);
 
     // Pass the names of the fields whose values can be merged.
     // @todo https://www.drupal.org/node/2456257 remove this.

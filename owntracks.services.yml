@@ -6,8 +6,8 @@ services:
     class: Drupal\owntracks\Access\OwnTracksUserAccess
     tags:
       - { name: access_check, applies_to: _owntracks_user_access }
-  serializer.normalizer.owntracks_location:
-    class: Drupal\owntracks\Normalizer\OwnTracksLocationNormalizer
+  serializer.normalizer.owntracks_entity:
+    class: Drupal\owntracks\Normalizer\OwnTracksEntityNormalizer
     tags:
       - { name: normalizer, priority: 5 }
     arguments: ['@entity.manager']
