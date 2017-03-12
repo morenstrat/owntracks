@@ -60,7 +60,7 @@ class OwnTracksTransition extends OwnTracksEntityBase implements OwnTracksEntity
       ->setDisplayConfigurable('view', TRUE)
       ->setRequired(TRUE);
 
-    /** @var \Drupal\Core\Field\BaseFieldDefinition $fields['t'] */
+    /* @var \Drupal\Core\Field\BaseFieldDefinition $fields['t'] */
     $fields['t']->setSetting('allowed_values', [
       'c' => 'Circular',
       'b' => 'Beacon',
