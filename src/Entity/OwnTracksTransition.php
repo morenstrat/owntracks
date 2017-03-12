@@ -44,7 +44,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   },
  * )
  */
-class OwnTracksTransition extends OwnTracksEntityBase implements OwnTracksEntityInterface {
+class OwnTracksTransition extends OwnTracksEntityBase implements OwnTracksTransitionInterface {
 
   /**
    * {@inheritdoc}

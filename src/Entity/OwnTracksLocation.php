@@ -44,7 +44,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   },
  * )
  */
-class OwnTracksLocation extends OwnTracksEntityBase implements OwnTracksEntityInterface {
+class OwnTracksLocation extends OwnTracksEntityBase implements OwnTracksLocationInterface {
 
   /**
    * {@inheritdoc}
