@@ -101,3 +101,15 @@ owntracks.user:
     _title: 'OwnTracks'
   requirements:
     _owntracks_user_access: 'TRUE'
+
+owntracks.endpoint:
+  path: '/owntracks/endpoint'
+  options:
+    _auth: ['basic_auth']
+  defaults:
+    _controller: '\Drupal\owntracks\Controller\OwnTracksEndpoint::handle'
+  methods: ['POST']
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _permission: 'create owntracks entities'
+    _content_type_format: 'json'

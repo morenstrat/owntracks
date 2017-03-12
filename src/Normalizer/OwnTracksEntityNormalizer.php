@@ -2,11 +2,12 @@
 
 namespace Drupal\owntracks\Normalizer;
 
+use Drupal\Component\Serialization\Exception\InvalidDataTypeException;
 use Drupal\serialization\Normalizer\ContentEntityNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
- * Denormalizes OwnTracks data into an entity object.
+ * Denormalizes OwnTracks endpoint request data into owntracks entities.
  */
 class OwnTracksEntityNormalizer extends ContentEntityNormalizer implements DenormalizerInterface {
 
@@ -21,19 +22,22 @@ class OwnTracksEntityNormalizer extends ContentEntityNormalizer implements Denor
    * {@inheritdoc}
    */
   public function denormalize($data, $class, $format = NULL, array $context = []) {
-    // Remove the payload _type property.
-    if (isset($data['_type'])) {
-      unset($data['_type']);
+    if (!isset($data['_type'])) {
+      throw new InvalidDataTypeException('Missing payload type');
     }
+
+    if (!in_array($data['_type'], ['location', 'transition'])) {
+      throw new InvalidDataTypeException('Invalid payload type');
+    }
+
+    $entity_type_id = 'owntracks_' . $data['_type'];
+    unset($data['_type']);
 
     // Rename desc property because desc is a reserved sql keyword.
     if (isset($data['desc'])) {
       $data['description'] = $data['desc'];
       unset($data['desc']);
     }
-
-    // Get the entity type ID.
-    $entity_type_id = $this->entityManager->getEntityTypeFromClass($class);
 
     // Create the entity from data.
     $entity = $this->entityManager->getStorage($entity_type_id)->create($data);
