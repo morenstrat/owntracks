@@ -30,9 +30,6 @@ class OwnTracksEntityNormalizer extends ContentEntityNormalizer implements Denor
       throw new InvalidDataTypeException('Invalid payload type');
     }
 
-    $entity_type_id = 'owntracks_' . $data['_type'];
-    unset($data['_type']);
-
     // Rename desc property because desc is a reserved sql keyword.
     if (isset($data['desc'])) {
       $data['description'] = $data['desc'];
@@ -40,6 +37,7 @@ class OwnTracksEntityNormalizer extends ContentEntityNormalizer implements Denor
     }
 
     // Create the entity from data.
+    $entity_type_id = 'owntracks_' . $data['_type'];
     $entity = $this->entityManager->getStorage($entity_type_id)->create($data);
 
     // Pass the names of the fields whose values can be merged.
