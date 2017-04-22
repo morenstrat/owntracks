@@ -22,14 +22,6 @@ class OwnTracksEntityNormalizer extends ContentEntityNormalizer implements Denor
    * {@inheritdoc}
    */
   public function denormalize($data, $class, $format = NULL, array $context = []) {
-    if (!isset($data['_type'])) {
-      throw new InvalidDataTypeException('Missing payload type');
-    }
-
-    if (!in_array($data['_type'], ['location', 'transition'])) {
-      throw new InvalidDataTypeException('Invalid payload type');
-    }
-
     // Rename desc property because desc is a reserved sql keyword.
     if (isset($data['desc'])) {
       $data['description'] = $data['desc'];

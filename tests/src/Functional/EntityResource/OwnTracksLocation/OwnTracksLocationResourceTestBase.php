@@ -63,6 +63,7 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
    */
   protected function createEntity() {
     $owntracks_location = OwnTracksLocation::create([
+      '_type' => 'location',
       'acc' => 0,
       'alt' => 0,
       'batt' => 100,
@@ -107,6 +108,11 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
           'target_uuid' => $author->uuid(),
           'url' => base_path() . 'user/' . $author->id(),
         ],
+      ],
+      '_type' => [
+        [
+          'value' => 'location',
+        ]
       ],
       'acc' => [
         [
@@ -196,6 +202,11 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
    */
   protected function getNormalizedPostEntity() {
     return [
+      '_type' => [
+        [
+          'value' => 'location',
+        ]
+      ],
       'acc' => [
         [
           'value' => 0,

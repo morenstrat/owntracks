@@ -63,6 +63,7 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
    */
   protected function createEntity() {
     $owntracks_transition = OwnTracksTransition::create([
+      '_type' => 'transition',
       'wtst' => 23456,
       'acc' => 0,
       'description' => 'valid',
@@ -100,6 +101,11 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
           'target_uuid' => $author->uuid(),
           'url' => base_path() . 'user/' . $author->id(),
         ],
+      ],
+      '_type' => [
+        [
+          '_type' => 'transition',
+        ]
       ],
       'wtst' => [
         [
@@ -154,6 +160,11 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
    */
   protected function getNormalizedPostEntity() {
     return [
+      '_type' => [
+        [
+          'value' => 'transition',
+        ]
+      ],
       'wtst' => [
         [
           'value' => 23456,

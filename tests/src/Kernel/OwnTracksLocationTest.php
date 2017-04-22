@@ -24,6 +24,7 @@ class OwnTracksLocationTest extends EntityKernelTestBase {
    * @var array
    */
   public static $sampleInvalidData = [
+    '_type'       => 'loc',
     'acc'         => -1,
     'alt'         => 'invalid',
     'batt'        => 101,
@@ -48,6 +49,7 @@ class OwnTracksLocationTest extends EntityKernelTestBase {
    * @var array
    */
   public static $sampleValidData = [
+    '_type'       => 'location',
     'acc'         => 0,
     'alt'         => 0,
     'batt'        => 100,
@@ -80,7 +82,7 @@ class OwnTracksLocationTest extends EntityKernelTestBase {
   public function testValidation() {
     $entity = OwnTracksLocation::create(static::$sampleInvalidData);
     $violations = $entity->validate();
-    $this->assertEquals(13, $violations->count());
+    $this->assertEquals(14, $violations->count());
   }
 
   /**
