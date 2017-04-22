@@ -27,7 +27,6 @@ class OwnTracksEntityAccessControlHandler extends EntityAccessControlHandler {
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
     $owner = $account->id() === $entity->getOwnerId();
-    $access = parent::checkAccess($entity, $operation, $account);
     $permissions = [];
 
     switch ($operation) {
@@ -56,7 +55,8 @@ class OwnTracksEntityAccessControlHandler extends EntityAccessControlHandler {
         break;
     }
 
-    return $access->orIf(AccessResult::allowedIfHasPermissions($account, $permissions, 'OR'))->addCacheableDependency($entity);
+    $access = AccessResult::allowedIfHasPermissions($account, $permissions, 'OR');
+    return $access->orIf(AccessResult::allowedIfHasPermission($account, $this->entityType->getAdminPermission()))->addCacheableDependency($entity);
   }
 
   /**
