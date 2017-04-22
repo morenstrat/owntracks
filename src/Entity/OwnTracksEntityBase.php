@@ -24,11 +24,7 @@ abstract class OwnTracksEntityBase extends ContentEntityBase implements OwnTrack
       ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE)
-      ->setRequired(TRUE)
-      ->setSetting('allowed_values', [
-        'location' => 'Location',
-        'transition' => 'Transition',
-      ]);
+      ->setRequired(TRUE);
 
     $fields['uid'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('User'))

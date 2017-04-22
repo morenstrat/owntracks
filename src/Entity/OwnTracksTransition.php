@@ -52,6 +52,11 @@ class OwnTracksTransition extends OwnTracksEntityBase implements OwnTracksTransi
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
 
+    /* @var \Drupal\Core\Field\BaseFieldDefinition $fields['_type'] */
+    $fields['_type']->setSetting('allowed_values', [
+      'transition' => 'Transition',
+    ]);
+
     $fields['wtst'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(t('Waypoint timestamp'))
       ->setDisplayOptions('form', ['weight' => 0])
