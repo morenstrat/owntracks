@@ -65,7 +65,7 @@ class OwnTracksEntityAccessControlHandler extends EntityAccessControlHandler {
   protected function checkFieldAccess($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, FieldItemListInterface $items = NULL) {
     $administrative_fields = ['uid'];
     if ($operation == 'edit' && in_array($field_definition->getName(), $administrative_fields, TRUE)) {
-      return AccessResult::allowedIfHasPermission($account, 'administer owntracks');
+      return AccessResult::allowedIfHasPermission($account, $this->entityType->getAdminPermission());
     }
 
     return parent::checkFieldAccess($operation, $field_definition, $account, $items);
