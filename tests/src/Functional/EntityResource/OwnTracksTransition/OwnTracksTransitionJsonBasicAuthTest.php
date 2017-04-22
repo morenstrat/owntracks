@@ -39,9 +39,4 @@ class OwnTracksTransitionJsonBasicAuthTest extends OwnTracksTransitionResourceTe
    */
   protected static $auth = 'basic_auth';
 
-  // @todo Fix in https://www.drupal.org/node/2805281: remove this trait usage.
-  use JsonBasicAuthWorkaroundFor2805281Trait {
-    JsonBasicAuthWorkaroundFor2805281Trait::assertResponseWhenMissingAuthentication insteadof BasicAuthResourceTestTrait;
-  }
-
 }
