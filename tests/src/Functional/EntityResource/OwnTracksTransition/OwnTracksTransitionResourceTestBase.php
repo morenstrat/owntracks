@@ -223,16 +223,16 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
 
     switch ($method) {
       case 'GET':
-        return "The 'view any owntracks entity' permission is required.";
+        return "The 'administer owntracks' permission is required.";
 
       case 'POST':
         return "The 'create owntracks entities' permission is required.";
 
       case 'PATCH':
-        return "The 'edit any owntracks entity' permission is required.";
+        return "The 'administer owntracks' permission is required.";
 
       case 'DELETE':
-        return "The 'delete any owntracks entity' permission is required.";
+        return "The 'administer owntracks' permission is required.";
     }
 
     return parent::getExpectedUnauthorizedAccessMessage($method);
