@@ -18,8 +18,8 @@ class OwnTracksEntityAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL) {
-    $access = AccessResult::allowedIfHasPermission($account, 'create owntracks entities');
-    return $access->orIf(parent::checkCreateAccess($account, $context, $entity_bundle));
+    $access = AccessResult::allowedIfHasPermission($account, $this->entityType->getAdminPermission());
+    return $access->orIf(AccessResult::allowedIfHasPermission($account, 'create owntracks entities'));
   }
 
   /**
