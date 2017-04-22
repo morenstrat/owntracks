@@ -29,7 +29,7 @@ class OwnTracksEntityNormalizer extends ContentEntityNormalizer implements Denor
     }
 
     // Create the entity from data.
-    $entity_type_id = 'owntracks_' . $data['_type'];
+    $entity_type_id = 'owntracks_' . $data['_type'][0]['value'];
     $entity = $this->entityManager->getStorage($entity_type_id)->create($data);
 
     // Pass the names of the fields whose values can be merged.
