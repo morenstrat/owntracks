@@ -213,4 +213,29 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
     ];
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  protected function getExpectedUnauthorizedAccessMessage($method) {
+    if ($this->config('rest.settings')->get('bc_entity_resource_permissions')) {
+      return parent::getExpectedUnauthorizedAccessMessage($method);
+    }
+
+    switch ($method) {
+      case 'GET':
+        return "The 'view any owntracks entity' permission is required.";
+
+      case 'POST':
+        return "The 'create owntracks entities' permission is required.";
+
+      case 'PATCH':
+        return "The 'edit any owntracks entity' permission is required.";
+
+      case 'DELETE':
+        return "The 'delete any owntracks entity' permission is required.";
+    }
+
+    return parent::getExpectedUnauthorizedAccessMessage($method);
+  }
+
 }
