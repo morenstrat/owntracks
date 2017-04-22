@@ -3,7 +3,6 @@
 namespace Drupal\Tests\owntracks\Functional\EntityResource\OwnTracksLocation;
 
 use Drupal\Tests\rest\Functional\BasicAuthResourceTestTrait;
-use Drupal\Tests\rest\Functional\JsonBasicAuthWorkaroundFor2805281Trait;
 
 /**
  * Class OwnTracksLocationJsonBasicAuthTest.
@@ -28,11 +27,6 @@ class OwnTracksLocationJsonBasicAuthTest extends OwnTracksLocationResourceTestBa
    * {@inheritdoc}
    */
   protected static $mimeType = 'application/json';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected static $expectedErrorMimeType = 'application/json';
 
   /**
    * {@inheritdoc}

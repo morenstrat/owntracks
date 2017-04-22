@@ -23,9 +23,4 @@ class OwnTracksLocationJsonAnonTest extends OwnTracksLocationResourceTestBase {
    */
   protected static $mimeType = 'application/json';
 
-  /**
-   * {@inheritdoc}
-   */
-  protected static $expectedErrorMimeType = 'application/json';
-
 }

@@ -23,9 +23,4 @@ class OwnTracksTransitionJsonAnonTest extends OwnTracksTransitionResourceTestBas
    */
   protected static $mimeType = 'application/json';
 
-  /**
-   * {@inheritdoc}
-   */
-  protected static $expectedErrorMimeType = 'application/json';
-
 }

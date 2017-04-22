@@ -3,7 +3,6 @@
 namespace Drupal\Tests\owntracks\Functional\EntityResource\OwnTracksTransition;
 
 use Drupal\Tests\rest\Functional\BasicAuthResourceTestTrait;
-use Drupal\Tests\rest\Functional\JsonBasicAuthWorkaroundFor2805281Trait;
 
 /**
  * Class OwnTracksTransitionJsonBasicAuthTest.
@@ -28,11 +27,6 @@ class OwnTracksTransitionJsonBasicAuthTest extends OwnTracksTransitionResourceTe
    * {@inheritdoc}
    */
   protected static $mimeType = 'application/json';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected static $expectedErrorMimeType = 'application/json';
 
   /**
    * {@inheritdoc}
