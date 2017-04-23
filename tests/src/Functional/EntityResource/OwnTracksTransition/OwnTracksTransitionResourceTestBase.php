@@ -137,7 +137,6 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
           'value' => '179.89765456',
         ],
       ],
-      ],
       't' => [
         [
           'value' => 'c',
