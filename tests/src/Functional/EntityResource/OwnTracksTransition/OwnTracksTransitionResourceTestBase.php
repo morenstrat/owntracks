@@ -104,7 +104,7 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
       ],
       '_type' => [
         [
-          '_type' => 'transition',
+          'value' => 'transition',
         ]
       ],
       'wtst' => [
