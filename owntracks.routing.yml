@@ -1,4 +1,4 @@
-owntracks.owntracks_location.add:
+entity.owntracks_location.add_form:
   path: '/owntracks_location/add'
   defaults:
     _entity_form: 'owntracks_location.add'
@@ -30,7 +30,7 @@ entity.owntracks_location.delete_form:
   requirements:
     _entity_access: 'owntracks_location.delete'
 
-owntracks.owntracks_transition.add:
+entity.owntracks_transition.add_form:
   path: '/owntracks_transition/add'
   defaults:
     _entity_form: 'owntracks_transition.add'
