@@ -68,8 +68,8 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
       'acc' => 0,
       'description' => 'valid',
       'event' => 'enter',
-      'lat' => -90,
-      'lon' => 180,
+      'lat' => '-88.89765467',
+      'lon' => '179.89765456',
       't' => 'c',
       'tid' => 'bo',
       'tst' => 123456,
@@ -129,13 +129,14 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
       ],
       'lat' => [
         [
-          'value' => -90,
+          'value' => '-88.89765467',
         ],
       ],
       'lon' => [
         [
-          'value' => 180,
+          'value' => '179.89765456',
         ],
+      ],
       ],
       't' => [
         [
@@ -187,12 +188,12 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
       ],
       'lat' => [
         [
-          'value' => -90,
+          'value' => '-88.89765467',
         ],
       ],
       'lon' => [
         [
-          'value' => 180,
+          'value' => '179.89765456',
         ],
       ],
       't' => [
