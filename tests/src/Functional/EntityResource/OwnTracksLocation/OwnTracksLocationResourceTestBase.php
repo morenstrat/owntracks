@@ -70,8 +70,8 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
       'cog' => 360,
       'description' => 'valid',
       'event' => 'enter',
-      'lat' => -90,
-      'lon' => 180,
+      'lat' => '-88.89765467',
+      'lon' => '179.89765456',
       'rad' => 0,
       't' => 'u',
       'tid' => 'bo',
@@ -103,7 +103,7 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
       ],
       'uid' => [
         [
-          'target_id' => $author->id(),
+          'target_id' => (int) $author->id(),
           'target_type' => 'user',
           'target_uuid' => $author->uuid(),
           'url' => base_path() . 'user/' . $author->id(),
@@ -146,12 +146,12 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
       ],
       'lat' => [
         [
-          'value' => -90,
+          'value' => '-88.89765467',
         ],
       ],
       'lon' => [
         [
-          'value' => 180,
+          'value' => '179.89765456',
         ],
       ],
       'rad' => [
@@ -239,12 +239,12 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
       ],
       'lat' => [
         [
-          'value' => -90,
+          'value' => '-88.89765467',
         ],
       ],
       'lon' => [
         [
-          'value' => 180,
+          'value' => '179.89765456',
         ],
       ],
       'rad' => [
