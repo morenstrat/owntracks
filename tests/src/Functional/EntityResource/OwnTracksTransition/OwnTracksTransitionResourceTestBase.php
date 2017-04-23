@@ -96,7 +96,7 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
       ],
       'uid' => [
         [
-          'target_id' => $author->id(),
+          'target_id' => (int) $author->id(),
           'target_type' => 'user',
           'target_uuid' => $author->uuid(),
           'url' => base_path() . 'user/' . $author->id(),
