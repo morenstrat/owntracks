@@ -264,7 +264,9 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
         ],
       ],
       'tst' => [
-        $this->formatExpectedTimestampItemValues(123456),
+        [
+          'value' => 123456,
+        ],
       ],
       'vac' => [
         [

@@ -207,7 +207,9 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
         ],
       ],
       'tst' => [
-        $this->formatExpectedTimestampItemValues(123456),
+        [
+          'value' => 123456,
+        ],
       ],
     ];
   }
