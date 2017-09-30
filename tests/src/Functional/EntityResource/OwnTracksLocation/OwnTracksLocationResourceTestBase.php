@@ -3,6 +3,7 @@
 namespace Drupal\Tests\owntracks\Functional\EntityResource\OwnTracksLocation;
 
 use Drupal\owntracks\Entity\OwnTracksLocation;
+use Drupal\Tests\rest\Functional\BcTimestampNormalizerUnixTestTrait;
 use Drupal\Tests\rest\Functional\EntityResource\EntityResourceTestBase;
 use Drupal\user\Entity\User;
 
@@ -10,6 +11,8 @@ use Drupal\user\Entity\User;
  * Class OwnTracksLocationResourceTestBase.
  */
 abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase {
+
+  use BcTimestampNormalizerUnixTestTrait;
 
   /**
    * {@inheritdoc}
@@ -170,9 +173,7 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
         ],
       ],
       'tst' => [
-        [
-          'value' => 123456,
-        ],
+        $this->formatExpectedTimestampItemValues(123456),
       ],
       'vac' => [
         [
@@ -263,9 +264,7 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
         ],
       ],
       'tst' => [
-        [
-          'value' => 123456,
-        ],
+        $this->formatExpectedTimestampItemValues(123456),
       ],
       'vac' => [
         [

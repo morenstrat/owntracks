@@ -3,6 +3,7 @@
 namespace Drupal\Tests\owntracks\Functional\EntityResource\OwnTracksTransition;
 
 use Drupal\owntracks\Entity\OwnTracksTransition;
+use Drupal\Tests\rest\Functional\BcTimestampNormalizerUnixTestTrait;
 use Drupal\Tests\rest\Functional\EntityResource\EntityResourceTestBase;
 use Drupal\user\Entity\User;
 
@@ -10,6 +11,8 @@ use Drupal\user\Entity\User;
  * Class OwnTracksTransitionResourceTestBase.
  */
 abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBase {
+
+  use BcTimestampNormalizerUnixTestTrait;
 
   /**
    * {@inheritdoc}
@@ -148,9 +151,7 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
         ],
       ],
       'tst' => [
-        [
-          'value' => 123456,
-        ],
+        $this->formatExpectedTimestampItemValues(123456),
       ],
     ];
   }
@@ -206,9 +207,7 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
         ],
       ],
       'tst' => [
-        [
-          'value' => 123456,
-        ],
+        $this->formatExpectedTimestampItemValues(123456),
       ],
     ];
   }
