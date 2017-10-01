@@ -57,7 +57,7 @@ class OwnTracksEndpoint extends ControllerBase {
       throw new HttpException(500, 'Internal server error');
     }
 
-    return new Response('', 200, ['Content-Type' => 'application/json']);
+    return new Response('{}', 200, ['Content-Type' => 'application/json']);
   }
 
 }
