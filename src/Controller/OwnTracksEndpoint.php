@@ -49,7 +49,7 @@ class OwnTracksEndpoint extends ControllerBase {
   public function handle(Request $request) {
     try {
       $content = $request->getContent();
-      /* @var \Drupal\owntracks\Entity\OwnTracksLocationInterface $entity */
+      /* @var \Drupal\owntracks\Entity\OwnTracksEntityInterface $entity */
       $entity = $this->serializer->deserialize($content, 'Drupal\owntracks\Entity\OwnTracksEntityInterface', 'json');
       $violations = $entity->validate();
 
