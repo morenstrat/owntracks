@@ -4,11 +4,11 @@ namespace Drupal\owntracks\Controller;
 
 use Drupal\Component\Serialization\Exception\InvalidDataTypeException;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\owntracks\OwnTracksEndpointService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Class OwnTracksEndpoint.
@@ -16,19 +16,19 @@ use Symfony\Component\Serializer\SerializerInterface;
 class OwnTracksEndpoint extends ControllerBase {
 
   /**
-   * The serializer.
+   * The endpoint service.
    *
-   * @var \Symfony\Component\Serializer\SerializerInterface
+   * @var \Drupal\owntracks\OwnTracksEndpointService
    */
-  protected $serializer;
+  protected $endpointService;
 
   /**
    * OwnTracksEndpoint constructor.
    *
-   * @param \Symfony\Component\Serializer\SerializerInterface $serializer
+   * @param $endpointService \Drupal\owntracks\OwnTracksEndpointService
    */
-  public function __construct(SerializerInterface $serializer) {
-    $this->serializer = $serializer;
+  public function __construct(OwnTracksEndpointService $endpointService) {
+    $this->endpointService = $endpointService;
   }
 
   /**
@@ -36,7 +36,7 @@ class OwnTracksEndpoint extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('serializer')
+      $container->get('owntracks.endpoint_service')
     );
   }
 
@@ -48,17 +48,7 @@ class OwnTracksEndpoint extends ControllerBase {
    */
   public function handle(Request $request) {
     try {
-      $content = $request->getContent();
-      /* @var \Drupal\owntracks\Entity\OwnTracksEntityInterface $entity */
-      $entity = $this->serializer->deserialize($content, 'Drupal\owntracks\Entity\OwnTracksEntityInterface', 'json');
-      $violations = $entity->validate();
-
-      if ($violations->count() === 0) {
-        $entity->save();
-      }
-      else {
-        throw new InvalidDataTypeException('Invalid payload');
-      }
+      $this->endpointService->create($request->getContent());
     }
     catch (InvalidDataTypeException $e) {
       throw new HttpException(400, $e->getMessage());
