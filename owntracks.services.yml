@@ -2,6 +2,8 @@ services:
   owntracks.location_service:
     class: Drupal\owntracks\OwnTracksLocationService
     arguments: ['@entity.query', '@entity_type.manager']
+  owntracks.endpoint_service:
+    class: Drupal\owntracks\OwnTracksEndpointService
   owntracks.user_access:
     class: Drupal\owntracks\Access\OwnTracksUserAccess
     tags:
