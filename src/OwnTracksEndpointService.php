@@ -21,30 +21,30 @@ class OwnTracksEndpointService {
    * @throws \Exception
    */
   public function create($data) {
-    $data = (array) json_decode($data);
+    $json = (array) json_decode($data);
 
-    if (!isset($data['_type'])) {
-      throw new InvalidDataTypeException('Missing payload type');
+    if (!isset($json['_type'])) {
+      throw new InvalidDataTypeException('Missing payload type: ' . $data);
     }
 
-    if ($data['_type'] === 'location') {
-      $entity = OwnTracksLocation::create($data);
+    if ($json['_type'] === 'location') {
+      $entity = OwnTracksLocation::create($json);
     }
-    elseif ($data['_type'] === 'transition') {
-      $entity = OwnTracksTransition::create($data);
+    elseif ($json['_type'] === 'transition') {
+      $entity = OwnTracksTransition::create($json);
     }
     else {
-      throw new InvalidDataTypeException('Invalid payload type');
+      throw new InvalidDataTypeException('Invalid payload type:' . $data);
     }
 
     if (!$entity instanceof OwnTracksEntityInterface) {
-      throw new \Exception('Internal server error');
+      throw new \Exception('Internal server error:' . $data);
     }
 
     $violations = $entity->validate();
 
     if ($violations->count() !== 0) {
-      throw new InvalidDataTypeException('Invalid payload data');
+      throw new InvalidDataTypeException('Invalid payload data: ' . $data);
     }
 
     $entity->save();
