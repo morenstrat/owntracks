@@ -18,53 +18,29 @@ class OwnTracksEntityAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL) {
-    $access = AccessResult::allowedIfHasPermission($account, $this->entityType->getAdminPermission());
-    return $access->orIf(AccessResult::allowedIfHasPermission($account, 'create owntracks entities'));
+    $permissions = [$this->entityType->getAdminPermission(), 'create owntracks entities'];
+    return AccessResult::allowedIfHasPermissions($account, $permissions, 'OR');
   }
 
   /**
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
-    $owner = $account->id() === $entity->getOwnerId();
-    $permissions = [];
+    $permissions = [$this->entityType->getAdminPermission(), $operation . ' any owntracks entity'];
 
-    switch ($operation) {
-      case "view":
-        $permissions[] = 'view any owntracks entity';
-
-        if ($owner) {
-          $permissions[] = 'view own owntracks entities';
-        }
-        break;
-
-      case "update":
-        $permissions[] = 'edit any owntracks entity';
-
-        if ($owner) {
-          $permissions[] = 'edit own owntracks entities';
-        }
-        break;
-
-      case "delete":
-        $permissions[] = 'delete any owntracks entity';
-
-        if ($owner) {
-          $permissions[] = 'delete own owntracks entities';
-        }
-        break;
+    if ($account->id() === $entity->getOwnerId()) {
+      $permissions[] = $operation . ' own owntracks entities';
     }
 
-    $access = AccessResult::allowedIfHasPermissions($account, $permissions, 'OR');
-    return $access->orIf(AccessResult::allowedIfHasPermission($account, $this->entityType->getAdminPermission()))->addCacheableDependency($entity);
+    return AccessResult::allowedIfHasPermissions($account, $permissions, 'OR')
+      ->addCacheableDependency($entity);
   }
 
   /**
    * {@inheritdoc}
    */
   protected function checkFieldAccess($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, FieldItemListInterface $items = NULL) {
-    $administrative_fields = ['uid'];
-    if ($operation == 'edit' && in_array($field_definition->getName(), $administrative_fields, TRUE)) {
+    if ($operation === 'edit' && $field_definition->getName() === 'uid') {
       return AccessResult::allowedIfHasPermission($account, $this->entityType->getAdminPermission());
     }
 

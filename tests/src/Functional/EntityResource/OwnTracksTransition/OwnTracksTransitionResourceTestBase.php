@@ -52,7 +52,7 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
         break;
 
       case 'PATCH':
-        $this->grantPermissionsToTestedRole(['edit any owntracks entity']);
+        $this->grantPermissionsToTestedRole(['update any owntracks entity']);
         break;
 
       case 'DELETE':

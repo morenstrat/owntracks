@@ -21,20 +21,16 @@ class OwnTracksUserMapAccess implements AccessInterface {
    *   The currently visited user.
    *
    * @return \Drupal\Core\Access\AccessResult
-   *   Allowed or Forbidden.
+   *   Allowed or Neutral.
    */
   public function access(AccountInterface $account, UserInterface $user) {
-    if ($account->hasPermission('access user profiles')) {
-      if ($account->hasPermission('view any owntracks entity')) {
-        return AccessResult::allowed();
-      }
+    $permissions = ['administer owntracks', 'view any owntracks entity'];
 
-      if ($user->id() === $account->id() && $account->hasPermission('view own owntracks entities')) {
-        return AccessResult::allowed();
-      }
+    if ($user->id() === $account->id()) {
+      $permissions[] = 'view own owntracks entities';
     }
 
-    return AccessResult::forbidden();
+    return AccessResult::allowedIfHasPermission($account, 'access user profiles')
+      ->andIf(AccessResult::allowedIfHasPermissions($account, $permissions, 'OR'));
   }
-
 }
