@@ -3,7 +3,6 @@
 namespace Drupal\owntracks;
 
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 
@@ -11,14 +10,6 @@ use Drupal\Core\Session\AccountInterface;
  * Provides the owntracks location service.
  */
 class OwnTracksLocationService {
-
-  /**
-   * Drupal\Core\Entity\Query\QueryFactory definition.
-   *
-   * @var \Drupal\Core\Entity\Query\QueryFactory
-   */
-  protected $entityQuery;
-
 
   /**
    * Drupal\Core\Entity\EntityTypeManagerInterface definition.
@@ -30,13 +21,10 @@ class OwnTracksLocationService {
   /**
    * OwnTracksLocationService constructor.
    *
-   * @param \Drupal\Core\Entity\Query\QueryFactory $entity_query
-   *   The entity query service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
    */
-  public function __construct(QueryFactory $entity_query, EntityTypeManagerInterface $entity_type_manager) {
-    $this->entityQuery = $entity_query;
+  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
     $this->entityTypeManager = $entity_type_manager;
   }
 
@@ -74,8 +62,9 @@ class OwnTracksLocationService {
       'second' => 59,
     ])->format('U');
 
-    $query = $this->entityQuery
-      ->get('owntracks_location')
+    $storage = $this->entityTypeManager
+      ->getStorage('owntracks_location');
+    $query = $storage->getQuery()
       ->condition('uid', $account->id())
       ->condition('tst', [$from, $till], 'BETWEEN');
 
@@ -86,9 +75,7 @@ class OwnTracksLocationService {
     $result = $query->execute();
 
     if (!empty($result)) {
-      $entities = $this->entityTypeManager
-        ->getStorage('owntracks_location')
-        ->loadMultiple($result);
+      $entities = $storage->loadMultiple($result);
 
       foreach ($entities as $owntracks_location) {
         $track[] = $owntracks_location->getLocation();
