@@ -75,7 +75,7 @@ class OwnTracksLocationService {
     $query = $this->entityQuery
       ->get('owntracks_location')
       ->condition('uid', $account->id())
-      ->condition('timestamp', [$from, $till], 'BETWEEN');
+      ->condition('tst', [$from, $till], 'BETWEEN');
 
     $result = $query->execute();
 
