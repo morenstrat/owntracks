@@ -37,17 +37,18 @@ class OwnTracksEndpointService {
       throw new InvalidDataTypeException('Invalid payload type:' . $data);
     }
 
-    if (!$entity instanceof OwnTracksEntityInterface) {
+    if ($entity instanceof OwnTracksEntityInterface) {
+      $violations = $entity->validate();
+
+      if ($violations->count() !== 0) {
+        throw new InvalidDataTypeException('Invalid payload data: ' . $data);
+      }
+
+      $entity->save();
+    }
+    else {
       throw new \Exception('Internal server error:' . $data);
     }
-
-    $violations = $entity->validate();
-
-    if ($violations->count() !== 0) {
-      throw new InvalidDataTypeException('Invalid payload data: ' . $data);
-    }
-
-    $entity->save();
   }
 
 }
