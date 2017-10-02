@@ -47,11 +47,13 @@ class OwnTracksLocationService {
    *   The user to get the track for.
    * @param \Drupal\Core\Datetime\DrupalDateTime $date
    *   The date of the track.
+   * @param string $tracker_id
+   *   A tracker ID.
    *
    * @return array
    *   The user's track.
    */
-  public function getUserTrack(AccountInterface $account, DrupalDateTime $date) {
+  public function getUserTrack(AccountInterface $account, DrupalDateTime $date, $tracker_id = NULL) {
     $track = [];
 
     $from = DrupalDateTime::createFromArray([
@@ -76,6 +78,10 @@ class OwnTracksLocationService {
       ->get('owntracks_location')
       ->condition('uid', $account->id())
       ->condition('tst', [$from, $till], 'BETWEEN');
+
+    if ($tracker_id !== NULL) {
+      $query->condition('tid', $tracker_id);
+    }
 
     $result = $query->execute();
 
