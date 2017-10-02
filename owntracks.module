@@ -7,6 +7,7 @@
 
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\owntracks\Entity\OwnTracksLocationInterface;
+use Drupal\owntracks\Entity\OwnTracksTransitionInterface;
 
 /**
  * Implements hook_entity_extra_field_info().
@@ -15,6 +16,13 @@ function owntracks_entity_extra_field_info() {
   $fields['owntracks_location']['owntracks_location']['display']['map'] = [
     'label' => t('Map'),
     'description' => t('Display a map with a location marker.'),
+    'weight' => -10,
+    'visible' => TRUE,
+  ];
+
+  $fields['owntracks_transition']['owntracks_transition']['display']['map'] = [
+    'label' => t('Map'),
+    'description' => t('Display a map with a transition marker.'),
     'weight' => -10,
     'visible' => TRUE,
   ];
@@ -35,11 +43,26 @@ function owntracks_owntracks_location_view(array &$build, OwnTracksLocationInter
 }
 
 /**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function owntracks_owntracks_transition_view(array &$build, OwnTracksTransitionInterface $owntracks_transition, EntityViewDisplayInterface $display) {
+  if ($display->getComponent('map')) {
+    $build['map'] = [
+      '#theme' => 'owntracks_map',
+      '#track' => [$owntracks_transition->getLocation()],
+    ];
+  }
+}
+
+/**
  * Implements hook_theme().
  */
 function owntracks_theme($existing, $type, $theme, $path) {
   return [
     'owntracks_location' => [
+      'render element' => 'content',
+    ],
+    'owntracks_transition' => [
       'render element' => 'content',
     ],
     'owntracks_map' => [
