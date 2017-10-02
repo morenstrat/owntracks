@@ -19,13 +19,14 @@ use Drupal\Component\Utility\Xss;
  *   - track: An array of Lat/Lang coordinates.
  */
 function template_preprocess_owntracks_map(array &$variables) {
+  $id = Html::getUniqueId('owntracks-map');
   $variables['attributes'] = new Attribute([
-    'id' => 'owntracks-map',
+    'id' => $id,
     'class' => ['owntracks-map'],
   ]);
 
   $variables['#attached']['library'][] = 'owntracks/owntracks';
-  $variables['#attached']['drupalSettings']['owntracks']['track'] = $variables['track'];
+  $variables['#attached']['drupalSettings']['owntracks']['track'][$id] = $variables['track'];
 
   $config = \Drupal::config('owntracks.map.settings');
   $variables['#attached']['drupalSettings']['owntracks']['map'] = [
