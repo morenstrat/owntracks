@@ -8,12 +8,12 @@ use Drupal\user\UserInterface;
 use Drupal\Core\Access\AccessResult;
 
 /**
- * OwnTracksUserAccess definition.
+ * OwnTracksUserMapAccess definition.
  */
-class OwnTracksUserAccess implements AccessInterface {
+class OwnTracksUserMapAccess implements AccessInterface {
 
   /**
-   * Check access to user owntracks locations map.
+   * Check access to owntracks user map.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The currently logged in user.
@@ -24,12 +24,17 @@ class OwnTracksUserAccess implements AccessInterface {
    *   Allowed or Forbidden.
    */
   public function access(AccountInterface $account, UserInterface $user) {
-    if ($account->hasPermission('view any owntracks entity') || ($account->hasPermission('view own owntracks entities') && $user->id() === $account->id())) {
-      return AccessResult::allowedIfHasPermission($account, 'access user profiles');
+    if ($account->hasPermission('access user profiles')) {
+      if ($account->hasPermission('view any owntracks entity')) {
+        return AccessResult::allowed();
+      }
+
+      if ($user->id() === $account->id() && $account->hasPermission('view own owntracks entities')) {
+        return AccessResult::allowed();
+      }
     }
-    else {
-      return AccessResult::forbidden();
-    }
+
+    return AccessResult::forbidden();
   }
 
 }

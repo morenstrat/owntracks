@@ -100,7 +100,7 @@ owntracks.user:
     _form: '\Drupal\owntracks\Form\OwnTracksMapForm'
     _title: 'OwnTracks'
   requirements:
-    _owntracks_user_access: 'TRUE'
+    _owntracks_user_map_access: 'TRUE'
 
 owntracks.endpoint:
   path: '/owntracks/endpoint'

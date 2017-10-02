@@ -4,10 +4,10 @@ services:
     arguments: ['@entity_type.manager']
   owntracks.endpoint_service:
     class: Drupal\owntracks\OwnTracksEndpointService
-  owntracks.user_access:
-    class: Drupal\owntracks\Access\OwnTracksUserAccess
+  owntracks.user_map_access:
+    class: Drupal\owntracks\Access\OwnTracksUserMapAccess
     tags:
-      - { name: access_check, applies_to: _owntracks_user_access }
+      - { name: access_check, applies_to: _owntracks_user_map_access }
   serializer.normalizer.owntracks_entity:
     class: Drupal\owntracks\Normalizer\OwnTracksEntityNormalizer
     tags:
