@@ -8,7 +8,7 @@ owntracks.owntracks_transition_settings_tab:
   route_name: entity.owntracks_transition.admin_form
   base_route: entity.owntracks_transition.admin_form
 
-owntracks.user:
+owntracks.user_map:
   title: 'OwnTracks'
-  route_name: owntracks.user
+  route_name: owntracks.user_map
   base_route: entity.user.canonical

@@ -10,9 +10,9 @@ use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * OwnTracks map form.
+ * OwnTracks user map form.
  */
-class OwnTracksMapForm extends FormBase {
+class OwnTracksUserMapForm extends FormBase {
 
   /**
    * OwntracksLocationService definition.

@@ -94,10 +94,10 @@ entity.owntracks_transition.admin_form:
   requirements:
     _permission: 'administer owntracks'
 
-owntracks.user:
+owntracks.user_map:
   path: '/user/{user}/owntracks'
   defaults:
-    _form: '\Drupal\owntracks\Form\OwnTracksMapForm'
+    _form: '\Drupal\owntracks\Form\OwnTracksUserMapForm'
     _title: 'OwnTracks'
   requirements:
     _owntracks_user_map_access: 'TRUE'
