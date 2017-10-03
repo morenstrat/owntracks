@@ -1,9 +1,0 @@
-id: entity.owntracks_transition
-plugin_id: 'entity:owntracks_transition'
-granularity: method
-configuration:
-  POST:
-    supported_formats:
-      - json
-    supported_auth:
-      - basic_auth
