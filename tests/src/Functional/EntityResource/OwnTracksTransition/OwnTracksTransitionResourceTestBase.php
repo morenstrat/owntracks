@@ -222,16 +222,32 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
 
     switch ($method) {
       case 'GET':
-        return "The following permissions are required: 'administer owntracks' OR 'view any owntracks entity' OR 'view own owntracks entities'.";
+        if ($this->entity->getOwnerId() === \Drupal::currentUser()->id()) {
+          return "The following permissions are required: 'administer owntracks' OR 'view any owntracks entity' OR 'view own owntracks entities'.";
+        }
+        else {
+          return "The following permissions are required: 'administer owntracks' OR 'view any owntracks entity'.";
+        }
 
       case 'POST':
         return "The following permissions are required: 'administer owntracks' OR 'create owntracks entities'.";
 
       case 'PATCH':
-        return "The following permissions are required: 'administer owntracks' OR 'update any owntracks entity' OR 'update own owntracks entities'.";
+        if ($this->entity->getOwnerId() === \Drupal::currentUser()->id()) {
+          return "The following permissions are required: 'administer owntracks' OR 'update any owntracks entity' OR 'update own owntracks entities'.";
+        }
+        else {
+          return "The following permissions are required: 'administer owntracks' OR 'update any owntracks entity'.";
+        }
 
       case 'DELETE':
-        return "The following permissions are required: 'administer owntracks' OR 'delete any owntracks entity' OR 'delete own owntracks entities'.";
+        if ($this->entity->getOwnerId() === \Drupal::currentUser()->id()) {
+          return "The following permissions are required: 'administer owntracks' OR 'delete any owntracks entity' OR 'delete own owntracks entities'.";
+        }
+        else {
+          return "The following permissions are required: 'administer owntracks' OR 'delete any owntracks entity'.";
+        }
+
     }
 
     return parent::getExpectedUnauthorizedAccessMessage($method);
