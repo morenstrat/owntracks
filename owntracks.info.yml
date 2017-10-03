@@ -8,7 +8,6 @@ core: 8.x
 configure: owntracks.admin_index
 
 dependencies:
-  - drupal:rest
   - drupal:basic_auth
   - drupal:datetime
   - drupal:options
