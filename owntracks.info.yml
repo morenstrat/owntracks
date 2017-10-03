@@ -9,5 +9,4 @@ configure: owntracks.admin_index
 
 dependencies:
   - drupal:basic_auth
-  - drupal:datetime
   - drupal:options
