@@ -301,7 +301,7 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
 
     switch ($method) {
       case 'GET':
-        return "The following permissions are required: 'administer owntracks' OR 'view any owntracks entity'.";
+        return "The following permissions are required: 'administer owntracks' OR 'view any owntracks entity' OR 'view own owntracks entities'.";
 
       case 'POST':
         return "The following permissions are required: 'administer owntracks' OR 'create owntracks entities'.";
