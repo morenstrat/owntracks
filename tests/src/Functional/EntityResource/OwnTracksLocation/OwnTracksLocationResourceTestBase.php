@@ -301,16 +301,16 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
 
     switch ($method) {
       case 'GET':
-        return "The 'administer owntracks' permission is required.";
+        return "The following permissions are required: 'administer owntracks' OR 'view any owntracks entity'.";
 
       case 'POST':
-        return "The 'create owntracks entities' permission is required.";
+        return "The following permissions are required: 'administer owntracks' OR 'create owntracks entities'.";
 
       case 'PATCH':
-        return "The 'administer owntracks' permission is required.";
+        return "The following permissions are required: 'administer owntracks' OR 'update any owntracks entity' OR 'update own owntracks entities'.";
 
       case 'DELETE':
-        return "The 'administer owntracks' permission is required.";
+        return "The following permissions are required: 'administer owntracks' OR 'delete any owntracks entity' OR 'delete own owntracks entities'.";
     }
 
     return parent::getExpectedUnauthorizedAccessMessage($method);
