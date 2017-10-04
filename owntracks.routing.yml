@@ -62,6 +62,38 @@ entity.owntracks_transition.delete_form:
   requirements:
     _entity_access: 'owntracks_transition.delete'
 
+entity.owntracks_waypoint.add_form:
+  path: '/owntracks_waypoint/add'
+  defaults:
+    _entity_form: 'owntracks_waypoint.add'
+    _title: 'Add OwnTracks Waypoint'
+  requirements:
+    _entity_create_access: 'owntracks_waypoint'
+
+entity.owntracks_waypoint.canonical:
+  path: '/owntracks_waypoint/{owntracks_waypoint}'
+  defaults:
+    _entity_view: 'owntracks_waypoint'
+    _title: 'OwnTracks Waypoint'
+  requirements:
+    _entity_access: 'owntracks_waypoint.view'
+
+entity.owntracks_waypoint.edit_form:
+  path: '/owntracks_waypoint/{owntracks_waypoint}/edit'
+  defaults:
+    _entity_form: 'owntracks_waypoint.edit'
+    _title: 'Edit OwnTracks Waypoint'
+  requirements:
+    _entity_access: 'owntracks_waypoint.edit'
+
+entity.owntracks_waypoint.delete_form:
+  path: '/owntracks_waypoint/{owntracks_waypoint}/delete'
+  defaults:
+    _entity_form: 'owntracks_waypoint.delete'
+    _title: 'Delete OwnTracks Waypoint'
+  requirements:
+    _entity_access: 'owntracks_waypoint.delete'
+
 owntracks.admin_index:
   path: '/admin/config/owntracks'
   defaults:
@@ -91,6 +123,14 @@ entity.owntracks_transition.admin_form:
   defaults:
     _form: '\Drupal\owntracks\OwnTracksTransitionSettingsForm'
     _title: 'OwnTracks Transition settings'
+  requirements:
+    _permission: 'administer owntracks'
+
+entity.owntracks_waypoint.admin_form:
+  path: '/admin/config/owntracks/waypoint'
+  defaults:
+    _form: '\Drupal\owntracks\OwnTracksWaypointSettingsForm'
+    _title: 'OwnTracks Waypoint settings'
   requirements:
     _permission: 'administer owntracks'
 

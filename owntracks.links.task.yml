@@ -8,6 +8,11 @@ owntracks.owntracks_transition_settings_tab:
   route_name: entity.owntracks_transition.admin_form
   base_route: entity.owntracks_transition.admin_form
 
+owntracks.owntracks_waypoint_settings_tab:
+  title: 'Settings'
+  route_name: entity.owntracks_waypoint.admin_form
+  base_route: entity.owntracks_waypoint.admin_form
+
 owntracks.user_map:
   title: 'OwnTracks'
   route_name: owntracks.user_map

@@ -43,14 +43,6 @@ abstract class OwnTracksEntityBase extends ContentEntityBase implements OwnTrack
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['event'] = BaseFieldDefinition::create('list_string')
-      ->setLabel(t('Event'))
-      ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE)
-      ->setSetting('allowed_values', ['enter' => 'Enter', 'leave' => 'Leave']);
-
     $fields['lat'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Latitude'))
       ->setDisplayOptions('form', ['weight' => 0])
@@ -93,13 +85,6 @@ abstract class OwnTracksEntityBase extends ContentEntityBase implements OwnTrack
         ],
       ]);
 
-    $fields['tid'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Tracker-ID'))
-      ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE);
-
     $fields['tst'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(t('Timestamp'))
       ->setDisplayOptions('form', ['weight' => 0])
@@ -107,13 +92,6 @@ abstract class OwnTracksEntityBase extends ContentEntityBase implements OwnTrack
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE)
       ->setRequired(TRUE);
-
-    $fields['t'] = BaseFieldDefinition::create('list_string')
-      ->setLabel(t('Trigger'))
-      ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE);
 
     return $fields;
   }

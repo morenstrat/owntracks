@@ -106,6 +106,14 @@ class OwnTracksLocation extends OwnTracksEntityBase implements OwnTracksLocation
         ],
       ]);
 
+    $fields['event'] = BaseFieldDefinition::create('list_string')
+      ->setLabel(t('Event'))
+      ->setDisplayOptions('form', ['weight' => 0])
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setSetting('allowed_values', ['enter' => 'Enter', 'leave' => 'Leave']);
+
     $fields['rad'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Radius'))
       ->setDisplayOptions('form', ['weight' => 0])
@@ -115,15 +123,27 @@ class OwnTracksLocation extends OwnTracksEntityBase implements OwnTracksLocation
       ->setSetting('suffix', 'm')
       ->setSetting('unsigned', TRUE);
 
-    /* @var \Drupal\Core\Field\BaseFieldDefinition $fields['t'] */
-    $fields['t']->setSetting('allowed_values', [
-      'c' => 'Circular',
-      'b' => 'Beacon',
-      'r' => 'Response',
-      'u' => 'User',
-      't' => 'Timer',
-      'a' => 'Automatic',
-    ]);
+    $fields['t'] = BaseFieldDefinition::create('list_string')
+      ->setLabel(t('Trigger'))
+      ->setDisplayOptions('form', ['weight' => 0])
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setSetting('allowed_values', [
+        'c' => 'Circular',
+        'b' => 'Beacon',
+        'r' => 'Response',
+        'u' => 'User',
+        't' => 'Timer',
+        'a' => 'Automatic',
+      ]);
+
+    $fields['tid'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Tracker-ID'))
+      ->setDisplayOptions('form', ['weight' => 0])
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
 
     $fields['vac'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Vertical accuracy'))

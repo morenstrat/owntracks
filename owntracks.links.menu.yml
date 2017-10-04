@@ -25,3 +25,10 @@ entity.owntracks_transition.admin_form:
   parent: owntracks.admin_index
   description: 'Configure OwnTracks Transition settings.'
   weight: 0
+
+entity.owntracks_waypoint.admin_form:
+  title: 'OwnTracks Waypoint settings'
+  route_name: entity.owntracks_waypoint.admin_form
+  parent: owntracks.admin_index
+  description: 'Configure OwnTracks Waypoint settings.'
+  weight: 0

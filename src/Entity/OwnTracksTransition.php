@@ -77,6 +77,14 @@ class OwnTracksTransition extends OwnTracksEntityBase implements OwnTracksTransi
         ],
       ]);
 
+    $fields['event'] = BaseFieldDefinition::create('list_string')
+      ->setLabel(t('Event'))
+      ->setDisplayOptions('form', ['weight' => 0])
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setSetting('allowed_values', ['enter' => 'Enter', 'leave' => 'Leave']);
+
     $fields['wtst'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(t('Waypoint timestamp'))
       ->setDisplayOptions('form', ['weight' => 0])
@@ -85,12 +93,24 @@ class OwnTracksTransition extends OwnTracksEntityBase implements OwnTracksTransi
       ->setDisplayConfigurable('view', TRUE)
       ->setRequired(TRUE);
 
-    /* @var \Drupal\Core\Field\BaseFieldDefinition $fields['t'] */
-    $fields['t']->setSetting('allowed_values', [
-      'c' => 'Circular',
-      'b' => 'Beacon',
-      'w' => 'WiFi',
-    ]);
+    $fields['t'] = BaseFieldDefinition::create('list_string')
+      ->setLabel(t('Trigger'))
+      ->setDisplayOptions('form', ['weight' => 0])
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setSetting('allowed_values', [
+        'c' => 'Circular',
+        'b' => 'Beacon',
+        'w' => 'WiFi',
+      ]);
+
+    $fields['tid'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Tracker-ID'))
+      ->setDisplayOptions('form', ['weight' => 0])
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
 
     return $fields;
   }
