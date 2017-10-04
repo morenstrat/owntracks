@@ -115,7 +115,7 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
       ],
       'acc' => [
         [
-          'value' => 0,
+          'value' => '0.000',
         ],
       ],
       'description' => [
@@ -171,7 +171,7 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
       ],
       'acc' => [
         [
-          'value' => 0,
+          'value' => '0.000',
         ],
       ],
       'description' => [
