@@ -3,6 +3,7 @@
 namespace Drupal\owntracks;
 
 use Drupal\Component\Serialization\Exception\InvalidDataTypeException;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\owntracks\Entity\OwnTracksEntityInterface;
 use Drupal\owntracks\Entity\OwnTracksLocation;
 use Drupal\owntracks\Entity\OwnTracksTransition;
@@ -12,6 +13,31 @@ use Drupal\owntracks\Entity\OwnTracksWaypoint;
  * Provides the owntracks endpoint service.
  */
 class OwnTracksEndpointService {
+
+  /**
+   * \Drupal\owntracks\OwnTracksWaypointService definition.
+   *
+   * @var \Drupal\owntracks\OwnTracksWaypointService
+   */
+  protected $waypointService;
+
+  /**
+   * \Drupal\Core\Session\AccountInterface defintion.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected $currentUser;
+
+  /**
+   * OwnTracksEndpointService constructor.
+   *
+   * @param \Drupal\owntracks\OwnTracksWaypointService $waypoint_service
+   * @param \Drupal\Core\Session\AccountInterface $current_user;
+   */
+  public function __construct(OwnTracksWaypointService $waypoint_service, AccountInterface $current_user) {
+    $this->waypointService = $waypoint_service;
+    $this->currentUser = $current_user;
+  }
 
   /**
    * Create an OwnTracks entity.
@@ -40,6 +66,10 @@ class OwnTracksEndpointService {
       $entity = OwnTracksTransition::create($json);
     }
     elseif($json['_type'] === 'waypoint') {
+      if ($this->waypointService->waypointExists($this->currentUser->id(), $json)) {
+        return;
+      }
+
       $entity = OwnTracksWaypoint::create($json);
     }
     elseif ($json['_type'] === 'waypoints') {

@@ -2,8 +2,12 @@ services:
   owntracks.location_service:
     class: Drupal\owntracks\OwnTracksLocationService
     arguments: ['@entity_type.manager']
+  owntracks.waypoint_service:
+    class: Drupal\owntracks\OwnTracksWaypointService
+    arguments: ['@entity_type.manager']
   owntracks.endpoint_service:
     class: Drupal\owntracks\OwnTracksEndpointService
+    arguments: ['@owntracks.waypoint_service', '@current_user']
   owntracks.user_map_access:
     class: Drupal\owntracks\Access\OwnTracksUserMapAccess
     tags:
