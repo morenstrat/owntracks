@@ -6,6 +6,7 @@ use Drupal\Component\Serialization\Exception\InvalidDataTypeException;
 use Drupal\owntracks\Entity\OwnTracksEntityInterface;
 use Drupal\owntracks\Entity\OwnTracksLocation;
 use Drupal\owntracks\Entity\OwnTracksTransition;
+use Drupal\owntracks\Entity\OwnTracksWaypoint;
 
 /**
  * Provides the owntracks endpoint service.
@@ -32,6 +33,16 @@ class OwnTracksEndpointService {
     }
     elseif ($json['_type'] === 'transition') {
       $entity = OwnTracksTransition::create($json);
+    }
+    elseif($json['_type'] === 'waypoint') {
+      $entity = OwnTracksWaypoint::create($json);
+    }
+    elseif ($json['_type'] === 'waypoints') {
+      foreach ($json['waypoints'] as $waypoint) {
+        $this->create(json_encode($waypoint));
+      }
+
+      return;
     }
     else {
       throw new InvalidDataTypeException('Invalid payload type:' . $data);
