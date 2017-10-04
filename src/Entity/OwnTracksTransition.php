@@ -70,8 +70,12 @@ class OwnTracksTransition extends OwnTracksEntityBase implements OwnTracksTransi
       ->setSetting('suffix', 'm')
       ->setSetting('precision', 10)
       ->setSetting('scale', 3)
-      ->setSetting('unsigned', TRUE)
-      ->setRequired(TRUE);
+      ->setRequired(TRUE)
+      ->addPropertyConstraints('value', [
+        'Range' => [
+          'min' => 0,
+        ],
+      ]);
 
     $fields['wtst'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(t('Waypoint timestamp'))
