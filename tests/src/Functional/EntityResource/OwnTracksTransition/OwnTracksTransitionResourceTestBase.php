@@ -68,7 +68,7 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
     $owntracks_transition = OwnTracksTransition::create([
       '_type' => 'transition',
       'wtst' => 23456,
-      'acc' => '0.000',
+      'acc' => '6.375',
       'description' => 'valid',
       'event' => 'enter',
       'lat' => '-88.89765467',
@@ -115,7 +115,7 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
       ],
       'acc' => [
         [
-          'value' => '0.000',
+          'value' => '6.375',
         ],
       ],
       'description' => [
@@ -171,7 +171,7 @@ abstract class OwnTracksTransitionResourceTestBase extends EntityResourceTestBas
       ],
       'acc' => [
         [
-          'value' => '0.000',
+          'value' => '6.375',
         ],
       ],
       'description' => [
