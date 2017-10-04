@@ -24,6 +24,7 @@ class OwnTracksTransitionTest extends EntityKernelTestBase {
    * @var array
    */
   public static $sampleInvalidData = [
+    'uid'         => -1,
     '_type'       => 'trans',
     'wtst'        => 0,
     'acc'         => -1,
@@ -68,7 +69,7 @@ class OwnTracksTransitionTest extends EntityKernelTestBase {
   public function testValidation() {
     $entity = OwnTracksTransition::create(static::$sampleInvalidData);
     $violations = $entity->validate();
-    $this->assertEquals(6, $violations->count());
+    $this->assertEquals(7, $violations->count());
   }
 
   /**
