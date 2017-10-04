@@ -136,7 +136,8 @@ class OwnTracksLocation extends OwnTracksEntityBase implements OwnTracksLocation
         'u' => 'User',
         't' => 'Timer',
         'a' => 'Automatic',
-      ]);
+      ])
+      ->setDefaultValue('u');
 
     $fields['tid'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Tracker-ID'))

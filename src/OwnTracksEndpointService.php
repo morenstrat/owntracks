@@ -60,6 +60,10 @@ class OwnTracksEndpointService {
     }
 
     if ($json['_type'] === 'location') {
+      if (empty($json['t'])) {
+        $json['t'] = 'a';
+      }
+
       $entity = OwnTracksLocation::create($json);
     }
     elseif ($json['_type'] === 'transition') {
