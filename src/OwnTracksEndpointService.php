@@ -28,6 +28,11 @@ class OwnTracksEndpointService {
       throw new InvalidDataTypeException('Missing payload type: ' . $data);
     }
 
+    if (isset($json['desc'])) {
+      $json['description'] = $json['desc'];
+      unset($json['desc']);
+    }
+
     if ($json['_type'] === 'location') {
       $entity = OwnTracksLocation::create($json);
     }
