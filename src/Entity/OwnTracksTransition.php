@@ -55,7 +55,7 @@ class OwnTracksTransition extends OwnTracksEntityBase implements OwnTracksTransi
     /* @var \Drupal\Core\Field\BaseFieldDefinition $fields['_type'] */
     $fields['_type']->setSetting('allowed_values', [
       'transition' => 'Transition',
-    ]);
+    ])->setDefaultValue('transition');
 
     $fields['acc'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Accuracy'))

@@ -55,7 +55,7 @@ class OwnTracksWaypoint extends OwnTracksEntityBase implements OwnTracksWaypoint
     /* @var \Drupal\Core\Field\BaseFieldDefinition $fields['_type'] */
     $fields['_type']->setSetting('allowed_values', [
       'waypoint' => 'Waypoint',
-    ]);
+    ])->setDefaultValue('waypoint');
 
     $fields['rad'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Radius'))
