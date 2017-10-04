@@ -36,15 +36,6 @@ abstract class OwnTracksEntityBase extends ContentEntityBase implements OwnTrack
       ->setRequired(TRUE)
       ->setDefaultValueCallback('Drupal\owntracks\Entity\OwnTracksEntityBase::getCurrentUserId');
 
-    $fields['acc'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Accuracy'))
-      ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE)
-      ->setSetting('suffix', 'm')
-      ->setSetting('unsigned', TRUE);
-
     $fields['description'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Description'))
       ->setDisplayOptions('form', ['weight' => 0])

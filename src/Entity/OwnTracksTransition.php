@@ -57,6 +57,22 @@ class OwnTracksTransition extends OwnTracksEntityBase implements OwnTracksTransi
       'transition' => 'Transition',
     ]);
 
+    $fields['acc'] = BaseFieldDefinition::create('decimal')
+      ->setLabel(t('Accuracy'))
+      ->setDisplayOptions('form', ['weight' => 0])
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'settings' => ['scale' => 3],
+        'weight' => 0,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setSetting('suffix', 'm')
+      ->setSetting('precision', 10)
+      ->setSetting('scale', 3)
+      ->setSetting('unsigned', TRUE)
+      ->setRequired(TRUE);
+
     $fields['wtst'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(t('Waypoint timestamp'))
       ->setDisplayOptions('form', ['weight' => 0])

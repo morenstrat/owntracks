@@ -57,6 +57,15 @@ class OwnTracksLocation extends OwnTracksEntityBase implements OwnTracksLocation
       'location' => 'Location',
     ]);
 
+    $fields['acc'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Accuracy'))
+      ->setDisplayOptions('form', ['weight' => 0])
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setSetting('suffix', 'm')
+      ->setSetting('unsigned', TRUE);
+
     $fields['alt'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Altitude'))
       ->setDisplayOptions('form', ['weight' => 0])
