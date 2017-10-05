@@ -306,7 +306,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Zeitstempel
+          label: Timestamp
           exclude: false
           alter:
             alter_text: false
