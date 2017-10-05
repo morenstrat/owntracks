@@ -7,7 +7,7 @@ services:
     arguments: ['@entity_type.manager']
   owntracks.endpoint_service:
     class: Drupal\owntracks\OwnTracksEndpointService
-    arguments: ['@owntracks.waypoint_service', '@current_user']
+    arguments: ['@current_user', '@entity_type.manager', '@owntracks.waypoint_service']
   owntracks.user_map_access:
     class: Drupal\owntracks\Access\OwnTracksUserMapAccess
     tags:

@@ -27,44 +27,21 @@ class OwnTracksWaypointService {
   }
 
   /**
-   * Check if a waypoint for the given account already exists.
-   *
-   * @param int $uid
-   * @param array $json
-   *
-   * @return bool
-   */
-  public function waypointExists(int $uid, array $json) {
-    $result = $this->entityTypeManager
-      ->getStorage('owntracks_waypoint')
-      ->getQuery()
-      ->condition('uid', $uid)
-      ->condition('description', $json['description'])
-      ->condition('lat', $json['lat'])
-      ->condition('lon', $json['lon'])
-      ->condition('rad', $json['rad'])
-      ->condition('tst', $json['tst'])
-      ->execute();
-
-    return empty($result) ? FALSE : TRUE;
-  }
-
-  /**
    * Gets the waypoint id for given user id and waypoint timestamp.
    *
    * @param int $uid
-   * @param int $wtst
+   * @param int $tst
    *
    * @return mixed|null
    */
-  public function getWaypointId(int $uid, int $wtst) {
+  public function getWaypointId(int $uid, int $tst) {
     $waypoint_id = NULL;
 
     $result = $this->entityTypeManager
       ->getStorage('owntracks_waypoint')
       ->getQuery()
       ->condition('uid', $uid)
-      ->condition('tst', $wtst)
+      ->condition('tst', $tst)
       ->execute();
 
     if (!empty($result)) {
