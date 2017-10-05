@@ -93,6 +93,23 @@ class OwnTracksTransition extends OwnTracksEntityBase implements OwnTracksTransi
       ->setDisplayConfigurable('view', TRUE)
       ->setRequired(TRUE);
 
+    $fields['waypoint'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Waypoint'))
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => 60,
+          'placeholder' => '',
+        ],
+        'weight' => 0,
+      ])
+      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setSetting('target_type', 'owntracks_waypoint')
+      ->setRequired(FALSE);
+
     $fields['t'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Trigger'))
       ->setDisplayOptions('form', ['weight' => 0])
