@@ -15,7 +15,7 @@ class OwnTracksEndpointService {
   /**
    * The current user.
    *
-   * @var \Drupal\Core\Session\AccountInterface $currentUser
+   * @var \Drupal\Core\Session\AccountInterface
    */
   protected $currentUser;
 
@@ -29,28 +29,28 @@ class OwnTracksEndpointService {
   /**
    * The owntracks waypoint service.
    *
-   * @var \Drupal\owntracks\OwnTracksWaypointService $waypointService
+   * @var \Drupal\owntracks\OwnTracksWaypointService
    */
   protected $waypointService;
 
   /**
    * Post data from the controller.
    *
-   * @var string $data
+   * @var string
    */
   protected $data;
 
   /**
    * Post data converted to array.
    *
-   * @var array $json
+   * @var array
    */
   protected $json;
 
   /**
    * The owntracks entity.
    *
-   * @var \Drupal\Owntracks\Entity\OwnTracksEntityInterface $entity
+   * @var \Drupal\Owntracks\Entity\OwnTracksEntityInterface
    */
   protected $entity;
 
@@ -58,8 +58,11 @@ class OwnTracksEndpointService {
    * OwnTracksEndpointService constructor.
    *
    * @param \Drupal\Core\Session\AccountInterface $current_user
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface
+   *   The current user.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager service.
    * @param \Drupal\owntracks\OwnTracksWaypointService $waypoint_service
+   *   The owntracks waypoint service.
    */
   public function __construct(AccountInterface $current_user, EntityTypeManagerInterface $entity_type_manager, OwnTracksWaypointService $waypoint_service) {
     $this->currentUser = $current_user;
@@ -108,7 +111,6 @@ class OwnTracksEndpointService {
 
       default:
         throw new InvalidDataTypeException('Invalid payload type:' . $this->data);
-        break;
     }
   }
 
@@ -156,7 +158,8 @@ class OwnTracksEndpointService {
   /**
    * Create an owntracks entity.
    *
-   * @param $entity_type
+   * @param string $entity_type
+   *   The entity type.
    *
    * @return $this
    */
@@ -171,8 +174,10 @@ class OwnTracksEndpointService {
   /**
    * Update an owntracks entity.
    *
-   * @param $entity_type
-   * @param $entity_id
+   * @param string $entity_type
+   *   The entity type.
+   * @param int $entity_id
+   *   The entity id.
    *
    * @return $this
    */
