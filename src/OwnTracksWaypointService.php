@@ -49,4 +49,29 @@ class OwnTracksWaypointService {
     return empty($result) ? FALSE : TRUE;
   }
 
+  /**
+   * Gets the waypoint id for given user id and waypoint timestamp.
+   *
+   * @param int $uid
+   * @param int $wtst
+   *
+   * @return mixed|null
+   */
+  public function getWaypointId(int $uid, int $wtst) {
+    $waypoint_id = NULL;
+
+    $result = $this->entityTypeManager
+      ->getStorage('owntracks_waypoint')
+      ->getQuery()
+      ->condition('uid', $uid)
+      ->condition('tst', $wtst)
+      ->execute();
+
+    if (!empty($result)) {
+      $waypoint_id = reset($result);
+    }
+
+    return $waypoint_id;
+  }
+
 }
