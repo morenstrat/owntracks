@@ -25,7 +25,8 @@ class OwnTracksEndpoint extends ControllerBase {
   /**
    * OwnTracksEndpoint constructor.
    *
-   * @param $endpointService \Drupal\owntracks\OwnTracksEndpointService
+   * @param \Drupal\owntracks\OwnTracksEndpointService $endpointService
+   *   The owntracks endpoint service.
    */
   public function __construct(OwnTracksEndpointService $endpointService) {
     $this->endpointService = $endpointService;
@@ -44,7 +45,10 @@ class OwnTracksEndpoint extends ControllerBase {
    * Handle owntracks endpoint requests.
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The HTTP request.
+   *
    * @return \Symfony\Component\HttpFoundation\Response
+   *   The HTTP response.
    */
   public function handle(Request $request) {
     try {

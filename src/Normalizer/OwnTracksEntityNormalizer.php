@@ -2,7 +2,6 @@
 
 namespace Drupal\owntracks\Normalizer;
 
-use Drupal\Component\Serialization\Exception\InvalidDataTypeException;
 use Drupal\serialization\Normalizer\ContentEntityNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 

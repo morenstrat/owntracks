@@ -74,6 +74,7 @@ class OwnTracksEndpointService {
    * Creates an OwnTracks entity.
    *
    * @param string $data
+   *   The posted data.
    *
    * @throws \Drupal\Component\Serialization\Exception\InvalidDataTypeException
    */

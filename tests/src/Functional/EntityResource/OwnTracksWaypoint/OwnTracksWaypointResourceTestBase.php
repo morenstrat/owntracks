@@ -104,7 +104,7 @@ abstract class OwnTracksWaypointResourceTestBase extends EntityResourceTestBase 
       '_type' => [
         [
           'value' => 'waypoint',
-        ]
+        ],
       ],
       'description' => [
         [
@@ -124,7 +124,7 @@ abstract class OwnTracksWaypointResourceTestBase extends EntityResourceTestBase 
       'rad' => [
         [
           'value' => 0,
-        ]
+        ],
       ],
       'tst' => [
         $this->formatExpectedTimestampItemValues(123456),
@@ -140,7 +140,7 @@ abstract class OwnTracksWaypointResourceTestBase extends EntityResourceTestBase 
       '_type' => [
         [
           'value' => 'waypoint',
-        ]
+        ],
       ],
       'description' => [
         [
@@ -160,7 +160,7 @@ abstract class OwnTracksWaypointResourceTestBase extends EntityResourceTestBase 
       'rad' => [
         [
           'value' => 0,
-        ]
+        ],
       ],
       'tst' => [
         [

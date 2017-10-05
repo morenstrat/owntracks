@@ -30,9 +30,12 @@ class OwnTracksWaypointService {
    * Gets the waypoint id for given user id and waypoint timestamp.
    *
    * @param int $uid
+   *   The user id.
    * @param int $tst
+   *   The timestamp.
    *
    * @return mixed|null
+   *   A waypoint id if found.
    */
   public function getWaypointId(int $uid, int $tst) {
     $waypoint_id = NULL;

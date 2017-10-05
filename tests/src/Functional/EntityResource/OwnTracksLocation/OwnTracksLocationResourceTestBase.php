@@ -115,7 +115,7 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
       '_type' => [
         [
           'value' => 'location',
-        ]
+        ],
       ],
       'acc' => [
         [
@@ -206,7 +206,7 @@ abstract class OwnTracksLocationResourceTestBase extends EntityResourceTestBase 
       '_type' => [
         [
           'value' => 'location',
-        ]
+        ],
       ],
       'acc' => [
         [
