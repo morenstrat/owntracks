@@ -67,6 +67,12 @@ class OwnTracksEndpointService {
       $entity = OwnTracksLocation::create($json);
     }
     elseif ($json['_type'] === 'transition') {
+      $waypoint_id = $this->waypointService->getWaypointId($this->currentUser->id(), $json['wtst']);
+
+      if ($waypoint_id) {
+        $json['waypoint'] = $waypoint_id;
+      }
+
       $entity = OwnTracksTransition::create($json);
     }
     elseif($json['_type'] === 'waypoint') {
