@@ -17,3 +17,4 @@ owntracks.user_map:
   title: 'OwnTracks'
   route_name: owntracks.user_map
   base_route: entity.user.canonical
+  weight: 10
