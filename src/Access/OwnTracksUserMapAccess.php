@@ -24,14 +24,16 @@ class OwnTracksUserMapAccess implements AccessInterface {
    *   Allowed or Neutral.
    */
   public function access(AccountInterface $account, UserInterface $user) {
-    $access = AccessResult::allowedIfHasPermissions($account, ['administer owntracks', 'view any owntracks entity'], 'OR');
+    $permissions = ['administer owntracks', 'view any owntracks entity'];
 
     if ($account->id() === $user->id()) {
-      $access->orIf(AccessResult::allowedIfHasPermission($account, 'view own owntracks entities'))
+      $permissions[] = 'view own owntracks entities';
+
+      return AccessResult::allowedIfHasPermissions($account, $permissions, 'OR')
         ->cachePerUser();
     }
 
-    return $access;
+    return AccessResult::allowedIfHasPermissions($account, $permissions, 'OR');
   }
 
 }
