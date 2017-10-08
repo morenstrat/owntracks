@@ -13,8 +13,28 @@ owntracks.owntracks_waypoint_settings_tab:
   route_name: entity.owntracks_waypoint.admin_form
   base_route: entity.owntracks_waypoint.admin_form
 
-owntracks.user_map:
+owntracks.user.track_map.primary:
   title: 'OwnTracks'
   route_name: owntracks.user_map
   base_route: entity.user.canonical
   weight: 10
+
+owntracks.user.track_map.secondary:
+  title: 'Track Map'
+  route_name: owntracks.user_map
+  parent_id: owntracks.user.track_map.primary
+
+owntracks.user.locations:
+  title: 'Locations'
+  route_name: view.owntracks_location.user
+  parent_id: owntracks.user.track_map.primary
+
+owntracks.user.waypoints:
+  title: 'Waypoints'
+  route_name: view.owntracks_waypoint.user
+  parent_id: owntracks.user.track_map.primary
+
+owntracks.user.transitions:
+  title: 'Transitions'
+  route_name: view.owntracks_transition.user
+  parent_id: owntracks.user.track_map.primary
