@@ -1910,6 +1910,7 @@ display:
         filters: false
         filter_groups: false
         arguments: false
+        access: false
       filters:
         tid:
           id: tid
@@ -2008,6 +2009,9 @@ display:
           entity_field: uid
           plugin_id: user_uid
       display_description: ''
+      access:
+        type: owntracks
+        options: {  }
     cache_metadata:
       max-age: 0
       contexts:

@@ -1010,7 +1010,7 @@ display:
       display_description: ''
       path: user/%user/owntracks/location
       defaults:
-        access: true
+        access: false
         arguments: false
         filters: false
         filter_groups: false
@@ -1724,6 +1724,9 @@ display:
             t: '0'
           destination: true
           plugin_id: dropbutton
+      access:
+        type: owntracks
+        options: {  }
     cache_metadata:
       max-age: 0
       contexts:

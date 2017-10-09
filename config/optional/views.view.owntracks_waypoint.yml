@@ -1443,6 +1443,7 @@ display:
         filters: false
         filter_groups: false
         arguments: false
+        access: false
       filters: {  }
       filter_groups:
         operator: AND
@@ -1502,6 +1503,9 @@ display:
         context: '0'
         menu_name: main
       display_description: ''
+      access:
+        type: owntracks
+        options: {  }
     cache_metadata:
       max-age: 0
       contexts:
