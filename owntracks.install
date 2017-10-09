@@ -22,3 +22,10 @@ function owntracks_requirements($phase) {
     ];
   }
 }
+
+/**
+ * Truncate table {cache_data} to allow p (Ping) location trigger value.
+ */
+function owntracks_update_8001() {
+  db_query('TRUNCATE table {cache_data}');
+}
