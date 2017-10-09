@@ -10,5 +10,6 @@ services:
     arguments: ['@current_user', '@entity_type.manager', '@owntracks.waypoint_service']
   owntracks.user_map_access:
     class: Drupal\owntracks\Access\OwnTracksUserMapAccess
+    arguments: ['@current_route_match']
     tags:
       - { name: access_check, applies_to: _owntracks_user_map_access }
