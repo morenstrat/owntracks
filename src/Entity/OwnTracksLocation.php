@@ -136,6 +136,7 @@ class OwnTracksLocation extends OwnTracksEntityBase implements OwnTracksLocation
         'u' => 'User',
         't' => 'Timer',
         'a' => 'Automatic',
+        'p' => 'Ping',
       ])
       ->setDefaultValue('u');
 
