@@ -26,18 +26,14 @@ class OwnTracksEntityAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
-    $permissions = [$this->entityType->getAdminPermission(), $operation . ' any owntracks entity'];
+    $access = AccessResult::allowedIfHasPermissions($account, [$this->entityType->getAdminPermission(), $operation . ' any owntracks entity'], 'OR');
 
-    if ($account->id() === \Drupal::currentUser()->id()) {
-      $permissions[] = $operation . ' own owntracks entities';
-
-      return AccessResult::allowedIfHasPermissions($account, $permissions, 'OR')
-        ->addCacheableDependency($entity)
-        ->cachePerUser();
+    if (!$access->isAllowed() && $account->id() === $entity->getOwnerId()) {
+      return $access->orIf(AccessResult::allowedIfHasPermission($account, $operation . ' own owntracks entities')
+        ->cachePerUser()->addCacheableDependency($entity));
     }
 
-    return AccessResult::allowedIfHasPermissions($account, $permissions, 'OR')
-      ->addCacheableDependency($entity);
+    return $access;
   }
 
   /**
