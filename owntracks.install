@@ -29,3 +29,32 @@ function owntracks_requirements($phase) {
 function owntracks_update_8001() {
   db_query('TRUNCATE table {cache_data}');
 }
+
+/**
+ * Fix cache contexts of owntracks entities views.
+ */
+function owntracks_update_8002() {
+  $names = [
+    'views.view.owntracks_location',
+    'views.view.owntracks_waypoint',
+    'views.view.owntracks_transition',
+  ];
+
+  foreach ($names as $name) {
+    $update = FALSE;
+    $config = \Drupal::configFactory()->getEditable($name);
+    $contexts = (array) $config->get('display.user.cache_metadata.contexts');
+
+    foreach ($contexts as $key => $value) {
+      if ($value === 'user.permissions') {
+        $contexts[$key] = 'user';
+        $update = TRUE;
+        break;
+      }
+    }
+
+    if ($update) {
+      $config->set('display.user.cache_metadata.contexts', $contexts)->save();
+    }
+  }
+}
