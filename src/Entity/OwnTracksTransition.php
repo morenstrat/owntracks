@@ -119,7 +119,6 @@ class OwnTracksTransition extends OwnTracksEntityBase implements OwnTracksTransi
       ->setSetting('allowed_values', [
         'c' => 'Circular',
         'b' => 'Beacon',
-        'w' => 'WiFi',
       ]);
 
     $fields['tid'] = BaseFieldDefinition::create('string')
