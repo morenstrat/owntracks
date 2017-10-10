@@ -1513,5 +1513,5 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user.permissions
+        - user
       tags: {  }
