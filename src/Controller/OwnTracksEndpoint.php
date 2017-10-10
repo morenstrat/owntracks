@@ -58,7 +58,7 @@ class OwnTracksEndpoint extends ControllerBase {
       throw new HttpException(400, $e->getMessage());
     }
     catch (\Exception $e) {
-      throw new HttpException(500, 'Internal server error');
+      throw new HttpException(500, $e->getMessage());
     }
 
     return new Response('{}', 200, ['Content-Type' => 'application/json']);
