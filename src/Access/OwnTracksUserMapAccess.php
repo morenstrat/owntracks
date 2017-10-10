@@ -4,9 +4,7 @@ namespace Drupal\owntracks\Access;
 
 use Drupal\Core\Routing\Access\AccessInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
-use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
 use Drupal\Core\Access\AccessResult;
 
