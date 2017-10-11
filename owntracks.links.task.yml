@@ -24,6 +24,11 @@ owntracks.user.track_map.secondary:
   route_name: owntracks.user_map
   parent_id: owntracks.user.track_map.primary
 
+owntracks.user.current:
+  title: 'Current location'
+  route_name: view.owntracks_location.current
+  parent_id: owntracks.user.track_map.primary
+
 owntracks.user.locations:
   title: 'Locations'
   route_name: view.owntracks_location.user
