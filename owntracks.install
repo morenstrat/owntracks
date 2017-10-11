@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\Yaml\Yaml;
+
 /**
  * @file
  * Install functions of the module.
@@ -64,4 +66,22 @@ function owntracks_update_8002() {
  */
 function owntracks_update_8003() {
   db_query('TRUNCATE table {cache_data}');
+}
+
+/**
+ * Update owntracks_location view.
+ */
+function owntracks_update_8004() {
+  $file = implode(DIRECTORY_SEPARATOR, [
+    drupal_get_path('module', 'owntracks'),
+    'config',
+    'optional',
+    'views.view.owntracks_location.yml'
+  ]);
+
+  $data = Yaml::parse(file_get_contents($file));
+
+  \Drupal::configFactory()->getEditable('views.view.owntracks_location')
+    ->setData($data)
+    ->save();
 }
