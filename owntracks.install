@@ -1,11 +1,11 @@
 <?php
 
-use Symfony\Component\Yaml\Yaml;
-
 /**
  * @file
  * Install functions of the module.
  */
+
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Implements hook_requirements().
@@ -76,7 +76,7 @@ function owntracks_update_8004() {
     drupal_get_path('module', 'owntracks'),
     'config',
     'optional',
-    'views.view.owntracks_location.yml'
+    'views.view.owntracks_location.yml',
   ]);
 
   $data = Yaml::parse(file_get_contents($file));
