@@ -85,3 +85,17 @@ function owntracks_update_8004() {
     ->setData($data)
     ->save();
 }
+
+/**
+ * Update owntracks entity types definitions.
+ */
+function owntracks_update_8005() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+  $owntracks_location = $entity_type_manager->getDefinition('owntracks_location');
+  $entity_definition_update_manager->updateEntityType($owntracks_location);
+  $owntracks_transition = $entity_type_manager->getDefinition('owntracks_transition');
+  $entity_definition_update_manager->updateEntityType($owntracks_transition);
+  $owntracks_waypoint = $entity_type_manager->getDefinition('owntracks_waypoint');
+  $entity_definition_update_manager->updateEntityType($owntracks_waypoint);
+}

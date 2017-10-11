@@ -27,6 +27,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *     },
  *     "access" = "Drupal\owntracks\Access\OwnTracksEntityAccessControlHandler",
  *     "views_data" = "Drupal\views\EntityViewsData",
+ *     "storage_schema" = "Drupal\owntracks\OwnTracksLocationStorageSchema",
  *   },
  *   links = {
  *     "canonical" = "/owntracks_location/{owntracks_location}",
