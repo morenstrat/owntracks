@@ -20,8 +20,8 @@ class OwnTracksLocationStorageSchema extends SqlContentEntityStorageSchema {
     $schema = parent::getEntitySchema($entity_type, $reset);
 
     $schema['owntracks_location']['indexes'] += [
-      'owntracks_transition__uid_tid' => ['uid', 'tid'],
-      'owntracks_transition__lat_lon' => ['lat', 'lon'],
+      'owntracks_location__uid_tid' => ['uid', 'tid'],
+      'owntracks_location__lat_lon' => ['lat', 'lon'],
     ];
 
     return $schema;
