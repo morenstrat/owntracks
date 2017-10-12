@@ -107,3 +107,21 @@ function owntracks_update_8006() {
   // Update has to be performed a second time to add indexes.
   owntracks_update_8005();
 }
+
+/**
+ * Reinstall owntracks views.
+ */
+function owntracks_update_8007() {
+  $views = [
+    'views.view.owntracks_location',
+    'views.view.owntracks_transition',
+    'views.view.owntracks_waypoint',
+  ];
+
+  foreach ($views as $view) {
+    \Drupal::configFactory()->getEditable($view)->delete();
+  }
+
+  \Drupal::service('config.installer')
+    ->installdefaultConfig('module', 'owntracks');
+}
