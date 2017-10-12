@@ -55,6 +55,7 @@ class OwnTracksUserMapForm extends FormBase {
       'month' => $form_state->getValue('month', $now->format('n')),
       'year'  => $form_state->getValue('year', $now->format('Y')),
     ]);
+    $tracker_id = $form_state->getValue('tracker_id');
     $ajax = [
       'callback' => [$this, 'reloadForm'],
       'event' => 'change',
@@ -123,6 +124,19 @@ class OwnTracksUserMapForm extends FormBase {
       '#ajax' => $ajax,
     ];
 
+    $options = db_query('SELECT DISTINCT tid FROM {owntracks_location} WHERE uid = :uid', [':uid' => $user->id()])
+      ->fetchAllKeyed(0, 0);
+
+    $form['container']['tracker_id'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Tracker ID'),
+      '#options' => $options,
+      '#default_value' => $tracker_id,
+      '#required' => FALSE,
+      '#weight' => 20,
+      '#ajax' => $ajax,
+    ];
+
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
@@ -134,7 +148,7 @@ class OwnTracksUserMapForm extends FormBase {
 
     $form['map'] = [
       '#theme' => 'owntracks_map',
-      '#track' => $this->ownTracksLocationService->getUserTrack($user, $date),
+      '#track' => $this->ownTracksLocationService->getUserTrack($user, $date, $tracker_id),
       '#weight' => 30,
     ];
 
