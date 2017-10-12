@@ -99,3 +99,11 @@ function owntracks_update_8005() {
   $owntracks_waypoint = $entity_type_manager->getDefinition('owntracks_waypoint');
   $entity_definition_update_manager->updateEntityType($owntracks_waypoint);
 }
+
+/**
+ * Update owntracks entity field definitions.
+ */
+function owntracks_update_8006() {
+  // Update has to be performed a second time to add indexes.
+  owntracks_update_8005();
+}
