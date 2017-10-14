@@ -5,6 +5,7 @@
  * Main functions of the module.
  */
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\owntracks\Entity\OwnTracksLocationInterface;
 use Drupal\owntracks\Entity\OwnTracksTransitionInterface;
@@ -96,4 +97,21 @@ function owntracks_theme($existing, $type, $theme, $path) {
       ],
     ],
   ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function owntracks_user_delete(EntityInterface $entity) {
+  $tables = [
+    'owntracks_location',
+    'owntracks_transition',
+    'owntracks_waypoint',
+  ];
+
+  foreach ($tables as $table) {
+    db_delete($table)
+      ->condition('uid', $entity->id())
+      ->execute();
+  }
 }
