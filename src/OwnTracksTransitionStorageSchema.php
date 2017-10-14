@@ -7,7 +7,7 @@ use Drupal\Core\Entity\Sql\SqlContentEntityStorageSchema;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 
 /**
- * Class OwnTracksTransitionStorageSchema
+ * Class OwnTracksTransitionStorageSchema.
  *
  * @package Drupal\owntracks
  */

@@ -68,7 +68,7 @@ class OwnTracksLocationService {
       ->condition('uid', $account->id())
       ->condition('tst', [$from, $till], 'BETWEEN');
 
-    if ($tracker_id !== NULL) {
+    if (!empty($tracker_id)) {
       $query->condition('tid', $tracker_id);
     }
 
