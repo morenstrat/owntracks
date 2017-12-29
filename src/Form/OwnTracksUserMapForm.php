@@ -124,13 +124,11 @@ class OwnTracksUserMapForm extends FormBase {
       '#ajax' => $ajax,
     ];
 
-    $options = db_query('SELECT DISTINCT tid FROM {owntracks_location} WHERE uid = :uid', [':uid' => $user->id()])
-      ->fetchAllKeyed(0, 0);
-
     $form['container']['tracker_id'] = [
-      '#type' => 'select',
+      '#type' => 'textfield',
+      '#size' => 2,
+      '#maxlength' => 2,
       '#title' => $this->t('Tracker ID'),
-      '#options' => $options,
       '#default_value' => $tracker_id,
       '#required' => FALSE,
       '#weight' => 20,
