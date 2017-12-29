@@ -125,3 +125,26 @@ function owntracks_update_8007() {
   \Drupal::service('config.installer')
     ->installdefaultConfig('module', 'owntracks');
 }
+
+/**
+ * Remove _type fields.
+ */
+function owntracks_update_8008() {
+  $entity_type_ids = [
+    'owntracks_location',
+    'owntracks_transition',
+    'owntracks_waypoint',
+  ];
+
+  $manager = \Drupal::entityDefinitionUpdateManager();
+  $database = \Drupal::database();
+
+  foreach ($entity_type_ids as $entity_type_id) {
+    $database->update($entity_type_id)
+      ->fields(['_type' => NULL])
+      ->execute();
+
+    $field = $manager->getFieldStorageDefinition('_type', $entity_type_id);
+    $manager->uninstallFieldStorageDefinition($field);
+  }
+}

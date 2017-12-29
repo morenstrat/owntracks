@@ -53,11 +53,6 @@ class OwnTracksLocation extends OwnTracksEntityBase implements OwnTracksLocation
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
 
-    /* @var \Drupal\Core\Field\BaseFieldDefinition $fields['_type'] */
-    $fields['_type']->setSetting('allowed_values', [
-      'location' => 'Location',
-    ])->setDefaultValue('location');
-
     $fields['acc'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Accuracy'))
       ->setDisplayOptions('form', ['weight' => 0])

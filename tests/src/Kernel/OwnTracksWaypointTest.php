@@ -25,7 +25,6 @@ class OwnTracksWaypointTest extends EntityKernelTestBase {
    */
   public static $sampleInvalidData = [
     'uid'         => -1,
-    '_type'       => 'way',
     'description' => 'valid',
     'lat'         => -90.1,
     'lon'         => 180.1,
@@ -39,7 +38,6 @@ class OwnTracksWaypointTest extends EntityKernelTestBase {
    * @var array
    */
   public static $sampleValidData = [
-    '_type'       => 'waypoint',
     'description' => 'valid',
     'lat'         => -90,
     'lon'         => 180,

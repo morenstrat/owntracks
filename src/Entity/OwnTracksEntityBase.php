@@ -18,14 +18,6 @@ abstract class OwnTracksEntityBase extends ContentEntityBase implements OwnTrack
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
 
-    $fields['_type'] = BaseFieldDefinition::create('list_string')
-      ->setLabel(t('Type'))
-      ->setDisplayOptions('form', ['weight' => 0])
-      ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 0])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE)
-      ->setRequired(TRUE);
-
     $fields['uid'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('User'))
       ->setDisplayOptions('form', ['weight' => 0])

@@ -25,7 +25,6 @@ class OwnTracksLocationTest extends EntityKernelTestBase {
    */
   public static $sampleInvalidData = [
     'uid'         => -1,
-    '_type'       => 'loc',
     'acc'         => -1,
     'alt'         => 'invalid',
     'batt'        => 101,
@@ -50,7 +49,6 @@ class OwnTracksLocationTest extends EntityKernelTestBase {
    * @var array
    */
   public static $sampleValidData = [
-    '_type'       => 'location',
     'acc'         => 0,
     'alt'         => 0,
     'batt'        => 100,
