@@ -67,7 +67,7 @@ class OwnTracksTransitionTest extends EntityKernelTestBase {
   public function testValidation() {
     $entity = OwnTracksTransition::create(static::$sampleInvalidData);
     $violations = $entity->validate();
-    $this->assertEquals(7, $violations->count());
+    $this->assertEquals(6, $violations->count());
   }
 
   /**

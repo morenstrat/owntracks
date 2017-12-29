@@ -59,7 +59,7 @@ class OwnTracksWaypointTest extends EntityKernelTestBase {
   public function testValidation() {
     $entity = OwnTracksWaypoint::create(static::$sampleInvalidData);
     $violations = $entity->validate();
-    $this->assertEquals(5, $violations->count());
+    $this->assertEquals(4, $violations->count());
   }
 
   /**
