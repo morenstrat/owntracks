@@ -34,10 +34,12 @@ class OwnTracksWaypointService {
    * @param int $tst
    *   The timestamp.
    *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   *
    * @return mixed|null
    *   A waypoint id if found.
    */
-  public function getWaypointId(int $uid, int $tst) {
+  public function getWaypointId($uid, $tst) {
     $waypoint_id = NULL;
 
     $result = $this->entityTypeManager

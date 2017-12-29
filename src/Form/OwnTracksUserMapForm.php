@@ -23,6 +23,9 @@ class OwnTracksUserMapForm extends FormBase {
 
   /**
    * OwnTracksDateSelectForm constructor.
+   *
+   * @param \Drupal\owntracks\OwnTracksLocationService $owntracks_location_service
+   *   The owntracks location service.
    */
   public function __construct(OwnTracksLocationService $owntracks_location_service) {
     $this->ownTracksLocationService = $owntracks_location_service;
@@ -32,8 +35,11 @@ class OwnTracksUserMapForm extends FormBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
+    /** @var OwnTracksLocationService $locationService */
+    $locationService = $container->get('owntracks.location_service');
+
     return new static(
-      $container->get('owntracks.location_service')
+      $locationService
     );
   }
 

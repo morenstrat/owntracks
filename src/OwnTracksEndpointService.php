@@ -77,6 +77,7 @@ class OwnTracksEndpointService {
    *   The posted data.
    *
    * @throws \Drupal\Component\Serialization\Exception\InvalidDataTypeException
+   * @throws \Exception
    */
   public function create($data) {
     $this->data = $data;
@@ -117,6 +118,8 @@ class OwnTracksEndpointService {
 
   /**
    * Creates a location entity.
+   *
+   * @throws \Exception
    */
   protected function createLocation() {
     if (empty($this->json['t'])) {
@@ -128,6 +131,8 @@ class OwnTracksEndpointService {
 
   /**
    * Create a waypoint entity.
+   *
+   * @throws \Exception
    */
   protected function createWaypoint() {
     $waypoint_id = $this->waypointService
@@ -144,6 +149,8 @@ class OwnTracksEndpointService {
 
   /**
    * Create a transition entity.
+   *
+   * @throws \Exception
    */
   protected function createTransition() {
     $waypoint_id = $this->waypointService
@@ -162,6 +169,8 @@ class OwnTracksEndpointService {
    * @param string $entity_type
    *   The entity type.
    *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   *
    * @return $this
    */
   protected function createEntity($entity_type) {
@@ -179,6 +188,8 @@ class OwnTracksEndpointService {
    *   The entity type.
    * @param int $entity_id
    *   The entity id.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    *
    * @return $this
    */

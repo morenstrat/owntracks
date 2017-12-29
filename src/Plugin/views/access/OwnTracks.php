@@ -52,11 +52,14 @@ class OwnTracks extends AccessPluginBase implements CacheableDependencyInterface
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    /** @var CurrentRouteMatch $currentRouteMatch */
+    $currentRouteMatch = $container->get('current_route_match');
+
     return new static(
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('current_route_match')
+      $currentRouteMatch
     );
   }
 

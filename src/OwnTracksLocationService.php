@@ -38,6 +38,8 @@ class OwnTracksLocationService {
    * @param string $tracker_id
    *   A tracker ID.
    *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   *
    * @return array
    *   The user's track.
    */
