@@ -7,6 +7,8 @@ use Drupal\Core\Url;
 use GuzzleHttp\RequestOptions;
 
 /**
+ * Class OwnTracksEndpointTest.
+ *
  * @group owntracks
  */
 class OwnTracksEndpointTest extends BrowserTestBase {
@@ -76,7 +78,8 @@ class OwnTracksEndpointTest extends BrowserTestBase {
    *   The request options.
    *
    * @return \Psr\Http\Message\ResponseInterface
-  */
+   *   The request response.
+   */
   protected function request($method, array $options = []) {
     $options[RequestOptions::HTTP_ERRORS] = FALSE;
     $options[RequestOptions::ALLOW_REDIRECTS] = FALSE;
