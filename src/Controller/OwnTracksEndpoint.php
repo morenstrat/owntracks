@@ -36,7 +36,7 @@ class OwnTracksEndpoint extends ControllerBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    /** @var OwnTracksEndpointService $endpointService */
+    /** @var \Drupal\owntracks\OwnTracksEndpointService $endpointService */
     $endpointService = $container->get('owntracks.endpoint_service');
 
     return new static(

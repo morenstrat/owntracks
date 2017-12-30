@@ -35,7 +35,7 @@ class OwnTracksUserMapForm extends FormBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    /** @var OwnTracksLocationService $locationService */
+    /** @var \Drupal\owntracks\OwnTracksLocationService $locationService */
     $locationService = $container->get('owntracks.location_service');
 
     return new static(
