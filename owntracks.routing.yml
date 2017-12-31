@@ -151,5 +151,5 @@ owntracks.endpoint:
   methods: ['POST']
   requirements:
     _user_is_logged_in: 'TRUE'
-    _permission: 'create owntracks entities'
+    _permission: 'administer owntracks+create owntracks entities'
     _content_type_format: 'json'
