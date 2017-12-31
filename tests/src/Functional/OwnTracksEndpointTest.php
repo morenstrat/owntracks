@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\owntracks\Functional;
 
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Core\Url;
 use GuzzleHttp\RequestOptions;
@@ -25,67 +26,143 @@ class OwnTracksEndpointTest extends BrowserTestBase {
    *
    * @var string
    */
-  protected $url;
+  protected $endpointUrl;
+
+  /**
+   * Authorization header of unauthorized account.
+   *
+   * @var string
+   */
+  protected $unauthorizedHeader;
+
+  /**
+   * Authorization header of authorized account.
+   *
+   * @var string
+   */
+  protected $authorizedHeader;
+
+  /**
+   * Authorization header of admin account.
+   *
+   * @var string
+   */
+  protected $adminHeader;
 
   /**
    * {@inheritdoc}
    */
   public function setUp() {
     parent::setUp();
-    $this->url = Url::fromRoute('owntracks.endpoint')
+
+    $this->endpointUrl = Url::fromRoute('owntracks.endpoint')
       ->setAbsolute(TRUE)->toString();
+
+    $unauthorizedAccount = $this->drupalCreateUser();
+    $this->unauthorizedHeader = $this
+      ->getAuthorizationHeader($unauthorizedAccount);
+
+    $authorizedAccount = $this->drupalCreateUser(['create owntracks entities']);
+    $this->authorizedHeader = $this
+      ->getAuthorizationHeader($authorizedAccount);
+
+    $adminAccount = $this->drupalCreateUser(['administer owntracks']);
+    $this->adminHeader = $this
+      ->getAuthorizationHeader($adminAccount);
   }
 
   /**
-   * Tests the owntracks endpoint.
+   * Test endpoint.
    */
   public function testEndpoint() {
     // Test anonymous request.
-    $response = $this->request('POST', [
-      'headers' => ['Content-Type' => 'application/json'],
+    $response = $this->request([
+      'headers' => [
+        'Content-Type' => 'application/json',
+      ],
     ]);
     $this->assertEquals(401, $response->getStatusCode());
 
-    // Test authenticated request without permission.
-    $account = $this->drupalCreateUser();
-    $this->drupalLogin($account);
-    $response = $this->request('POST', [
-      'headers' => ['Content-Type' => 'application/json'],
+    // Test unauthorized request.
+    $response = $this->request([
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'Authorization' => $this->unauthorizedHeader,
+      ],
     ]);
-    $this->assertEquals(401, $response->getStatusCode());
+    $this->assertEquals(403, $response->getStatusCode());
 
     // Test request method.
-    $account = $this->drupalCreateUser(['administer owntracks']);
-    $this->drupalLogin($account);
-    $response = $this->request('GET');
-    $this->assertEquals(405, $response->getStatusCode());
+    $this->drupalGet($this->endpointUrl);
+    $this->assertSession()->statusCodeEquals(405);
 
-    // Test content type.
-    $account = $this->drupalCreateUser(['create owntracks entities']);
-    $this->drupalLogin($account);
-    $response = $this->request('POST', [
-      'headers' => ['Content-Type' => 'text/html'],
+    // Test request content type.
+    $response = $this->request([
+      'headers' => [
+        'Content-Type' => 'text/html',
+        'Authorization' => $this->authorizedHeader,
+      ],
     ]);
     $this->assertEquals(415, $response->getStatusCode());
+
+    // Test missing payload type.
+    $response = $this->request([
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'Authorization' => $this->authorizedHeader,
+      ],
+      'body' => '{ "type": "missing" }',
+    ]);
+    $this->assertEquals(400, $response->getStatusCode());
+
+    // Test invalid payload type.
+    $response = $this->request([
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'Authorization' => $this->authorizedHeader,
+      ],
+      'body' => '{ "_type": "invalid" }',
+    ]);
+    $this->assertEquals(400, $response->getStatusCode());
+
+    // Test incomplete payload.
+    $response = $this->request([
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'Authorization' => $this->adminHeader,
+      ],
+      'body' => '{ "_type": "location" }',
+    ]);
+    $this->assertEquals(400, $response->getStatusCode());
   }
 
   /**
-   * Send a request to the endpoint.
+   * Send post request to the endpoint.
    *
-   * @param string $method
-   *   The request HTTP method.
    * @param array $options
    *   The request options.
    *
-   * @return \Psr\Http\Message\ResponseInterface
+   * @return \GuzzleHttp\Psr7\Response
    *   The request response.
    */
-  protected function request($method, array $options = []) {
+  protected function request($options) {
     $options[RequestOptions::HTTP_ERRORS] = FALSE;
     $options[RequestOptions::ALLOW_REDIRECTS] = FALSE;
 
     return $this->getSession()->getDriver()->getClient()->getClient()
-      ->request($method, $this->url, $options);
+      ->request('POST', $this->endpointUrl, $options);
+  }
+
+  /**
+   * Get authorization header for the given account.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   A user account.
+   *
+   * @return string
+   */
+  protected function getAuthorizationHeader(AccountInterface $account) {
+    return 'Basic ' . base64_encode($account->name->value . ':' . $account->passRaw);
   }
 
 }
