@@ -199,7 +199,9 @@ class OwnTracksEndpointService {
       ->load($entity_id);
 
     foreach ($this->json as $key => $value) {
-      $this->entity->set($key, $value);
+      if ($this->entity->hasField($key)) {
+        $this->entity->set($key, $value);
+      }
     }
 
     return $this;
