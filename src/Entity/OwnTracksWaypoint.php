@@ -53,6 +53,8 @@ class OwnTracksWaypoint extends OwnTracksEntityBase implements OwnTracksWaypoint
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
 
+    $fields['description']->setRequired(TRUE);
+
     $fields['rad'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Radius'))
       ->setDisplayOptions('form', ['weight' => 0])

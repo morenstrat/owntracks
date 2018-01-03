@@ -207,3 +207,22 @@ function owntracks_update_8009() {
   db_change_field('owntracks_waypoint', 'description', 'description', $spec['fields']['description']);
   db_add_index('owntracks_waypoint', 'owntracks_waypoint_field__description', ['description'], $spec);
 }
+
+/**
+ * Set field description mandatory on owntracks_waypoint entities.
+ */
+function owntracks_update_8010() {
+  $spec = [
+    'fields' => [
+      'description' => [
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 255,
+      ],
+    ],
+  ];
+
+  db_drop_index('owntracks_waypoint', 'owntracks_waypoint_field__description');
+  db_change_field('owntracks_waypoint', 'description', 'description', $spec['fields']['description']);
+  db_add_index('owntracks_waypoint', 'owntracks_waypoint_field__description', ['description'], $spec);
+}
