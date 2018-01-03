@@ -37,9 +37,11 @@ class OwnTracksLocationStorageSchema extends SqlContentEntityStorageSchema {
     if ($table_name == 'owntracks_location') {
       switch ($field_name) {
         case 'acc':
+        case 'tid':
+          $this->addSharedTableFieldIndex($storage_definition, $schema);
+          break;
         case 'lat':
         case 'lon':
-        case 'tid':
         case 'tst':
           $this->addSharedTableFieldIndex($storage_definition, $schema, TRUE);
           break;

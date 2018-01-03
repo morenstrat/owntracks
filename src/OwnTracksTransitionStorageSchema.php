@@ -36,10 +36,12 @@ class OwnTracksTransitionStorageSchema extends SqlContentEntityStorageSchema {
 
     if ($table_name == 'owntracks_transition') {
       switch ($field_name) {
+        case 'tid':
+          $this->addSharedTableFieldIndex($storage_definition, $schema);
+          break;
         case 'acc':
         case 'lat':
         case 'lon':
-        case 'tid':
         case 'tst':
           $this->addSharedTableFieldIndex($storage_definition, $schema, TRUE);
           break;
