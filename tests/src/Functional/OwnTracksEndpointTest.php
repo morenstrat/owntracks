@@ -134,6 +134,36 @@ class OwnTracksEndpointTest extends BrowserTestBase {
       'body' => '{ "_type": "location" }',
     ]);
     $this->assertEquals(400, $response->getStatusCode());
+
+    // Test location payload.
+    $response = $this->request([
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'Authorization' => $this->authorizedHeader,
+      ],
+      'body' => '{"_type":"location","lat":"7","lon":"53","tst":"123456"}',
+    ]);
+    $this->assertEquals(200, $response->getStatusCode());
+
+    // Test waypoints payload.
+    $response = $this->request([
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'Authorization' => $this->authorizedHeader,
+      ],
+      'body' => '{"_type":"waypoints","waypoints":[{"_type":"waypoint","desc":"Office","lat":"53","lon":"7","rad":"100","tst":"123455"},{"_type":"waypoint","desc":"Home","lat":"54","lon":"6","rad":"100","tst":"123456"}]}',
+    ]);
+    $this->assertEquals(200, $response->getStatusCode());
+
+    // Test transition payload.
+    $response = $this->request([
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'Authorization' => $this->authorizedHeader,
+      ],
+      'body' => '{"_type":"transition","lat":"7","lon":"53","tst":"123457","wtst":"123456","acc":"10"}',
+    ]);
+    $this->assertEquals(200, $response->getStatusCode());
   }
 
   /**
