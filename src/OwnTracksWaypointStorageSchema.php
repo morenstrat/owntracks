@@ -40,6 +40,7 @@ class OwnTracksWaypointStorageSchema extends SqlContentEntityStorageSchema {
         case 'rad':
           $this->addSharedTableFieldIndex($storage_definition, $schema);
           break;
+
         case 'lat':
         case 'lon':
         case 'tst':

@@ -175,7 +175,7 @@ class OwnTracksEndpointTest extends BrowserTestBase {
    * @return \GuzzleHttp\Psr7\Response
    *   The request response.
    */
-  protected function request($options) {
+  protected function request(array $options) {
     $options[RequestOptions::HTTP_ERRORS] = FALSE;
     $options[RequestOptions::ALLOW_REDIRECTS] = FALSE;
 
@@ -190,6 +190,7 @@ class OwnTracksEndpointTest extends BrowserTestBase {
    *   A user account.
    *
    * @return string
+   *   The authorization header value.
    */
   protected function getAuthorizationHeader(AccountInterface $account) {
     return 'Basic ' . base64_encode($account->name->value . ':' . $account->passRaw);

@@ -39,6 +39,7 @@ class OwnTracksTransitionStorageSchema extends SqlContentEntityStorageSchema {
         case 'tid':
           $this->addSharedTableFieldIndex($storage_definition, $schema);
           break;
+
         case 'acc':
         case 'lat':
         case 'lon':
