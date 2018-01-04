@@ -174,7 +174,6 @@ class OwnTracksEndpointTest extends BrowserTestBase {
     $this->assertEquals(200, $response->getStatusCode());
 
     // @todo: test waypoint update
-
     // Test transition payload.
     $response = $this->request([
       'headers' => [

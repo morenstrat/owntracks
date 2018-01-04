@@ -97,10 +97,9 @@ class OwnTracksLocationTest extends EntityKernelTestBase {
 
   /**
    * Tests the owntracks location storage.
-   *
-   * @expectedException \Drupal\Core\Entity\EntityStorageException
    */
   public function testEntityStorageException() {
+    $this->setExpectedException('\Drupal\Core\Entity\EntityStorageException');
     OwnTracksLocation::create(static::$sampleInvalidData)->save();
   }
 

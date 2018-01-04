@@ -75,10 +75,9 @@ class OwnTracksWaypointTest extends EntityKernelTestBase {
 
   /**
    * Tests the owntracks waypoint storage.
-   *
-   * @expectedException \Drupal\Core\Entity\EntityStorageException
    */
   public function testEntityStorageException() {
+    $this->setExpectedException('\Drupal\Core\Entity\EntityStorageException');
     OwnTracksWaypoint::create(static::$sampleInvalidData)->save();
   }
 
