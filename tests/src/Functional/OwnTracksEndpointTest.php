@@ -173,7 +173,8 @@ class OwnTracksEndpointTest extends BrowserTestBase {
     ]);
     $this->assertEquals(200, $response->getStatusCode());
 
-    // Test waypoint update.
+    // Test waypoint update. If user ID and timestamp match, the endpoint
+    // considers the waypoint payload to be an update.
     $before = $this->entityTypeManager->getStorage('owntracks_waypoint')
       ->load(2);
 
@@ -204,7 +205,8 @@ class OwnTracksEndpointTest extends BrowserTestBase {
     $this->assertEquals('100', $before->rad->value);
     $this->assertEquals('200', $after->rad->value);
 
-    // Test transition payload.
+    // Test transition payload. If user ID and waypoint timestamp of a
+    // transition match an existing waypoint, the waypoint be referenced.
     $response = $this->request([
       'headers' => [
         'Content-Type' => 'application/json',
@@ -214,7 +216,20 @@ class OwnTracksEndpointTest extends BrowserTestBase {
     ]);
     $this->assertEquals(200, $response->getStatusCode());
 
-    // @todo: test waypoint id
+    // Load the referenced waypoint.
+    $transition = $this->entityTypeManager->getStorage('owntracks_transition')
+      ->load(2);
+    $waypoint = $transition->waypoint->entity;
+
+    // Load expected waypoint.
+    $expected = $this->entityTypeManager->getStorage('owntracks_waypoint')
+      ->load(3);
+
+    $this->assertEquals($expected->id(), $waypoint->id());
+    $this->assertEquals($expected->uuid(), $waypoint->uuid());
+    $this->assertEquals($expected->getOwnerId(), $waypoint->getOwnerId());
+    $this->assertEquals($expected->tst->value, $waypoint->tst->value);
+    $this->assertEquals($transition->wtst->value, $waypoint->tst->value);
   }
 
   /**
