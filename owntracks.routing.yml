@@ -20,7 +20,7 @@ entity.owntracks_location.edit_form:
     _entity_form: 'owntracks_location.edit'
     _title: 'Edit OwnTracks Location'
   requirements:
-    _entity_access: 'owntracks_location.edit'
+    _entity_access: 'owntracks_location.update'
 
 entity.owntracks_location.delete_form:
   path: '/owntracks_location/{owntracks_location}/delete'
@@ -52,7 +52,7 @@ entity.owntracks_transition.edit_form:
     _entity_form: 'owntracks_transition.edit'
     _title: 'Edit OwnTracks Transition'
   requirements:
-    _entity_access: 'owntracks_transition.edit'
+    _entity_access: 'owntracks_transition.update'
 
 entity.owntracks_transition.delete_form:
   path: '/owntracks_transition/{owntracks_transition}/delete'
@@ -84,7 +84,7 @@ entity.owntracks_waypoint.edit_form:
     _entity_form: 'owntracks_waypoint.edit'
     _title: 'Edit OwnTracks Waypoint'
   requirements:
-    _entity_access: 'owntracks_waypoint.edit'
+    _entity_access: 'owntracks_waypoint.update'
 
 entity.owntracks_waypoint.delete_form:
   path: '/owntracks_waypoint/{owntracks_waypoint}/delete'
