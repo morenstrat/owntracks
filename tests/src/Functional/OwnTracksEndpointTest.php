@@ -173,7 +173,37 @@ class OwnTracksEndpointTest extends BrowserTestBase {
     ]);
     $this->assertEquals(200, $response->getStatusCode());
 
-    // @todo: test waypoint update
+    // Test waypoint update.
+    $before = $this->entityTypeManager->getStorage('owntracks_waypoint')
+      ->load(2);
+
+    $response = $this->request([
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'Authorization' => $this->authorizedHeader,
+      ],
+      'body' => '{"_type":"waypoint","desc":"Home","lat":"52","lon":"6","rad":"200","tst":"123455"}',
+    ]);
+    $this->assertEquals(200, $response->getStatusCode());
+
+    $this->entityTypeManager->getStorage('owntracks_waypoint')
+      ->resetCache([2]);
+
+    $after = $this->entityTypeManager->getStorage('owntracks_waypoint')
+      ->load(2);
+
+    $this->assertEquals($before->uuid(), $after->uuid());
+    $this->assertEquals($before->getOwnerId(), $after->getOwnerId());
+
+    $this->assertEquals('Office', $before->description->value);
+    $this->assertEquals('Home', $after->description->value);
+
+    $this->assertEquals(['53.00000000', '7.00000000'], $before->getLocation());
+    $this->assertEquals(['52.00000000', '6.00000000'], $after->getLocation());
+
+    $this->assertEquals('100', $before->rad->value);
+    $this->assertEquals('200', $after->rad->value);
+
     // Test transition payload.
     $response = $this->request([
       'headers' => [
