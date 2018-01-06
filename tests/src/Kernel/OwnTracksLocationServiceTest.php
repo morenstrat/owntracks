@@ -109,7 +109,7 @@ class OwnTracksLocationServiceTest extends EntityKernelTestBase {
     ])->save();
 
     $actual = $this->ownTracksLocationService->getUserTrack($account, $date, $tid);
-    $this->assertEquals([[7.12345678, 53.12345678], [6.12345678, 54.12345678]], $actual);
+    $this->assertEquals([[6.12345678, 54.12345678], [7.12345678, 53.12345678]], $actual);
   }
 
 }
