@@ -93,8 +93,8 @@ abstract class OwnTracksEntityBase extends ContentEntityBase implements OwnTrack
    */
   public function getLocation() {
     return [
-      round($this->get('lat')->value, 8),
-      round($this->get('lon')->value, 8),
+      round(floatval($this->get('lat')->value), 8),
+      round(floatval($this->get('lon')->value), 8),
     ];
   }
 
