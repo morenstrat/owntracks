@@ -68,7 +68,8 @@ class OwnTracksLocationService {
       ->getStorage('owntracks_location');
     $query = $storage->getQuery()
       ->condition('uid', $account->id())
-      ->condition('tst', [$from, $till], 'BETWEEN');
+      ->condition('tst', [$from, $till], 'BETWEEN')
+      ->sort('tst');
 
     if (!empty($tracker_id)) {
       $query->condition('tid', $tracker_id);
