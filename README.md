@@ -88,11 +88,13 @@ Configure the following settings:
 
    `username and password of your Drupal account`
 
-#### iOs
+#### iOS
 
 * TBD
 
-### Testing
+## Testing
+
+### Smartphone App
 
 #### Android
 
@@ -104,7 +106,7 @@ endpoint state message should be `Response 200, 1`.
 
 * TBD
 
-#### Drupal
+### Drupal
 
 Go to `admin/content`. You should see three tabs: `OwnTracks Location`,
 `OwnTracks Transition` and `OwnTracks Waypoint`. If you don't see them right
