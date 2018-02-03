@@ -72,7 +72,7 @@ class OwnTracksEndpointService {
    * @param \Drupal\owntracks\OwnTracksWaypointService $waypoint_service
    *   The owntracks waypoint service.
    * @param \Drupal\Core\Logger\LoggerChannelFactory $logger
-   *   The logger service
+   *   The logger service.
    */
   public function __construct(AccountInterface $current_user, EntityTypeManagerInterface $entity_type_manager, OwnTracksWaypointService $waypoint_service, LoggerChannelFactory $logger) {
     $this->currentUser = $current_user;
@@ -124,7 +124,7 @@ class OwnTracksEndpointService {
 
       default:
         $this->logger->warning('Unsupported payload type: @type', [
-          '@type'=> $this->json['_type'],
+          '@type' => $this->json['_type'],
         ]);
         break;
     }
