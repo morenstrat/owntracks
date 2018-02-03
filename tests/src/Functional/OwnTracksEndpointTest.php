@@ -22,7 +22,7 @@ class OwnTracksEndpointTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['owntracks'];
+  public static $modules = ['owntracks', 'dblog'];
 
   /**
    * The endpoint url.
@@ -127,15 +127,21 @@ class OwnTracksEndpointTest extends BrowserTestBase {
     ]);
     $this->assertEquals(400, $response->getStatusCode());
 
-    // Test invalid payload type.
+    // Test unsupported payload type.
     $response = $this->request([
       'headers' => [
         'Content-Type' => 'application/json',
         'Authorization' => $this->authorizedHeader,
       ],
-      'body' => '{ "_type": "invalid" }',
+      'body' => '{ "_type": "unsupported" }',
     ]);
-    $this->assertEquals(400, $response->getStatusCode());
+    $this->assertEquals(200, $response->getStatusCode());
+    $account = $this->drupalCreateUser(['access site reports']);
+    $this->drupalLogin($account);
+    $this->drupalGet('admin/reports/dblog');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains('Unsupported payload type: unsupported');
+    $this->drupalLogout();
 
     // Test incomplete payload.
     $response = $this->request([

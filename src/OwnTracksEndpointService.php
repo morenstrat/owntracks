@@ -4,6 +4,7 @@ namespace Drupal\owntracks;
 
 use Drupal\Component\Serialization\Exception\InvalidDataTypeException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Logger\LoggerChannelFactory;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\owntracks\Entity\OwnTracksEntityInterface;
 
@@ -32,6 +33,13 @@ class OwnTracksEndpointService {
    * @var \Drupal\owntracks\OwnTracksWaypointService
    */
   protected $waypointService;
+
+  /**
+   * The logger service.
+   *
+   * @var \Drupal\Core\Logger\LoggerChannelInterface
+   */
+  protected $logger;
 
   /**
    * Post data from the controller.
@@ -63,11 +71,14 @@ class OwnTracksEndpointService {
    *   The entity type manager service.
    * @param \Drupal\owntracks\OwnTracksWaypointService $waypoint_service
    *   The owntracks waypoint service.
+   * @param \Drupal\Core\Logger\LoggerChannelFactory $logger
+   *   The logger service
    */
-  public function __construct(AccountInterface $current_user, EntityTypeManagerInterface $entity_type_manager, OwnTracksWaypointService $waypoint_service) {
+  public function __construct(AccountInterface $current_user, EntityTypeManagerInterface $entity_type_manager, OwnTracksWaypointService $waypoint_service, LoggerChannelFactory $logger) {
     $this->currentUser = $current_user;
     $this->entityTypeManager = $entity_type_manager;
     $this->waypointService = $waypoint_service;
+    $this->logger = $logger->get('owntracks');
   }
 
   /**
@@ -112,7 +123,10 @@ class OwnTracksEndpointService {
         break;
 
       default:
-        throw new InvalidDataTypeException('Invalid payload type:' . $this->data);
+        $this->logger->warning('Unsupported payload type: @type', [
+          '@type'=> $this->json['_type'],
+        ]);
+        break;
     }
   }
 
