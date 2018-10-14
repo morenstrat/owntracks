@@ -1,9 +1,9 @@
 # OwnTracks
 
-## Introduction
+## INTRODUCTION
 
-The [OwnTracks Drupal module](https://www.drupal.org/project/owntracks) provides
-an HTTP endpoint for the [OwnTracks smartphone app](http://www.owntracks.org).
+The [OwnTracks Drupal module][1] provides an HTTP endpoint for the
+[OwnTracks smartphone app][2].
 
 The OwnTracks smartphone app periodically collects location data from
 smartphones and sends this data to an HTTP or MQTT endpoint.
@@ -14,18 +14,21 @@ The OwnTracks Drupal module leverages the following technology:
 
 * the Drupal Views module to list the data
 
-* the [Leaflet](http://leafletjs.com) JavaScript library and a configurable map
-tile provider such as [OpenStreetMap](https://www.openstreetmap.org) to
-visualize the data
+* the [Leaflet][3] JavaScript library and a configurable map tile provider such
+as [OpenStreetMap][4] to visualize the data
 
 There are some [Screenshots](#screenshots) at the end of this document.
 
-## Installation
+## REQUIREMENTS
+
+No special requirements.
+
+## INSTALLATION
 
 ### Drupal Module
 
-Download the module from the [project page](https://www.drupal.org/project/owntracks)
-or fetch it with Drush or Composer:
+Download the module from the [OwnTracks Drupal module][1] page or fetch it with
+Drush or Composer:
 
 * `drush dl owntracks`
 
@@ -40,11 +43,11 @@ Drush:
 
 The app can be downloaded and installed from the Android and iOS app stores:
 
-* [OwnTracks for Android](https://play.google.com/store/apps/details?id=org.owntracks.android)
+* [OwnTracks for Android][5]
 
-* [OwnTracks for iOS](https://itunes.apple.com/us/app/mqttitude/id692424691)
+* [OwnTracks for iOS][6]
 
-## Configuration
+## CONFIGURATION
 
 ### Drupal Module
 
@@ -57,7 +60,7 @@ provide three settings, for example:
 
 * Tile layer attribution
 
-   `Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors`
+   `Map data © <a href="//openstreetmap.org">OpenStreetMap</a> contributors`
 
 * Polyline color (hex or written-out)
 
@@ -92,7 +95,7 @@ Configure the following settings:
 
 * TBD
 
-## Testing
+## TESTING
 
 ### Smartphone App
 
@@ -114,7 +117,7 @@ after enabling the module, clear your caches. Click `OwnTracks Location` and you
 should see the location that you just uploaded from your smartphone app. In the
 Operations column, click `View` and you should see a map with a location marker.
 
-## Features
+## FEATURES
 
 Currently, the OwnTracks Drupal module supports three different OwnTracks
 payload types:
@@ -156,10 +159,10 @@ The OwnTracks Drupal module stores the records and displays them as:
 
 ### Waypoints
 
-A waypoint is a location with a radius (aka geo-fence). Waypoints must be created
-in the smartphone app and uploaded manually to the endpoint. Once a user enters
-or leaves a waypoint's radius, the smartphone app emits a transition event (see
-below).
+A waypoint is a location with a radius (aka geo-fence). Waypoints must be
+created in the smartphone app and uploaded manually to the endpoint. Once a user
+enters or leaves a waypoint's radius, the smartphone app emits a transition
+event (see below).
 
 #### Android
 
@@ -203,24 +206,37 @@ Go to `user/[uid]/owntracks/transition` to see a listing of transitions.
 This feature will be added in a future version of the module and allows for
 sharing waypoints and following the location of other users.
 
-## Screenshots
+## SCREENSHOTS
 
 ### Track Map
 
-![Track Map](https://owntracks.dunix-data.de/sites/default/files/2018-01/Track.jpg)
+![Track Map][a]
 
 ### Current Location Map
 
-![Current Location Map](https://owntracks.dunix-data.de/sites/default/files/2018-01/Current.jpg)
+![Current Location Map][b]
 
 ### Location Listing
 
-![Location Listing](https://owntracks.dunix-data.de/sites/default/files/2018-01/Locations.jpg)
+![Location Listing][c]
 
 ### Waypoint Listing
 
-![Waypoint Listing](https://owntracks.dunix-data.de/sites/default/files/2018-01/Waypoints.jpg)
+![Waypoint Listing][d]
 
 ### Transition Listing
 
-![Transition Listing](https://owntracks.dunix-data.de/sites/default/files/2018-01/Transitions.jpg)
+![Transition Listing][e]
+
+[1]: https://www.drupal.org/project/owntracks
+[2]: https://www.owntracks.org
+[3]: https://leafletjs.com
+[4]: https://www.openstreetmap.org
+[5]: https://play.google.com/store/apps/details?id=org.owntracks.android
+[6]: https://itunes.apple.com/us/app/mqttitude/id692424691
+
+[a]: https://owntracks.dunix-data.de/sites/default/files/2018-01/Track.jpg
+[b]: https://owntracks.dunix-data.de/sites/default/files/2018-01/Current.jpg
+[c]: https://owntracks.dunix-data.de/sites/default/files/2018-01/Locations.jpg
+[d]: https://owntracks.dunix-data.de/sites/default/files/2018-01/Waypoints.jpg
+[e]: https://owntracks.dunix-data.de/sites/default/files/2018-01/Transitions.jpg
