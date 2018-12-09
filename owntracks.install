@@ -226,3 +226,10 @@ function owntracks_update_8010() {
   db_change_field('owntracks_waypoint', 'description', 'description', $spec['fields']['description']);
   db_add_index('owntracks_waypoint', 'owntracks_waypoint_field__description', ['description'], $spec);
 }
+
+/**
+ * Flush caches to allow l (Location) transition trigger value.
+ */
+function owntracks_update_8011() {
+  drupal_flush_all_caches();
+}
