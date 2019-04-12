@@ -132,8 +132,10 @@ function owntracks_user_delete(EntityInterface $entity) {
     'owntracks_waypoint',
   ];
 
+  $database = \Drupal::database();
+
   foreach ($tables as $table) {
-    db_delete($table)
+    $database->delete($table)
       ->condition('uid', $entity->id())
       ->execute();
   }
