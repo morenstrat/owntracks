@@ -235,8 +235,8 @@ sharing waypoints and following the location of other users.
 [5]: https://play.google.com/store/apps/details?id=org.owntracks.android
 [6]: https://itunes.apple.com/us/app/mqttitude/id692424691
 
-[a]: https://owntracks.dunix-data.de/sites/default/files/2018-01/Track.jpg
-[b]: https://owntracks.dunix-data.de/sites/default/files/2018-01/Current.jpg
-[c]: https://owntracks.dunix-data.de/sites/default/files/2018-01/Locations.jpg
-[d]: https://owntracks.dunix-data.de/sites/default/files/2018-01/Waypoints.jpg
-[e]: https://owntracks.dunix-data.de/sites/default/files/2018-01/Transitions.jpg
+[a]: https://www.drupal.org/files/project-images/owntracks_track.jpg
+[b]: https://www.drupal.org/files/project-images/owntracks_current.jpg
+[c]: https://www.drupal.org/files/project-images/owntracks_locations.jpg
+[d]: https://www.drupal.org/files/project-images/owntracks_waypoints.jpg
+[e]: https://www.drupal.org/files/project-images/owntracks_transitions.jpg
