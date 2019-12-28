@@ -85,7 +85,7 @@ class OwnTracksTransitionTest extends EntityKernelTestBase {
    * Tests the owntracks transition storage.
    */
   public function testEntityStorageException() {
-    $this->setExpectedException('\Drupal\Core\Entity\EntityStorageException');
+    $this->expectException('\Drupal\Core\Entity\EntityStorageException');
     OwnTracksTransition::create(static::$sampleInvalidData)->save();
   }
 

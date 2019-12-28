@@ -5,6 +5,7 @@
  * Install functions of the module.
  */
 
+use Drupal\Core\Url;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -19,7 +20,7 @@ function owntracks_requirements($phase) {
         'title' => 'OwnTracks Map Configuration',
         'value' => empty($settings) ? t('Not configured') : t('Configured'),
         'severity' => empty($settings) ? REQUIREMENT_ERROR : REQUIREMENT_OK,
-        'description' => empty($settings) ? t('OwnTracks Map is not configured. <a href=":url">Add configuration</a>', [':url' => \Drupal::url('owntracks.map_settings')]) : t('OwnTracks Map is configured.'),
+        'description' => empty($settings) ? t('OwnTracks Map is not configured. <a href=":url">Add configuration</a>', [':url' => Url::fromRoute('owntracks.map_settings')]) : t('OwnTracks Map is configured.'),
       ],
     ];
   }
@@ -29,7 +30,7 @@ function owntracks_requirements($phase) {
  * Truncate table {cache_data} to allow p (Ping) location trigger value.
  */
 function owntracks_update_8001() {
-  db_query('TRUNCATE table {cache_data}');
+  \Drupal::database()->query('TRUNCATE table {cache_data}');
 }
 
 /**
@@ -65,7 +66,7 @@ function owntracks_update_8002() {
  * Truncate table {cache_data} to allow v (Frequent) location trigger value.
  */
 function owntracks_update_8003() {
-  db_query('TRUNCATE table {cache_data}');
+  \Drupal::database()->query('TRUNCATE table {cache_data}');
 }
 
 /**
@@ -183,29 +184,31 @@ function owntracks_update_8009() {
     ],
   ];
 
-  db_drop_index('owntracks_location', 'owntracks_location_field__acc');
-  db_change_field('owntracks_location', 'acc', 'acc', $spec['fields']['acc']);
-  db_add_index('owntracks_location', 'owntracks_location_field__acc', ['acc'], $spec);
+  $schema = \Drupal::database()->schema();
 
-  db_drop_index('owntracks_location', 'owntracks_location_field__tid');
-  db_drop_index('owntracks_location', 'owntracks_location__uid_tid');
-  db_change_field('owntracks_location', 'tid', 'tid', $spec['fields']['tid']);
-  db_add_index('owntracks_location', 'owntracks_location_field__tid', ['tid'], $spec);
-  db_add_index('owntracks_location', 'owntracks_location__uid_tid', ['uid', 'tid'], $spec);
+  $schema->dropIndex('owntracks_location', 'owntracks_location_field__acc');
+  $schema->changeField('owntracks_location', 'acc', 'acc', $spec['fields']['acc']);
+  $schema->addIndex('owntracks_location', 'owntracks_location_field__acc', ['acc'], $spec);
 
-  db_drop_index('owntracks_transition', 'owntracks_transition_field__tid');
-  db_drop_index('owntracks_transition', 'owntracks_transition__uid_tid');
-  db_change_field('owntracks_transition', 'tid', 'tid', $spec['fields']['tid']);
-  db_add_index('owntracks_transition', 'owntracks_transition_field__tid', ['tid'], $spec);
-  db_add_index('owntracks_transition', 'owntracks_transition__uid_tid', ['uid', 'tid'], $spec);
+  $schema->dropIndex('owntracks_location', 'owntracks_location_field__tid');
+  $schema->dropIndex('owntracks_location', 'owntracks_location__uid_tid');
+  $schema->changeField('owntracks_location', 'tid', 'tid', $spec['fields']['tid']);
+  $schema->addIndex('owntracks_location', 'owntracks_location_field__tid', ['tid'], $spec);
+  $schema->addIndex('owntracks_location', 'owntracks_location__uid_tid', ['uid', 'tid'], $spec);
 
-  db_drop_index('owntracks_waypoint', 'owntracks_waypoint_field__rad');
-  db_change_field('owntracks_waypoint', 'rad', 'rad', $spec['fields']['rad']);
-  db_add_index('owntracks_waypoint', 'owntracks_waypoint_field__rad', ['rad'], $spec);
+  $schema->dropIndex('owntracks_transition', 'owntracks_transition_field__tid');
+  $schema->dropIndex('owntracks_transition', 'owntracks_transition__uid_tid');
+  $schema->changeField('owntracks_transition', 'tid', 'tid', $spec['fields']['tid']);
+  $schema->addIndex('owntracks_transition', 'owntracks_transition_field__tid', ['tid'], $spec);
+  $schema->addIndex('owntracks_transition', 'owntracks_transition__uid_tid', ['uid', 'tid'], $spec);
 
-  db_drop_index('owntracks_waypoint', 'owntracks_waypoint_field__description');
-  db_change_field('owntracks_waypoint', 'description', 'description', $spec['fields']['description']);
-  db_add_index('owntracks_waypoint', 'owntracks_waypoint_field__description', ['description'], $spec);
+  $schema->dropIndex('owntracks_waypoint', 'owntracks_waypoint_field__rad');
+  $schema->changeField('owntracks_waypoint', 'rad', 'rad', $spec['fields']['rad']);
+  $schema->addIndex('owntracks_waypoint', 'owntracks_waypoint_field__rad', ['rad'], $spec);
+
+  $schema->dropIndex('owntracks_waypoint', 'owntracks_waypoint_field__description');
+  $schema->changeField('owntracks_waypoint', 'description', 'description', $spec['fields']['description']);
+  $schema->addIndex('owntracks_waypoint', 'owntracks_waypoint_field__description', ['description'], $spec);
 }
 
 /**
@@ -221,10 +224,10 @@ function owntracks_update_8010() {
       ],
     ],
   ];
-
-  db_drop_index('owntracks_waypoint', 'owntracks_waypoint_field__description');
-  db_change_field('owntracks_waypoint', 'description', 'description', $spec['fields']['description']);
-  db_add_index('owntracks_waypoint', 'owntracks_waypoint_field__description', ['description'], $spec);
+  $schema = \Drupal::database()->schema();
+  $schema->dropIndex('owntracks_waypoint', 'owntracks_waypoint_field__description');
+  $schema->changeField('owntracks_waypoint', 'description', 'description', $spec['fields']['description']);
+  $schema->addIndex('owntracks_waypoint', 'owntracks_waypoint_field__description', ['description'], $spec);
 }
 
 /**
