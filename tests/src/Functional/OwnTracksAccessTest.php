@@ -25,6 +25,13 @@ class OwnTracksAccessTest extends BrowserTestBase {
   public static $modules = ['owntracks'];
 
   /**
+   * Default theme for testing.
+   *
+   * @var string
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Tests owntracks access controllers and plugins.
    */
   public function testAccess() {

@@ -25,6 +25,13 @@ class OwnTracksEndpointTest extends BrowserTestBase {
   public static $modules = ['owntracks', 'dblog'];
 
   /**
+   * Default theme for testing.
+   *
+   * @var string
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * The endpoint url.
    *
    * @var string
